@@ -1,5 +1,5 @@
 # JORDAN M. WITTE
-wittejm@gmail.com • [github.com/wittejm](github.com/wittejm)
+wittejm@gmail.com
 
 Portland, OR
 
