@@ -81,7 +81,7 @@ March 2019-Present
     
 **CONTACT:** Tim Chabuk, Director, Intelligent Information Systems
 
-2012-2014	CITIGROUP Inc. at Buffalo, NY
+### 2012-2014:	CITIGROUP Inc. at Buffalo, NY
 
 **Java Developer** 
 
