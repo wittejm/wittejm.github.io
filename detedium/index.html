@@ -1,1 +1,35 @@
-Detedium
+<script src="./index.js"></script>
+<link rel="stylesheet" type="text/css" href="index.css" media="screen" />
+
+<h1>Detedium</h1>
+<body>
+<div id="prompt"></div>
+<div id="guessDiv">
+<textarea id="guessInput" cols="5" name="text" placeholder="" onchange="()=>normalizeInput()"></textarea>
+</div>
+<div id="submitDiv">
+<button id="submitButton" disabled="true">Submit</button>
+</div>
+<div id="responsesDiv">
+</div>
+<script>
+
+  const guessInput = document.getElementById("guessInput");
+  const submitButton = document.getElementById("submitButton");
+  guessInput.addEventListener('input', normalizeInput); 
+  submitButton.addEventListener('click', submit); 
+  guessInput.rows = numWords;
+  const promptDiv = document.getElementById("prompt");
+  const prompt1 = prompts[0];
+  let res = "";
+  prompt1.map(
+    (row, i) =>
+    {
+      let rowDiv = document.createElement('div');
+      rowDiv.className = `r`;
+      promptDiv.appendChild(rowDiv);
+      row.map((c, i)=>rowDiv.appendChild(createSquare(c)))
+    }
+  );
+  </script>
+  </body>
