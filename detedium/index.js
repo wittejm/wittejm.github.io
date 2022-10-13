@@ -81,22 +81,18 @@ function submit() {
 
   const guesses = new Array(numWords).fill(0).map(
     (_,i)=>inputFields[i].value.split(""));
-  console.log("guesses", guesses);
+  inputFields.forEach((i)=>i.value="");
   const responsesDiv = document.getElementById("responsesDiv");
   let response = document.createElement('div');
   response.className = 'response'
   responsesDiv.appendChild(response);
   guesses.map((guess, i)=>{
-    console.log("guess", guess)
     let rowDiv = document.createElement('div');
     rowDiv.className = `r`;
     response.appendChild(rowDiv);
     const byg = bygSingleWord(guess.join(""), answers[i].toUpperCase());
     guess.map((letter, j)=>{
       let letterDiv = document.createElement('div');
-      console.log("i j", i, j);
-      console.log("letter", letter);
-      console.log("answer[i][j]", answers[i][j].toUpperCase(), letter);
       const color = byg[j];
       letterDiv.className = `s l ${color}`;
       rowDiv.appendChild(letterDiv);
