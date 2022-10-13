@@ -1,8 +1,8 @@
 .s {
-  height: 32px;
-  width: 32px;
-  padding: 4px;
-  margin: 4px;
+  height: 10vw;
+  width: 10vw;
+  padding: 1vw;
+  margin: 1vw;
   
 }
 
@@ -53,10 +53,9 @@ h1 {
 }
 input {
   letter-spacing: 16px;
-  size: 30;
+  font-size: 8vw;
   font-family: "verdana";
-  resize: none;
-  max-width: 200px;
+  max-width: 50vw;
 }
 
 .r {
