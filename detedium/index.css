@@ -1,12 +1,9 @@
 .s {
-  height: 40px;
-  width: 40px;
+  height: 32px;
+  width: 32px;
   padding: 4px;
   margin: 4px;
   
-}
-body {
-  width: 100%;
 }
 
 button {
@@ -19,20 +16,26 @@ button {
 }
 
 #guessDiv {
-  margin-top: 40px;
+  margin-top: 5px;
   margin-left: auto;
   margin-right: auto;
   width: fit-content;
 }
 #submitDiv {
-  margin-top: 40px;
+  margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
   width: fit-content;
 }
+#submitButton {
+  border-width: 2px;
+  border-style: solid;
+  font-size: 20;
+  font-family: "verdana";
+}
 
 #responsesDiv {
-  margin-top: 40px;
+  margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
   width: fit-content;
@@ -44,11 +47,12 @@ h1 {
   width: fit-content;
 
 }
-textarea {
-  letter-spacing: 24px;
-  font-size: 50;
+input {
+  letter-spacing: 16px;
+  font-size: 40;
   font-family: "verdana";
   resize: none;
+  max-width: 300px;
 }
 
 .r {
@@ -67,6 +71,15 @@ textarea {
 }
 .l {
   text-align: center;
-  font-size: 36;
+  vertical-align: center;
+  font-size: 32;
   font-family: "verdana";
+}
+.response {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-width: 0px;
+  border-bottom-width: 2px;
+  border-color: black;
+  border-style: solid;
 }
