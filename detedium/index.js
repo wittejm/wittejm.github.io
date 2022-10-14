@@ -1,5 +1,16 @@
 const data = [
   [
+    482,
+    [
+      ['b', 'y','b','b','b'],
+      ['y', 'b','b','y','b'],
+      ['b', 'y','g','b','b'],
+      ['y', 'b','g','b','b'],
+      ['g', 'g','g','g','g'],
+    ],
+    ['mound', 'ovary', 'grope', 'riots', 'floor']
+  ],
+  [
     480,
     [
       ['y', 'b','b','b','b'],
@@ -86,11 +97,13 @@ function submit() {
   let response = document.createElement('div');
   response.className = 'response'
   responsesDiv.appendChild(response);
+  const resultBygs = [];
   guesses.map((guess, i)=>{
     let rowDiv = document.createElement('div');
     rowDiv.className = `r`;
     response.appendChild(rowDiv);
     const byg = bygSingleWord(guess.join(""), answers[i].toUpperCase());
+    resultBygs.push(byg);
     guess.map((letter, j)=>{
       let letterDiv = document.createElement('div');
       const color = byg[j];
@@ -98,5 +111,6 @@ function submit() {
       rowDiv.appendChild(letterDiv);
       letterDiv.append(letter)
     })
-  })
+  });
+  if (resultBygs.map((word)=>word.every(l=>l==='g')).every((correct)=>correct)) window.alert("🥑!")
 }
