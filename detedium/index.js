@@ -122,5 +122,5 @@ function submit() {
       letterDiv.append(letter)
     })
   });
-  if (resultBygs.map((word)=>word.every(l=>l==='g')).every((correct)=>correct)) window.alert("🥑!")
+  if (resultBygs.map((word)=>word.every(l=>l==='g')).every((correct)=>correct)) window.alert("yay hike!")
 }
