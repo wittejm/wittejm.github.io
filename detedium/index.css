@@ -58,6 +58,11 @@ input {
   max-width: 50vw;
 }
 
+input:disabled {
+  background-color: #228B22;
+  color: #000000;
+}
+
 .r {
   display:flex;
   width: fit-content;

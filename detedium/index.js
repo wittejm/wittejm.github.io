@@ -154,7 +154,6 @@ function submit() {
 
   const guesses = new Array(numWords).fill(0).map(
     (_,i)=>inputFields[i].value.split(""));
-  inputFields.forEach((i)=>i.value="");
   const responsesDiv = document.getElementById("responsesDiv");
   let response = document.createElement('div');
   response.className = 'response'
@@ -165,6 +164,8 @@ function submit() {
     rowDiv.className = `r`;
     response.appendChild(rowDiv);
     const byg = bygSingleWord(guess.join(""), answers[i].toUpperCase());
+    if (byg.every(l=>l==='g')) inputFields[i].disabled=true;
+    else inputFields[i].value="";
     resultBygs.push(byg);
     guess.map((letter, j)=>{
       let letterDiv = document.createElement('div');
