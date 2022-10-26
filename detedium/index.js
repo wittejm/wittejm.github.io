@@ -158,7 +158,7 @@ const data = [
 ]
 
 let guesses = [];
-let activeDay = 0;
+let activeDay = 1;
 let numWords = data[activeDay][1].length;
 let answers = data[activeDay][2];
 let prompt = data[activeDay][1];
