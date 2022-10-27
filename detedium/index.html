@@ -7,7 +7,8 @@
 <script src="./index.js"></script>
 <link rel="stylesheet" type="text/css" href="index.css" media="screen" />
 <body>
-  <h1><span id="backButton"></span><span id="header"></span> <span id="forwardButton"></span></h1>
+  <h1><span id="backButtonSpan"><button id="backButton"><</button>
+  </span><span id="header"></span> <span id="forwardButtonSpan"><button id="forwardButton">></button></span></h1>
 <div id="prompt"></div>
 <div id="guessDiv">
 </div>
@@ -18,38 +19,24 @@
 </div>
 
 <script>
-  const header = document.getElementById("header");
-  header.textContent = data[activeDay][0];
-
   const submitButton = document.getElementById("submitButton");
   submitButton.addEventListener('click', submit); 
   const backButton = document.getElementById("backButton");
-  backButton.addEventListener('click', ()=>activeDay = activeDay+1); 
+  backButton.addEventListener('click', ()=> {
+    activeDay = activeDay + 1;
+    loadGame();
+  }
+  );
+  const forwardButton = document.getElementById("forwardButton");
+    forwardButton.addEventListener('click', ()=> {
+    activeDay = activeDay - 1;
+    loadGame();
+  }
+  );
   const promptDiv = document.getElementById("prompt");
   const guessDiv = document.getElementById("guessDiv");
-  
-  const inputFields = [];
-  prompt.map(
-    (row, i) =>
-    {
-      let rowDiv = document.createElement('div');
-      rowDiv.className = `r`;
-      promptDiv.appendChild(rowDiv);
-      row.map((c, i)=>rowDiv.appendChild(createSquare(c)))
+  loadGame();
 
-      let wordInput = document.createElement('input');
-      let wordDiv = document.createElement('div');
-
-      wordInput.type = "text";
-      wordInput.id = `wordInput-${i}`;
-      wordInput.placeholder = "";
-      wordInput.addEventListener('input', ()=>normalizeInput(wordInput)); 
-      guessDiv.appendChild(wordDiv);
-      wordDiv.appendChild(wordInput);
-      inputFields.push(wordInput)
-
-    }
-  );
   </script>
   </body>
   </html>

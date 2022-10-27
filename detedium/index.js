@@ -157,11 +157,66 @@ const data = [
   ],
 ]
 
-let guesses = [];
-let activeDay = 1;
-let numWords = data[activeDay][1].length;
-let answers = data[activeDay][2];
-let prompt = data[activeDay][1];
+const gameNodes = [];
+let inputFields = [];
+let activeDay = 0;
+
+let guesses;
+let numWords;
+let answers;
+let prompt;
+
+function loadGame() {
+
+  const header = document.getElementById("header");
+  header.textContent = data[activeDay][0];
+  let forwardButton = document.getElementById("forwardButton");
+  let backButton = document.getElementById("backButton");
+
+  if (activeDay===0) {
+    forwardButton.disabled=true;
+  } else forwardButton.disabled=false;
+
+  if (activeDay===data.length -  1) {
+    backButton.disabled=true;
+  } else backButton.disabled=false;
+
+  guesses = [];
+  numWords = data[activeDay][1].length;
+  answers = data[activeDay][2];
+  prompt = data[activeDay][1];
+
+  console.log("active day", activeDay);
+  gameNodes.map(node=>node.remove())
+  inputFields = [];
+  prompt.map(
+    (row, i) =>
+      {
+        let rowDiv = document.createElement('div');
+        rowDiv.className = `r`;
+        gameNodes.push(rowDiv);
+        promptDiv.appendChild(rowDiv);
+        row.map((c, i)=>{
+          const square = createSquare(c);
+          gameNodes.push(square);
+          rowDiv.appendChild(square);
+        })
+
+        let wordInput = document.createElement('input');
+        gameNodes.push(wordInput);
+        let wordDiv = document.createElement('div');
+        gameNodes.push(wordDiv);
+
+        wordInput.type = "text";
+        wordInput.id = `wordInput-${i}`;
+        wordInput.placeholder = "";
+        wordInput.addEventListener('input', ()=>normalizeInput(wordInput));
+        guessDiv.appendChild(wordDiv);
+        wordDiv.appendChild(wordInput);
+        inputFields.push(wordInput)
+      }
+  );
+}
 
 function createSquare(color) {
   let li = document.createElement('div');
@@ -218,6 +273,7 @@ function submit() {
   const guesses = new Array(numWords).fill(0).map(
     (_,i)=>inputFields[i].value.split(""));
   const responsesDiv = document.getElementById("responsesDiv");
+  gameNodes.push(responsesDiv)
   let response = document.createElement('div');
   response.className = 'response'
   responsesDiv.appendChild(response);
