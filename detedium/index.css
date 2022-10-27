@@ -1,8 +1,9 @@
 .s {
-  height: 10vw;
-  width: 10vw;
-  padding: 1vw;
-  margin: 1vw;
+  
+  height: 2.5rem;
+  width: 2.5rem;
+  padding: 0.3rem;
+  margin: 0.3rem;
   
 }
 
@@ -52,10 +53,10 @@ h1 {
 
 }
 input {
-  letter-spacing: 16px;
-  font-size: 8vw;
+  letter-spacing: 8px;
+  font-size: 1.8rem;
   font-family: "verdana";
-  max-width: 50vw;
+  max-width: 10rem;
 }
 
 input:disabled {
@@ -80,7 +81,7 @@ input:disabled {
 .l {
   text-align: center;
   vertical-align: center;
-  font-size: 8vw;
+  font-size: 2rem;
   font-family: "verdana";
 }
 .response {
