@@ -92,3 +92,6 @@ input:disabled {
   border-color: black;
   border-style: solid;
 }
+.fontRed {
+  color: red;
+}
