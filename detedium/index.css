@@ -52,6 +52,44 @@ h1 {
   width: fit-content;
 
 }
+#keyboardDiv {
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
+
+.keyboardRow {
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
+
+.key {
+  height: 2.5rem;
+  width: 2.5rem;
+  padding: 0.15rem;
+  margin: 0.15rem;
+}
+
+.keyLetter {
+  position: absolute;
+  height: 2.8rem;
+  width: 2.8rem;
+  border-color: #000000;
+  border-width: 1px;
+  border-style: solid;
+
+}
+.keySubLetter {
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  text-align: center;
+  vertical-align: center;
+}
+#svg {
+  position: absolute;
+}
 input {
   letter-spacing: 8px;
   font-size: 1.8rem;
@@ -94,4 +132,8 @@ input:disabled {
 }
 .fontRed {
   color: red;
+}
+
+.keyboardRow {
+  display: flex;
 }

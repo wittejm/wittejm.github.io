@@ -1,4 +1,5 @@
 const gameNodes = [];
+const allSvgs = [];
 let inputFields = [];
 let activeDay = 0;
 
@@ -6,6 +7,7 @@ let guesses;
 let numWords;
 let answers;
 let prompt;
+let usage = {};
 
 function loadGame() {
 
@@ -27,8 +29,7 @@ function loadGame() {
   answers = data[activeDay][2];
   prompt = data[activeDay][1];
 
-  console.log("active day", activeDay);
-  gameNodes.map(node=>node.remove())
+  gameNodes.map(node=>node.remove());
   inputFields = [];
   prompt.map(
     (row, i) =>
@@ -57,6 +58,10 @@ function loadGame() {
         inputFields.push(wordInput)
       }
   );
+
+  usage = {};
+  [...line1, ...line2, ...line3].map((l)=>usage[l]= new Array(data[activeDay][1].length).fill('w'));
+  updateKeyColors();
 }
 
 function createSquare(color) {
@@ -133,10 +138,14 @@ function submit() {
     guess.map((letter, j)=>{
       let letterDiv = document.createElement('div');
       const color = byg[j];
+
+      usage[letter][j]= usage[letter][j]==='g'? 'g' : usage[letter][j]==='y'? 'y' : color;
+      
       letterDiv.className = `s l ${color}`;
       rowDiv.appendChild(letterDiv);
       letterDiv.append(letter)
     })
   });
-  // if (resultBygs.map((word)=>word.every(l=>l==='g')).every((correct)=>correct)) window.alert("yay hike!")
+  updateKeyColors();
+  // if (resultBygs.map((word)=>word.every(l=>l==='g')).every((correct)=>correct)) window.alert("yay!")
 }
