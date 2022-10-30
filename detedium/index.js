@@ -102,15 +102,12 @@ function bygSingleWord(guess, truth) {
   guess.split("").map((_,i)=>{
     guessLetter = guess[i];
     truthLetter = updatedTruth[i];
-    if (updatedTruth.includes(guessLetter)) {
+    if (updatedTruth.includes(guessLetter) && greenMarked[i]!==1) {
       yellowMarked[i]=1;
       updatedTruth= updatedTruth.slice(0,updatedTruth.indexOf(guessLetter))+"_"+(updatedTruth.slice(updatedTruth.indexOf(guessLetter)+1));
     }
   });
-
   return guess.split("").map((_,i)=>{
-    guessLetter = guess[i];
-    truthLetter = updatedTruth[i];
     if(greenMarked[i]) return "g";
     if(yellowMarked[i]) return "y";
     return "b";
