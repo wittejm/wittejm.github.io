@@ -53,6 +53,7 @@ function loadGame() {
         wordInput.id = `wordInput-${i}`;
         wordInput.placeholder = "";
         wordInput.onfocus="blur();";
+        wordInput.onFocus="blur();";
         wordInput.addEventListener('input', ()=>normalizeInput(wordInput));
         wordInput.addEventListener('focus', ()=>{console.log(i); selectedInput=i; blur()});
         guessDiv.appendChild(wordDiv);

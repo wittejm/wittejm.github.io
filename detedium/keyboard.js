@@ -43,17 +43,15 @@ function updateKeyColors() {
     const keyDiv = document.getElementById(`key-${letter}`);
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     allSvgs.push(svg);
-    svg.setAttribute('onClick',"msg()");
-
-    svg.setAttribute('viewBox',"0 0 48 48");
-    svg.setAttribute('width', 48);
-    svg.setAttribute('height', 48);
+    svg.setAttribute('viewBox',"0 0 42 42");
+    svg.setAttribute('width', 42);
+    svg.setAttribute('height', 42);
 
     const rect = document.createElementNS('http://www.w3.org/2000/svg','rect');
       rect.setAttribute('x', 0);
       rect.setAttribute('y', 0);
-      rect.setAttribute('width', 48);
-      rect.setAttribute('height',48);
+      rect.setAttribute('width', 42);
+      rect.setAttribute('height',42);
       rect.setAttribute('stroke','gray');
       rect.setAttribute('strokeWidth',1);
       rect.setAttribute('fill','#FFFFFF');
@@ -66,7 +64,7 @@ function updateKeyColors() {
       const rect = document.createElementNS('http://www.w3.org/2000/svg','rect');
       rect.setAttribute('x', 0);
       rect.setAttribute('y', (index ) * stepSize);
-      rect.setAttribute('width', 48);
+      rect.setAttribute('width', 42);
       rect.setAttribute('height',stepSize);
       rect.setAttribute('stroke',{g:'#228B22',w:'white',y:'#FFEECC',b:'#ACACAC'}[color]);
       rect.setAttribute('strokeWidth',1);
