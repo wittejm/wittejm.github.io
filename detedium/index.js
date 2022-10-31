@@ -53,9 +53,10 @@ function loadGame() {
         wordInput.type = "text";
         wordInput.id = `wordInput-${i}`;
         wordInput.placeholder = "";
+        wordInput.addEventListener('input', ()=>normalizeInput(wordInput));
+
         if (useKeyboard) {
           wordInput.onFocus="blur();";
-          wordInput.addEventListener('input', ()=>normalizeInput(wordInput));
           wordInput.addEventListener('focus', ()=>{
             selectedInput=i;
             wordInput.className="focusedInput"
@@ -151,7 +152,9 @@ function submit() {
       let letterDiv = document.createElement('div');
       const color = byg[j];
 
-      usage[letter][i]= usage[letter][i]==='g' || color === 'g' ? 'g' : usage[letter][i]==='y'? 'y' : color;
+      if (useKeyboard) {
+        usage[letter][i]= usage[letter][i]==='g' || color === 'g' ? 'g' : usage[letter][i]==='y'? 'y' : color;
+      }
       
       letterDiv.className = `s l ${color}`;
       rowDiv.appendChild(letterDiv);
