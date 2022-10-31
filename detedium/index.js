@@ -57,14 +57,11 @@ function loadGame() {
         wordInput.addEventListener('input', ()=>normalizeInput(wordInput));
         wordInput.addEventListener('focus', ()=>{
           selectedInput=i;
-          wordInput.setAttribute('readonly', 'readonly'); // Force keyboard to hide on input field.
-          wordInput.setAttribute('disabled', 'true'); // Force keyboard to hide on textarea field.
-            setTimeout(function() {
-              wordInput.blur();  //actually close the keyboard
-              // Remove readonly attribute after keyboard is hidden.
-              element.removeAttribute('readonly');
-              element.removeAttribute('disabled');
-            }, 100);
+          wordInput.className="focusedInput"
+          inputFields.map((f,index)=> {if (i!==index) f.className=""});
+          setTimeout(function() {
+            wordInput.blur();
+          }, 100);
         });
         guessDiv.appendChild(wordDiv);
         wordDiv.appendChild(wordInput);
@@ -72,6 +69,7 @@ function loadGame() {
       }
   );
   inputFields[0].focus();
+  inputFields[0].className="focusedInput"
   usage = {};
   [...line1, ...line2, ...line3].map((l)=>usage[l]= new Array(data[activeDay][1].length).fill('w'));
   updateKeyColors();

@@ -72,8 +72,6 @@ h1 {
 .keyLetter {
   position: absolute;
   width: 42px;
-
-
 }
 .keySubLetter {
   margin-left: auto;
@@ -91,6 +89,11 @@ input {
   font-size: 1.8rem;
   font-family: "verdana";
   max-width: 10rem;
+}
+.focusedInput {
+  border-style: solid;
+  border-width: 3px;
+  border-color: lightblue;
 }
 
 input:disabled {
