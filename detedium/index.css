@@ -121,6 +121,16 @@ input:disabled {
   font-size: 1.8rem;
   font-family: "verdana";
 }
+
+.backspace {
+  margin-left: 2px;
+  text-align: center;
+  vertical-align: center;
+  font-size: 1.6rem;
+  font-family: "verdana";
+  font-weight: "bolder";
+}
+
 .response {
   margin-top: 10px;
   padding-top: 10px;

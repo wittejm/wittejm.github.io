@@ -1,12 +1,13 @@
 const line1 = 'QWERTYUIOP'.split("");
 const line2 = 'ASDFGHJKL'.split("");
 const line3 = 'ZXCVBNM'.split("");
-
+let row3Div;
 function buildKeyboard() {
   const keyboardDiv = document.getElementById("keyboardDiv");
 
-  [line1, line2, line3].map((line)=> {
+  [line1, line2, line3].map((line, index)=> {
     const lineDiv = document.createElement('div');
+    if (index===2) row3Div = lineDiv;
     lineDiv.className = 'keyboardRow';
     keyboardDiv.appendChild(lineDiv);
 
@@ -26,8 +27,19 @@ function buildKeyboard() {
       keySubLetterDiv.append(k);
     });
   });
+  let backspaceDiv = document.createElement('div');
+  backspaceDiv.className = 'backspace';
+  backspaceDiv.id="del";
+  backspaceDiv.addEventListener('click', ()=>backspace());
+
+  row3Div.appendChild(backspaceDiv);
+  backspaceDiv.append("DEL");
 }
 
+function backspace() {
+  const input = inputFields[selectedInput];
+  input.value = input.value.slice(0,input.value.length-1)
+}
 function clickKey(k) {
   const input = inputFields[selectedInput];
 
@@ -43,15 +55,15 @@ function updateKeyColors() {
     const keyDiv = document.getElementById(`key-${letter}`);
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     allSvgs.push(svg);
-    svg.setAttribute('viewBox',"0 0 42 42");
-    svg.setAttribute('width', 42);
-    svg.setAttribute('height', 42);
+    svg.setAttribute('viewBox',"0 0 40 40");
+    svg.setAttribute('width', 40);
+    svg.setAttribute('height', 40);
 
     const rect = document.createElementNS('http://www.w3.org/2000/svg','rect');
       rect.setAttribute('x', 0);
       rect.setAttribute('y', 0);
-      rect.setAttribute('width', 42);
-      rect.setAttribute('height',42);
+      rect.setAttribute('width', 40);
+      rect.setAttribute('height',40);
       rect.setAttribute('stroke','gray');
       rect.setAttribute('strokeWidth',1);
       rect.setAttribute('fill','#FFFFFF');

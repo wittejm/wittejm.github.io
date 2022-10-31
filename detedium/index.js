@@ -52,7 +52,6 @@ function loadGame() {
         wordInput.type = "text";
         wordInput.id = `wordInput-${i}`;
         wordInput.placeholder = "";
-        wordInput.onfocus="blur();";
         wordInput.onFocus="blur();";
         wordInput.addEventListener('input', ()=>normalizeInput(wordInput));
         wordInput.addEventListener('focus', ()=>{
