@@ -3,7 +3,7 @@ const data = [
     498,
     [
       ['b', 'b','b','b','b'],
-      ['b', 'g','b','b','b'],
+      ['y', 'g','b','b','b'],
       ['g', 'g','g','g','g'],
     ],
     ['every','laugh', 'waltz']

@@ -2,7 +2,7 @@ const gameNodes = [];
 const allSvgs = [];
 let inputFields = [];
 let activeDay = 0;
-
+let selectedInput=-1;
 let guesses;
 let numWords;
 let answers;
@@ -52,13 +52,15 @@ function loadGame() {
         wordInput.type = "text";
         wordInput.id = `wordInput-${i}`;
         wordInput.placeholder = "";
+        wordInput.onfocus="blur();";
         wordInput.addEventListener('input', ()=>normalizeInput(wordInput));
+        wordInput.addEventListener('focus', ()=>{console.log(i); selectedInput=i; blur()});
         guessDiv.appendChild(wordDiv);
         wordDiv.appendChild(wordInput);
         inputFields.push(wordInput)
       }
   );
-
+  inputFields[0].focus();
   usage = {};
   [...line1, ...line2, ...line3].map((l)=>usage[l]= new Array(data[activeDay][1].length).fill('w'));
   updateKeyColors();
@@ -119,10 +121,10 @@ function submit() {
   const guesses = new Array(numWords).fill(0).map(
     (_,i)=>inputFields[i].value.split(""));
   const responsesDiv = document.getElementById("responsesDiv");
-  gameNodes.push(responsesDiv)
   let response = document.createElement('div');
   response.className = 'response'
   responsesDiv.appendChild(response);
+  gameNodes.push(response)
   const resultBygs = [];
   guesses.map((guess, i)=>{
     let rowDiv = document.createElement('div');
@@ -136,7 +138,7 @@ function submit() {
       let letterDiv = document.createElement('div');
       const color = byg[j];
 
-      usage[letter][j]= usage[letter][j]==='g'? 'g' : usage[letter][j]==='y'? 'y' : color;
+      usage[letter][i]= usage[letter][i]==='g' || color === 'g' ? 'g' : usage[letter][i]==='y'? 'y' : color;
       
       letterDiv.className = `s l ${color}`;
       rowDiv.appendChild(letterDiv);
