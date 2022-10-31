@@ -55,7 +55,17 @@ function loadGame() {
         wordInput.onfocus="blur();";
         wordInput.onFocus="blur();";
         wordInput.addEventListener('input', ()=>normalizeInput(wordInput));
-        wordInput.addEventListener('focus', ()=>{console.log(i); selectedInput=i; blur()});
+        wordInput.addEventListener('focus', ()=>{
+          selectedInput=i;
+          wordInput.setAttribute('readonly', 'readonly'); // Force keyboard to hide on input field.
+          wordInput.setAttribute('disabled', 'true'); // Force keyboard to hide on textarea field.
+            setTimeout(function() {
+              wordInput.blur();  //actually close the keyboard
+              // Remove readonly attribute after keyboard is hidden.
+              element.removeAttribute('readonly');
+              element.removeAttribute('disabled');
+            }, 100);
+        });
         guessDiv.appendChild(wordDiv);
         wordDiv.appendChild(wordInput);
         inputFields.push(wordInput)
