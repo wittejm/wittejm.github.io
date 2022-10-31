@@ -40,7 +40,8 @@
   );
   const promptDiv = document.getElementById("prompt");
   const guessDiv = document.getElementById("guessDiv");
-  buildKeyboard();
+  if(window.location.hash.includes("key")) useKeyboard=false;
+  if (useKeyboard) buildKeyboard();
 
   loadGame();
 

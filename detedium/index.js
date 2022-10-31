@@ -8,6 +8,7 @@ let numWords;
 let answers;
 let prompt;
 let usage = {};
+let useKeyboard = true;
 
 function loadGame() {
 
@@ -52,26 +53,30 @@ function loadGame() {
         wordInput.type = "text";
         wordInput.id = `wordInput-${i}`;
         wordInput.placeholder = "";
-        wordInput.onFocus="blur();";
-        wordInput.addEventListener('input', ()=>normalizeInput(wordInput));
-        wordInput.addEventListener('focus', ()=>{
-          selectedInput=i;
-          wordInput.className="focusedInput"
-          inputFields.map((f,index)=> {if (i!==index) f.className=""});
-          setTimeout(function() {
-            wordInput.blur();
-          }, 100);
-        });
+        if (useKeyboard) {
+          wordInput.onFocus="blur();";
+          wordInput.addEventListener('input', ()=>normalizeInput(wordInput));
+          wordInput.addEventListener('focus', ()=>{
+            selectedInput=i;
+            wordInput.className="focusedInput"
+            inputFields.map((f,index)=> {if (i!==index) f.className=""});
+            setTimeout(function() {
+              wordInput.blur();
+            }, 100);
+          });
+        }
         guessDiv.appendChild(wordDiv);
         wordDiv.appendChild(wordInput);
         inputFields.push(wordInput)
       }
   );
-  inputFields[0].focus();
-  inputFields[0].className="focusedInput"
-  usage = {};
-  [...line1, ...line2, ...line3].map((l)=>usage[l]= new Array(data[activeDay][1].length).fill('w'));
-  updateKeyColors();
+  if(useKeyboard) {
+    inputFields[0].focus();
+    inputFields[0].className="focusedInput"
+    usage = {};
+    [...line1, ...line2, ...line3].map((l)=>usage[l]= new Array(data[activeDay][1].length).fill('w'));
+    updateKeyColors();
+  }
 }
 
 function createSquare(color) {

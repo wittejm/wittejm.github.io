@@ -70,13 +70,13 @@ function updateKeyColors() {
 
       svg.appendChild(rect);
     keyDiv.appendChild(svg);
-    const stepSize = 48/numWords;
+    const stepSize = 40/numWords;
     usageOfLetter.map((color, index)=> {
       if (color==='w') return;
       const rect = document.createElementNS('http://www.w3.org/2000/svg','rect');
       rect.setAttribute('x', 0);
       rect.setAttribute('y', (index ) * stepSize);
-      rect.setAttribute('width', 42);
+      rect.setAttribute('width', 40);
       rect.setAttribute('height',stepSize);
       rect.setAttribute('stroke',{g:'#228B22',w:'white',y:'#FFEECC',b:'#ACACAC'}[color]);
       rect.setAttribute('strokeWidth',1);
