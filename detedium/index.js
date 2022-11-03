@@ -9,7 +9,7 @@ let answers;
 let prompt;
 let usage = {};
 let useKeyboard = true;
-let isMobile = true; // navigator.userAgent.toLowerCase().match(/mobile/i);
+let isMobile = navigator.userAgent.toLowerCase().match(/mobile/i);
 
 function tapSelectInput(i) {
   inputFields.map((f) => {
