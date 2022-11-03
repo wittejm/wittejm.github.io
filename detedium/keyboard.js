@@ -38,14 +38,14 @@ function buildKeyboard() {
 
 function backspace() {
   const input = inputFields[selectedInput];
-  input.value = input.value.slice(0,input.value.length-1)
+  input.innerHTML = input.innerHTML.slice(0,input.innerHTML.length-1)
 }
 function clickKey(k) {
   const input = inputFields[selectedInput];
-
-  input.value = `${input.value}${k}`;
+  input.innerHTML = `${input.innerHTML}${k}`;
   normalizeInput(input);
 }
+
 function updateKeyColors() {
   allSvgs.map(node=>node.remove());
 

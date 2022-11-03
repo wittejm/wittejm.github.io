@@ -90,9 +90,24 @@ input {
   font-family: "verdana";
   max-width: 10rem;
 }
+
+.mobileInput {
+  letter-spacing: 8px;
+  font-size: 1.8rem;
+  font-family: "verdana";
+  width: 10rem;
+  height: 2rem;
+  border-style: solid;
+  border-width: 1px;
+  margin: 3px;
+
+  border-color: gray;
+}
+
 .focusedInput {
   border-style: solid;
   border-width: 3px;
+  margin: 2px;
   border-color: lightblue;
 }
 
