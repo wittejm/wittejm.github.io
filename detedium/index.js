@@ -219,5 +219,8 @@ function submit() {
     });
   });
   updateKeyColors();
+  let submitButton = document.getElementById("submitButton");
+  submitButton.disabled = true;
+
   // if (resultBygs.map((word)=>word.every(l=>l==='g')).every((correct)=>correct)) window.alert("yay!")
 }
