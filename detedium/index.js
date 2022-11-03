@@ -9,7 +9,7 @@ let answers;
 let prompt;
 let usage = {};
 let useKeyboard = true;
-let isMobile = navigator.userAgent.toLowerCase().match(/mobile/i);
+let isMobile = true; // navigator.userAgent.toLowerCase().match(/mobile/i);
 
 function tapSelectInput(i) {
   inputFields.map((f) => {
@@ -103,10 +103,10 @@ function createSquare(color) {
 function normalizeInput(inputArea) {
   if (isMobile) {
     inputArea.innerHTML = inputArea.innerHTML.slice(0, 5);
-    if (inputArea.innerHTML.length === 5) {
-      selectedInput = (selectedInput + 1) % data[activeDay][2].length;
-      tapSelectInput(selectedInput)
-    }
+    // if (inputArea.innerHTML.length === 5) {
+    //  selectedInput = (selectedInput + 1) % data[activeDay][2].length;
+    //  tapSelectInput(selectedInput)
+    // }
     let submitButton = document.getElementById("submitButton");
 
     if (
