@@ -11,17 +11,21 @@ let usage = {};
 let useKeyboard = true;
 let isMobile = navigator.userAgent.toLowerCase().match(/mobile/i);
 
-function tapSelectInput(i) {
-  inputFields.map((f) => {
-    if (f.className.includes("fontRed"))
-    f.className = " fontRed mobileInput";
-    else f.className = "mobileInput";
-  });
+function addClassName(existing, classNameToAdd) {
+  if (existing.includes(classNameToAdd)) return existing;
+  return `${existing} ${classNameToAdd}`;
+}
+function removeClassName(existing, classNameToRemove) {
+  if (!existing.includes(classNameToRemove)) return existing;
+  return existing.split(" ").filter(c=>c!==classNameToRemove).join(" ");
+}
 
+function tapSelectInput(i) {
   selectedInput = i;
-  if (inputFields[i].className.includes("fontRed"))
-  inputFields[i].className = "focusedInput mobileInput fontRed";
-  else inputFields[i].className = "focusedInput mobileInput";
+  inputFields.map((f, index) => {
+    if (i === index) f.className = addClassName(f.className, "focusedInput")
+    else f.className = removeClassName(f.className, "focusedInput")
+  });
 }
 
 function loadGame() {
@@ -86,7 +90,7 @@ function loadGame() {
   });
 
   selectedInput = 0;
-  inputFields[selectedInput].className = " mobileInput focusedInput";
+  inputFields[selectedInput].className = "mobileInput focusedInput";
   usage = {};
   [...line1, ...line2, ...line3].map(
     (l) => (usage[l] = new Array(data[activeDay][1].length).fill("w"))
@@ -101,49 +105,22 @@ function createSquare(color) {
 }
 
 function normalizeInput(inputArea) {
+  let input = (isMobile ? inputArea.innerHTML : inputArea.value).slice(0, 5).toLowerCase().replace(/[^a-zA-Z]/, "");
+  if (input.length === 5 && !valid.includes(input)) inputArea.className = addClassName(inputArea.className, "fontRed");
+  else inputArea.className = removeClassName(inputArea.className, "fontRed");
   if (isMobile) {
-    inputArea.innerHTML = inputArea.innerHTML.slice(0, 5);
-    // if (inputArea.innerHTML.length === 5) {
-    //  selectedInput = (selectedInput + 1) % data[activeDay][2].length;
-    //  tapSelectInput(selectedInput)
-    // }
-    let submitButton = document.getElementById("submitButton");
-
-    if (
-      inputArea.innerHTML.length === 5 &&
-      !valid.includes(inputArea.innerHTML.toLowerCase())
-    )
-      inputArea.className = inputArea.className + " fontRed";
-    else {
-      if (inputArea.className.includes("focusedInput"))
-        inputArea.className = "focusedInput mobileInput";
-      else inputArea.className = "mobileInput";
-    }
-
-    if (inputFields.every((i) => i.innerHTML.length === 5)) {
-      submitButton.disabled = false;
-    } else submitButton.disabled = true;
+    inputArea.innerHTML = input.toUpperCase();
   } else {
+    inputArea.value = input.toUpperCase()
     const cursorLocation = inputArea.selectionStart;
-    inputArea.value = inputArea.value
-      .toUpperCase()
-      .replace(/[^a-zA-Z]/, "")
-      .slice(0, 5);
     inputArea.selectionStart = cursorLocation;
     inputArea.selectionEnd = cursorLocation;
-
-    let submitButton = document.getElementById("submitButton");
-
-    if (
-      inputArea.value.length === 5 &&
-      !valid.includes(inputArea.value.toLowerCase())
-    )
-      inputArea.className = "fontRed";
-    else inputArea.className = "";
-    if (inputFields.every((i) => i.value.length === 5)) {
-      submitButton.disabled = false;
-    } else submitButton.disabled = true;
   }
+
+  let submitButton = document.getElementById("submitButton");
+  if (inputFields.every((i) => (i.value || i.innerHTML).length === 5)) {
+    submitButton.disabled = false;
+  } else submitButton.disabled = true;
 }
 
 function bygSingleWord(guess, truth) {
