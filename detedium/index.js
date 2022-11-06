@@ -6,7 +6,6 @@ let selectedInput = -1;
 let guesses;
 let numWords;
 let answers;
-let prompt;
 let usage = {};
 let useKeyboard = true;
 let isMobile = navigator.userAgent.toLowerCase().match(/mobile/i);
@@ -17,14 +16,17 @@ function addClassName(existing, classNameToAdd) {
 }
 function removeClassName(existing, classNameToRemove) {
   if (!existing.includes(classNameToRemove)) return existing;
-  return existing.split(" ").filter(c=>c!==classNameToRemove).join(" ");
+  return existing
+    .split(" ")
+    .filter((c) => c !== classNameToRemove)
+    .join(" ");
 }
 
 function tapSelectInput(i) {
   selectedInput = i;
   inputFields.map((f, index) => {
-    if (i === index) f.className = addClassName(f.className, "focusedInput")
-    else f.className = removeClassName(f.className, "focusedInput")
+    if (i === index) f.className = addClassName(f.className, "focusedInput");
+    else f.className = removeClassName(f.className, "focusedInput");
   });
 }
 
@@ -45,17 +47,17 @@ function loadGame() {
   guesses = [];
   numWords = data[activeDay][1].length;
   answers = data[activeDay][2];
-  prompt = data[activeDay][1];
+  let prompt = data[activeDay][1];
 
   gameNodes.map((node) => node.remove());
   inputFields = [];
-  prompt.map((row, i) => {
+  prompt.map((row, wordIndex) => {
     let rowDiv = document.createElement("div");
     rowDiv.className = `r`;
     gameNodes.push(rowDiv);
     promptDiv.appendChild(rowDiv);
-    row.map((c, i) => {
-      const square = createSquare(c);
+    row.map((c, letterIndex) => {
+      const square = createSquare(c, `prompt-${wordIndex}-${letterIndex}`);
       gameNodes.push(square);
       rowDiv.appendChild(square);
     });
@@ -68,8 +70,8 @@ function loadGame() {
       wordInput = document.createElement("div");
       wordInput.className = "mobileInput";
       wordInput.addEventListener("click", () => {
-        console.log("selected", i);
-        tapSelectInput(i);
+        console.log("selected", wordIndex);
+        tapSelectInput(wordIndex);
       });
 
       gameNodes.push(wordInput);
@@ -79,7 +81,7 @@ function loadGame() {
       gameNodes.push(wordInput);
 
       wordInput.type = "text";
-      wordInput.id = `wordInput-${i}`;
+      wordInput.id = `wordInput-${wordIndex}`;
       wordInput.placeholder = "";
       wordInput.addEventListener("input", () => normalizeInput(wordInput));
       inputFields.push(wordInput);
@@ -98,25 +100,30 @@ function loadGame() {
   updateKeyColors();
 }
 
-function createSquare(color) {
+function createSquare(color, id) {
   let li = document.createElement("div");
-  li.className = `s ${color}`;
+  li.className = `s ${color} noHighlight`;
+  li.id = id;
   return li;
 }
 
 function normalizeInput(inputArea) {
-  let input = (isMobile ? inputArea.innerHTML : inputArea.value).slice(0, 5).toLowerCase().replace(/[^a-zA-Z]/, "");
-  if (input.length === 5 && !valid.includes(input)) inputArea.className = addClassName(inputArea.className, "fontRed");
+  let input = (isMobile ? inputArea.innerHTML : inputArea.value)
+    .slice(0, 5)
+    .toLowerCase()
+    .replace(/[^a-zA-Z]/, "");
+  if (input.length === 5 && !valid.includes(input))
+    inputArea.className = addClassName(inputArea.className, "fontRed");
   else inputArea.className = removeClassName(inputArea.className, "fontRed");
   if (isMobile) {
     inputArea.innerHTML = input.toUpperCase();
   } else {
-    inputArea.value = input.toUpperCase()
+    inputArea.value = input.toUpperCase();
     const cursorLocation = inputArea.selectionStart;
     inputArea.selectionStart = cursorLocation;
     inputArea.selectionEnd = cursorLocation;
   }
-
+  if (input.length===5) applySolutionConstraint();
   let submitButton = document.getElementById("submitButton");
   if (inputFields.every((i) => (i.value || i.innerHTML).length === 5)) {
     submitButton.disabled = false;
@@ -156,13 +163,7 @@ function bygSingleWord(guess, truth) {
 }
 
 function submit() {
-  const guesses = new Array(numWords)
-    .fill(0)
-    .map((_, i) =>
-      isMobile
-        ? inputFields[i].innerHTML.split("")
-        : inputFields[i].value.split("")
-    );
+  const guesses = getGuesses();
 
   const responsesDiv = document.getElementById("responsesDiv");
   let response = document.createElement("div");
@@ -175,7 +176,8 @@ function submit() {
     rowDiv.className = `r`;
     response.appendChild(rowDiv);
     const byg = bygSingleWord(guess.join(""), answers[i].toUpperCase());
-    if (byg.every((l) => l === "g")) inputFields[i].disabled = true;
+    if (byg.length === 5 && byg.every((l) => l === "g"))
+      inputFields[i].disabled = true;
     else
       isMobile ? (inputFields[i].innerHTML = "") : (inputFields[i].value = "");
     resultBygs.push(byg);
@@ -200,4 +202,15 @@ function submit() {
   submitButton.disabled = true;
 
   // if (resultBygs.map((word)=>word.every(l=>l==='g')).every((correct)=>correct)) window.alert("yay!")
+}
+
+function getGuesses() {
+  const guesses = new Array(numWords)
+    .fill(0)
+    .map((_, i) =>
+      isMobile
+        ? inputFields[i].innerHTML.split("")
+        : inputFields[i].value.split("")
+    );
+  return guesses;
 }

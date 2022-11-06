@@ -3,7 +3,7 @@
   height: 2.2rem;
   width: 2.2rem;
   padding: 0.15rem;
-  margin: 0.15rem;
+  margin: 0.05rem;
   
 }
 
@@ -109,6 +109,17 @@ input {
   border-width: 3px;
   margin: 2px;
   border-color: lightblue;
+}
+.noHighlight {
+  border-style: solid;
+  border-width: 2px;
+  border-color: white;
+}
+
+.redHighlight {
+  border-style: solid;
+  border-width: 2px;
+  border-color: red;
 }
 
 input:disabled {
