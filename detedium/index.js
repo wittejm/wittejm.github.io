@@ -68,6 +68,7 @@ function loadGame() {
     let wordInput;
     if (isMobile) {
       wordInput = document.createElement("div");
+      wordInput.id = `wordInput-${wordIndex}`;
       wordInput.className = "mobileInput";
       wordInput.addEventListener("click", () => {
         console.log("selected", wordIndex);

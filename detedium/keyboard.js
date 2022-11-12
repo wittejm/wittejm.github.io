@@ -38,7 +38,8 @@ function buildKeyboard() {
 
 function backspace() {
   const input = inputFields[selectedInput];
-  input.innerHTML = input.innerHTML.slice(0,input.innerHTML.length-1)
+  input.innerHTML = input.innerHTML.slice(0,input.innerHTML.length-1);
+  normalizeInput(input);
 }
 function clickKey(k) {
   const input = inputFields[selectedInput];
