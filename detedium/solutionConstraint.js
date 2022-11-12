@@ -11,9 +11,8 @@ function applySolutionConstraint() {
   const guesses = getGuesses();
   new Array(numWords-1).fill(0).forEach((_,wordIndex)=> {
     const byg = data[activeDay][1][wordIndex];
-    const previousGuess = guesses[wordIndex];
-    let thisGuess = guesses[wordIndex+1].slice(0);
-    console.log("previousGuess, thisGuess", previousGuess, thisGuess);
+    const previousGuess = guesses[wordIndex].join("");
+    let thisGuess = guesses[wordIndex+1].join("");
     if (thisGuess.length < 5 || previousGuess.length < 5) return;
     byg.forEach((letter, letterIndex)=> {
       const square = document.getElementById(`prompt-${wordIndex}-${letterIndex}`);
@@ -37,4 +36,16 @@ function applySolutionConstraint() {
       }
     });
   })
+}
+
+function clearConstraintHighlights(changedWordIndex) {
+  new Array(numWords-1).fill(0).forEach((_,wordIndex)=> {
+    if (wordIndex!==changedWordIndex-1 && wordIndex!==changedWordIndex) return;
+    const byg = data[activeDay][1][wordIndex];
+    byg.forEach((_, letterIndex)=> {
+      const square = document.getElementById(`prompt-${wordIndex}-${letterIndex}`);
+      square.className = removeClassName(square.className, "redHighlight");
+      square.className = addClassName(square.className, "noHighlight");
+    });
+  });
 }

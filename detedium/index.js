@@ -112,6 +112,7 @@ function normalizeInput(inputArea) {
     .slice(0, 5)
     .toLowerCase()
     .replace(/[^a-zA-Z]/, "");
+  const inputWordIndex = parseInt(inputArea.id.split("-")[1]);
   if (input.length === 5 && !valid.includes(input))
     inputArea.className = addClassName(inputArea.className, "fontRed");
   else inputArea.className = removeClassName(inputArea.className, "fontRed");
@@ -123,7 +124,8 @@ function normalizeInput(inputArea) {
     inputArea.selectionStart = cursorLocation;
     inputArea.selectionEnd = cursorLocation;
   }
-  if (input.length===5) applySolutionConstraint();
+  if (input.length === 5) applySolutionConstraint(inputWordIndex);
+  else clearConstraintHighlights(inputWordIndex);
   let submitButton = document.getElementById("submitButton");
   if (inputFields.every((i) => (i.value || i.innerHTML).length === 5)) {
     submitButton.disabled = false;
