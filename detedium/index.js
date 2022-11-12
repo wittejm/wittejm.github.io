@@ -201,6 +201,7 @@ function submit() {
     });
   });
   updateKeyColors();
+  new Array(numWords).fill(0).forEach((_, wordIndex) => clearConstraintHighlights(wordIndex))
   let submitButton = document.getElementById("submitButton");
   submitButton.disabled = true;
 
