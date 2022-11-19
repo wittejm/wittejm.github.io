@@ -114,7 +114,6 @@ function applyRules() {
   // hard mode
   if (previousGuessByg) {
     new Array(5).fill(0).map((_, letterIndex) => {
-      console.log(`guess-${numSubmitted}-${currentRowIndex}-${letterIndex}`);
       const guessSquare = document.getElementById(
         `guess-${numSubmitted}-${currentRowIndex}-${letterIndex}`
       );
