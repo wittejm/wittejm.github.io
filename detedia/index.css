@@ -1,0 +1,181 @@
+.s {
+  
+  height: 2.2rem;
+  width: 2.2rem;
+  padding: 0.15rem;
+  margin: 0.05rem;
+  text-align: center;
+  vertical-align: center;
+  font-size: 1.8rem;
+  font-family: "verdana";
+}
+
+body {
+  width: 95%
+}
+
+button {
+  font-size: 20px
+}
+#prompt {
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
+
+#guessDiv {
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
+#submitDiv {
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
+#submitButton {
+  border-width: 2px;
+  border-style: solid;
+  font-size: 20;
+  font-family: "verdana";
+}
+
+#responsesDiv {
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
+
+h1 {
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+
+}
+#keyboardDiv {
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
+
+.keyboardRow {
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  display: flex;
+
+}
+
+.key {
+  padding: 0.02rem;
+  margin: 0.02rem;
+}
+
+.keyLetter {
+  position: absolute;
+  width: 38px;
+}
+.keySubLetter {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  text-align: center;
+  vertical-align: middle;
+  display: inline-block;
+}
+#svg {
+  position: absolute;
+}
+input {
+  letter-spacing: 8px;
+  font-size: 1.8rem;
+  font-family: "verdana";
+  max-width: 10rem;
+}
+
+.mobileInput {
+  letter-spacing: 8px;
+  font-size: 1.8rem;
+  font-family: "verdana";
+  width: 10rem;
+  height: 2rem;
+  border-style: solid;
+  border-width: 1px;
+  margin: 3px;
+
+  border-color: gray;
+}
+
+.noHighlight {
+  border-style: solid;
+  border-width: 3px;
+  margin: 1px;
+  border-color: white;
+}
+
+.redHighlight {
+  border-color: red;
+}
+
+.focusedInput {
+  border-color: lightblue;
+}
+
+input:disabled {
+  background-color: #228B22;
+  color: #000000;
+}
+
+.r {
+  display:flex;
+  width: fit-content;
+}
+
+.b {
+  background-color: #DCDCDC;
+}
+.y {
+  background-color: #FFD700;
+}
+.g {
+  background-color: #228B22;
+}
+.l {
+  text-align: center;
+  vertical-align: center;
+  font-size: 1.8rem;
+  font-family: "verdana";
+}
+
+.backspace {
+  margin-left: 2px;
+  text-align: center;
+  vertical-align: center;
+  font-size: 1.6rem;
+  font-family: "verdana";
+  font-weight: "bolder";
+}
+
+.response {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-width: 0px;
+  border-bottom-width: 2px;
+  border-color: black;
+  border-style: solid;
+}
+.fontRed {
+  color: red;
+}
+
+svg {pointer-events: none}
+rect {pointer-events: none}
+body {
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;          /* Likely future */      
+}

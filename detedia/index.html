@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <header>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </header>
+  <script src="./index.js"></script>
+  <script src="../detedium/valid.js"></script>
+  <script src="../detedium/data.js"></script>
+  <script src="./keyboard.js"></script>
+  <script src="./solutionConstraint.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="./index.css" media="screen" />
+  <body>
+    <h1>
+      <span id="backButtonSpan"><button id="backButton"><</button> </span
+      ><span id="header"></span>
+      <span id="forwardButtonSpan"><button id="forwardButton">></button></span>
+    </h1>
+    <div id="prompt"></div>
+    <div id="submitDiv">
+      <button id="submitButton" disabled="true">SUBMIT</button>
+    </div>
+    <div id="keyboardDiv"></div>
+    <div id="responsesDiv"></div>
+
+    <script>
+      const promptDiv = document.getElementById("prompt"); 
+      const guessDiv = document.getElementById("guessDiv");
+      const submitButton = document.getElementById("submitButton");
+      submitButton.addEventListener("click", submit);
+      const backButton = document.getElementById("backButton");
+      backButton.addEventListener("click", () => {
+        activeDay = activeDay + 1;
+        loadGame();
+      });
+      const forwardButton = document.getElementById("forwardButton");
+      forwardButton.addEventListener("click", () => {
+        activeDay = activeDay - 1;
+        loadGame();
+      });
+
+      buildKeyboard();
+      loadGame();
+    </script>
+  </body>
+</html>
