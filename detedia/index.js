@@ -11,6 +11,9 @@ let usage = {};
 let previousGuess = null;
 let previousGuessByg = null;
 let numSubmitted = 0;
+let enforceDictionary = false;
+let enforceSolutionConstraint = false;
+let enforceHardMode = false;
 
 let isMobile = navigator.userAgent.toLowerCase().match(/mobile/i);
 // if (!isMobile) window.location = ('https://wittejm.github.io/detedium/index.html');
@@ -41,8 +44,8 @@ function tapSelectInput(tapped) {
 function loadGame() {
   previousGuess = null;
   previousGuessByg = null;
-  const header = document.getElementById("header");
-  header.textContent = data[activeDay][0];
+  const dayNumber = document.getElementById("dayNumber");
+  dayNumber.textContent = data[activeDay][0];
   let forwardButton = document.getElementById("forwardButton");
   let backButton = document.getElementById("backButton");
 
@@ -277,4 +280,14 @@ function getGuesses() {
     .fill(0)
     .map((_, i) => inputs.slice(5 * i, 5 * (i + 1)));
   return guesses;
+}
+
+function toggleRulesList() {
+  const rulesList = document.getElementById("rulesList");
+  if (rulesList.className.includes("hidden")) {
+    rulesList.className = removeClassName(rulesList.className, "hidden");
+  } else {
+    rulesList.className = addClassName(rulesList.className, "hidden");
+  }
+
 }
