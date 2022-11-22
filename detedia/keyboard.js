@@ -40,7 +40,7 @@ function buildKeyboard() {
 function backspace() {
   let input = gameSquares[selectedInput];
   if(input.innerHTML === "") {
-    selectedInput = Math.max(selectedInput-1, 0);
+    selectedInput = selectedInput > 0 ? selectedInput-1 : inputs.length-1;
     input = gameSquares[selectedInput];
   }
   input.innerHTML = "";
