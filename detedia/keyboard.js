@@ -102,5 +102,6 @@ function updateKeyColors() {
 
 document.addEventListener('keydown', event => {
   const key = event.key.toUpperCase();
-  clickKey(key);
+  if (key==="BACKSPACE") backspace();
+  if (key.match(/^[A-Z]$/)) clickKey(key);
 });
