@@ -52,15 +52,19 @@ function loadGame() {
   if (activeDay === 0) {
     forwardButton.disabled = true;
   } else forwardButton.disabled = false;
+  forwardButton.blur();
 
   if (activeDay === data.length - 1) {
     backButton.disabled = true;
   } else backButton.disabled = false;
+  backButton.blur();
 
-  numWords = Math.min(6, data[activeDay][1].length);
   answers = data[activeDay][2];
+  numWords = Math.min(6, answers.length);
   inputs = new Array(numWords * 5).fill("");
-  let prompt = computePromptFromWords(answers);// data[activeDay][1];
+  let prompt = computePromptFromWords(answers);
+  // data[activeDay][1] = prompt;
+  // prompt = data[activeDay][1];
   gameSquares = [];
   gameNodes.map((node) => node.remove());
   prompt.map((row, wordIndex) => {
@@ -80,7 +84,7 @@ function loadGame() {
   tapSelectInput(0);
   usage = {};
   [...line1, ...line2, ...line3].map(
-    (l) => (usage[l] = new Array(data[activeDay][1].length).fill("w"))
+    (l) => (usage[l] = new Array(numWords).fill("w"))
   );
   updateKeyColors();
 }
@@ -88,7 +92,6 @@ function loadGame() {
 function createSquare(color, wordIndex, letterIndex) {
   let li = document.createElement("div");
   li.addEventListener("click", () => {
-    console.log("selected", wordIndex, letterIndex);
     tapSelectInput(wordIndex * 5 + letterIndex);
   });
   li.className = `s ${color} noHighlight`;
@@ -182,6 +185,7 @@ function applyRules() {
   if (inputs.every((i) => i !== "")) {
     submitButton.disabled = false;
   } else submitButton.disabled = true;
+  submitButton.blur();
 }
 
 function bygSingleWord(guess, truth) {
@@ -272,6 +276,7 @@ function submit() {
     })
   let submitButton = document.getElementById("submitButton");
   submitButton.disabled = true;
+  submitButton.blur();
   tapSelectInput(0);
 }
 
@@ -297,5 +302,5 @@ function computePromptFromWords(words) {
 
 function obeysSuperHardMode(words) {
   // for each word: for each blank, check that subsequent words do not contain that letter. UNLESS there's yellow shit going on.
-  
+
 }

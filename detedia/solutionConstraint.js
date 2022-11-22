@@ -8,7 +8,7 @@ function applySolutionConstraint() {
   // already, we're checking the whole word to see if it's correct;... or rather, we're scoring it. applying byg.
   const guesses = getGuesses();
   new Array(numWords - 1).fill(0).forEach((_, wordIndex) => {
-    const byg = data[activeDay][1][wordIndex];
+    const byg = computePromptFromWords(data[activeDay][2])[wordIndex];
     const previousWord = guesses[wordIndex].join("");
     let thisWord = guesses[wordIndex + 1].join("");
     if (thisWord.length < 5 || previousWord.length < 5) return;
@@ -51,7 +51,7 @@ function applySolutionConstraint() {
 function clearConstraintHighlights(changedWordIndex) {
   [changedWordIndex-1, changedWordIndex].forEach((wordIndex) => {
     if (wordIndex===-1) return;
-    const byg = data[activeDay][1][wordIndex];
+    const byg = computePromptFromWords(data[activeDay][2])[wordIndex] ;
     byg.forEach((_, letterIndex) => {
       const square = document.getElementById(
         `prompt-${wordIndex}-${letterIndex}`
