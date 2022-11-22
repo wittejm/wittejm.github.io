@@ -57,10 +57,10 @@ function loadGame() {
     backButton.disabled = true;
   } else backButton.disabled = false;
 
-  numWords = data[activeDay][1].length;
+  numWords = Math.min(6, data[activeDay][1].length);
   answers = data[activeDay][2];
   inputs = new Array(numWords * 5).fill("");
-  let prompt = data[activeDay][1];
+  let prompt = computePromptFromWords(answers);// data[activeDay][1];
   gameSquares = [];
   gameNodes.map((node) => node.remove());
   prompt.map((row, wordIndex) => {
@@ -289,5 +289,13 @@ function toggleRulesList() {
   } else {
     rulesList.className = addClassName(rulesList.className, "hidden");
   }
+}
 
+function computePromptFromWords(words) {
+  return words.map((word)=>bygSingleWord(word, words[words.length-1])).slice(0,6);
+}
+
+function obeysSuperHardMode(words) {
+  // for each word: for each blank, check that subsequent words do not contain that letter. UNLESS there's yellow shit going on.
+  
 }
