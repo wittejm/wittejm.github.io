@@ -267,13 +267,11 @@ function submit() {
   previousGuessByg = resultBygs;
   applyRules();
   updateKeyColors();
-  new Array(numWords)
-    .fill(0)
-    .forEach((_, wordIndex) => {
-      clearConstraintHighlights(wordIndex);
-      const rowDiv = document.getElementById(`r-${wordIndex}`);
-      rowDiv.className = removeClassName(rowDiv.className, "fontRed");
-    })
+  new Array(numWords).fill(0).forEach((_, wordIndex) => {
+    clearConstraintHighlights(wordIndex);
+    const rowDiv = document.getElementById(`r-${wordIndex}`);
+    rowDiv.className = removeClassName(rowDiv.className, "fontRed");
+  });
   let submitButton = document.getElementById("submitButton");
   submitButton.disabled = true;
   submitButton.blur();
@@ -297,10 +295,11 @@ function toggleRulesList() {
 }
 
 function computePromptFromWords(words) {
-  return words.map((word)=>bygSingleWord(word, words[words.length-1])).slice(0,6);
+  return words
+    .map((word) => bygSingleWord(word, words[words.length - 1]))
+    .slice(0, 6);
 }
 
 function obeysSuperHardMode(words) {
   // for each word: for each blank, check that subsequent words do not contain that letter. UNLESS there's yellow shit going on.
-
 }

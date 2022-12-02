@@ -49,9 +49,9 @@ function applySolutionConstraint() {
 }
 
 function clearConstraintHighlights(changedWordIndex) {
-  [changedWordIndex-1, changedWordIndex].forEach((wordIndex) => {
-    if (wordIndex===-1) return;
-    const byg = computePromptFromWords(data[activeDay][2])[wordIndex] ;
+  [changedWordIndex - 1, changedWordIndex].forEach((wordIndex) => {
+    if (wordIndex === -1) return;
+    const byg = computePromptFromWords(data[activeDay][2])[wordIndex];
     byg.forEach((_, letterIndex) => {
       const square = document.getElementById(
         `prompt-${wordIndex}-${letterIndex}`
