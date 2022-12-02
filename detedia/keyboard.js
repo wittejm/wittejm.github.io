@@ -39,8 +39,8 @@ function buildKeyboard() {
 
 function backspace() {
   let input = gameSquares[selectedInput];
-  if (input.innerHTML === "") {
-    selectedInput = selectedInput > 0 ? selectedInput - 1 : inputs.length - 1;
+  while (input.innerHTML === "") {
+    selectedInput = selectedInput > 0 ? selectedInput - 1 : 0;
     input = gameSquares[selectedInput];
   }
   input.innerHTML = "";
@@ -51,10 +51,10 @@ function backspace() {
 
 function clickKey(k) {
   const input = gameSquares[selectedInput];
-  input.innerHTML = k;
-  inputs[selectedInput] = k;
+  input.innerHTML = k === " " ? "" : k;
+  inputs[selectedInput] = k === " " ? "" : k;
   applyRules();
-  tapSelectInput((selectedInput + 1) % inputs.length);
+  if (selectedInput < inputs.length - 1) tapSelectInput(selectedInput + 1);
 }
 
 function updateKeyColors() {
@@ -111,5 +111,5 @@ function updateKeyColors() {
 document.addEventListener("keydown", (event) => {
   const key = event.key.toUpperCase();
   if (key === "BACKSPACE") backspace();
-  if (key.match(/^[A-Z]$/)) clickKey(key);
+  if (key.match(/^[ A-Z]$/)) clickKey(key);
 });
