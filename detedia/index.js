@@ -44,8 +44,6 @@ function tapSelectInput(tapped) {
 function loadGame() {
   previousGuess = null;
   previousGuessByg = null;
-  const dayNumber = document.getElementById("dayNumber");
-  dayNumber.textContent = data[activeDay][0];
   let forwardButton = document.getElementById("forwardButton");
   let backButton = document.getElementById("backButton");
 
@@ -87,6 +85,11 @@ function loadGame() {
     (l) => (usage[l] = new Array(numWords).fill("w"))
   );
   updateKeyColors();
+
+  const dayNumber = document.getElementById("dayNumber");
+  dayNumber.textContent = `${data[activeDay][0]}${
+    !obeysSuperHardMode(answers) ? "!" : ""
+  }`;
 }
 
 function createSquare(color, wordIndex, letterIndex) {
@@ -302,4 +305,76 @@ function computePromptFromWords(words) {
 
 function obeysSuperHardMode(words) {
   // for each word: for each blank, check that subsequent words do not contain that letter. UNLESS there's yellow shit going on.
+
+  let foundRepeat = words
+    .slice(0, words.length - 1)
+    .some((previousWord, previousIndex) =>
+      words.slice(previousIndex + 1).some((subsequentWord, subsequentIndex) => {
+        const byg = bygSingleWord(previousWord, words[words.length - 1]);
+        console.log("previousWord, subsq:", previousWord, subsequentWord, byg);
+        return byg.some((c, ind) => {
+          const indicesInPreviousWordOfThisLetter = previousWord
+            .split("")
+            .reduce((soFar, current, currInd) => {
+              if (current === previousWord[ind]) soFar.push(currInd);
+              return soFar;
+            }, []);
+          const indicesInSubsequentWordOfThisLetter = subsequentWord
+            .split("")
+            .reduce((soFar, current, currInd) => {
+              if (current === previousWord[ind]) soFar.push(currInd);
+              return soFar;
+            }, []);
+          console.log(
+            "indicesInPreviousWordOfThisLetter, ind: ",
+            ind,
+            subsequentWord[ind],
+            indicesInPreviousWordOfThisLetter
+          );
+          const numYellowOrGreenOfThisLetterInPreviousWord =
+            indicesInPreviousWordOfThisLetter.filter(
+              (ind) => byg[ind] === "y" || byg[ind] === "g"
+            ).length;
+          console.log(
+            "numYellowOrGreenOfThisLetterInPreviousWord",
+            numYellowOrGreenOfThisLetterInPreviousWord
+          );
+          console.log(
+            "subsequentWord.match(new RegExp(previousWord[ind], 'g'')) || [].length",
+            (subsequentWord.match(new RegExp(previousWord[ind], "g")) || [])
+              .length
+          );
+          const foundARepeat =
+            (c === "y" && previousWord[ind] === subsequentWord[ind]) ||
+            (c === "b" &&
+              numYellowOrGreenOfThisLetterInPreviousWord <
+                (subsequentWord.match(new RegExp(previousWord[ind], "g")) || [])
+                  .length);
+          if (foundARepeat) {
+            console.log(
+              "====\n====\n",
+              "isyorg",
+              numYellowOrGreenOfThisLetterInPreviousWord
+            );
+            console.log(
+              c,
+              "prev, subs",
+              previousWord[ind],
+              subsequentWord[ind]
+            );
+            console.log(
+              "subsequentWord.includes(previousWord[ind])",
+              subsequentWord.includes(previousWord[ind])
+            );
+          }
+          return foundARepeat;
+        });
+      })
+    );
+  console.log(
+    foundRepeat
+      ? "this does not obey super hard mode"
+      : "this obeys super hard mode!"
+  );
+  return !foundRepeat;
 }
