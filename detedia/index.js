@@ -347,9 +347,10 @@ function obeysSuperHardMode(words) {
           const foundARepeat =
             (c === "y" && previousWord[ind] === subsequentWord[ind]) ||
             (c === "b" &&
-              numYellowOrGreenOfThisLetterInPreviousWord <
+              (numYellowOrGreenOfThisLetterInPreviousWord <
                 (subsequentWord.match(new RegExp(previousWord[ind], "g")) || [])
-                  .length);
+                  .length ||
+                previousWord[ind] === subsequentWord[ind]));
           if (foundARepeat) {
             console.log(
               "====\n====\n",
