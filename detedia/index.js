@@ -102,12 +102,16 @@ function createSquare(color, wordIndex, letterIndex) {
   return li;
 }
 
+function getWordAt(index) {
+  return [0, 1, 2, 3, 4]
+  .map((i) => inputs[index * 5 + i])
+  .join("");
+}
+
 function applyRules() {
   // if completing a word, check it's valid
   const currentRowIndex = Math.floor(selectedInput / 5);
-  const currentWord = [0, 1, 2, 3, 4]
-    .map((i) => inputs[currentRowIndex * 5 + i])
-    .join("");
+  const currentWord = getWordAt(currentRowIndex);
   const rowDiv = document.getElementById(`r-${currentRowIndex}`);
   if (currentWord.length === 5 && !valid.includes(currentWord.toLowerCase())) {
     rowDiv.className = addClassName(rowDiv.className, "fontRed");
