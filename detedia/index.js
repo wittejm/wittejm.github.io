@@ -8,6 +8,7 @@ let guesses;
 let numWords;
 let answers;
 let usage = {};
+let allSubmittedGuesses = [];
 let previousGuess = null;
 let previousGuessByg = null;
 let numSubmitted = 0;
@@ -42,6 +43,7 @@ function tapSelectInput(tapped) {
 }
 
 function loadGame() {
+  allSubmittedGuesses = getProgressFromStorage() || [];
   previousGuess = null;
   previousGuessByg = null;
   let forwardButton = document.getElementById("forwardButton");
@@ -103,9 +105,7 @@ function createSquare(color, wordIndex, letterIndex) {
 }
 
 function getWordAt(index) {
-  return [0, 1, 2, 3, 4]
-  .map((i) => inputs[index * 5 + i])
-  .join("");
+  return [0, 1, 2, 3, 4].map((i) => inputs[index * 5 + i]).join("");
 }
 
 function applyRules() {
@@ -233,16 +233,10 @@ function bygSingleWord(guess, truth) {
 function submit() {
   numSubmitted = numSubmitted + 1;
   previousGuess = getGuesses();
-  const responsesDiv = document.getElementById("responsesDiv");
-  let response = document.createElement("div");
-  response.className = "response";
-  responsesDiv.prepend(response);
-  gameNodes.push(response);
+  allSubmittedGuesses.push(previousGuess);
+  renderAllGuesses();
   const resultBygs = [];
   previousGuess.map((guess, wordIndex) => {
-    let rowDiv = document.createElement("div");
-    rowDiv.className = `r`;
-    response.appendChild(rowDiv);
     const byg = bygSingleWord(guess.join(""), answers[wordIndex].toUpperCase());
     // wipe non-green letters
     byg.map((c, letterIndex) => {
@@ -255,20 +249,13 @@ function submit() {
     });
     resultBygs.push(byg);
     guess.map((letter, letterIndex) => {
-      let letterDiv = document.createElement("div");
       const color = byg[letterIndex];
-
       usage[letter][wordIndex] =
         usage[letter][wordIndex] === "g" || color === "g"
           ? "g"
           : usage[letter][wordIndex] === "y"
           ? "y"
           : color;
-
-      letterDiv.className = `s l ${color} noHighlight`;
-      letterDiv.id = `guess-${numSubmitted}-${wordIndex}-${letterIndex}`;
-      rowDiv.appendChild(letterDiv);
-      letterDiv.append(letter);
     });
   });
   previousGuessByg = resultBygs;
@@ -382,4 +369,47 @@ function obeysSuperHardMode(words) {
       : "this obeys super hard mode!"
   );
   return !foundRepeat;
+}
+
+function getProgressFromStorage() {
+  return null;
+}
+
+function renderAllGuesses() {
+  const responsesDiv = document.getElementById("responsesDiv");
+  [...responsesDiv.children].map((child) => responsesDiv.removeChild(child));
+  allSubmittedGuesses.map((submittedGuess) => {
+    let response = document.createElement("div");
+    response.className = "response";
+    responsesDiv.prepend(response);
+    gameNodes.push(response);
+    const resultBygs = [];
+    submittedGuess.map((wordGuess, wordIndex) => {
+      let rowDiv = document.createElement("div");
+      rowDiv.className = `r`;
+      response.appendChild(rowDiv);
+      const byg = bygSingleWord(
+        wordGuess.join(""),
+        answers[wordIndex].toUpperCase()
+      );
+      // wipe non-green letters
+      byg.map((c, letterIndex) => {
+        if (c !== "g") {
+          selectedInput = wordIndex * 5 + letterIndex;
+          let input = gameSquares[selectedInput];
+          input.innerHTML = "";
+          inputs[selectedInput] = "";
+        }
+      });
+      resultBygs.push(byg);
+      wordGuess.map((letter, letterIndex) => {
+        let letterDiv = document.createElement("div");
+        const color = byg[letterIndex];
+        letterDiv.className = `s l ${color} noHighlight`;
+        letterDiv.id = `guess-${numSubmitted}-${wordIndex}-${letterIndex}`;
+        rowDiv.appendChild(letterDiv);
+        letterDiv.append(letter);
+      });
+    });
+  });
 }
