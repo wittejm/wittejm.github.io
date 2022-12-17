@@ -44,7 +44,10 @@ function tapSelectInput(tapped) {
 function loadGame() {
   let forwardButton = document.getElementById("forwardButton");
   let backButton = document.getElementById("backButton");
-
+  usage = {};
+  [...line1, ...line2, ...line3].map(
+    (l) => (usage[l] = new Array(numWords).fill("w"))
+  );
   if (activeDay === 0) {
     forwardButton.disabled = true;
   } else forwardButton.disabled = false;
@@ -61,7 +64,6 @@ function loadGame() {
   inputs = new Array(numWords * 5).fill("");
   allSubmittedGuesses = getProgressFromStorage() || [];
   gameNodes.map((node) => node.remove());
-  renderAllGuesses(true);
   let prompt = computePromptFromWords(answers);
   prompt.map((row, wordIndex) => {
     let rowDiv = document.createElement("div");
@@ -78,11 +80,8 @@ function loadGame() {
   });
 
   tapSelectInput(0);
-  usage = {};
-  [...line1, ...line2, ...line3].map(
-    (l) => (usage[l] = new Array(numWords).fill("w"))
-  );
-  updateKeyColors();
+
+  renderAllGuesses(true);
 
   const dayNumber = document.getElementById("dayNumber");
   dayNumber.textContent = `${data[activeDay][0]}${
@@ -242,7 +241,6 @@ function submit() {
   renderAllGuesses(false);
 
   applyRules();
-  updateKeyColors();
   new Array(numWords).fill(0).forEach((_, wordIndex) => {
     clearConstraintHighlights(wordIndex);
     const rowDiv = document.getElementById(`r-${wordIndex}`);
@@ -344,6 +342,9 @@ function saveGuesses() {
 function resetStorage() {
   window.localStorage.removeItem(`submittedGuesses-${activeDay}`);
   allSubmittedGuesses = [];
+  [...line1, ...line2, ...line3].map(
+    (l) => (usage[l] = new Array(numWords).fill("w"))
+  );
   renderAllGuesses(true);
 }
 
@@ -387,6 +388,12 @@ function renderAllGuesses(gameStart) {
       wordGuess.map((letter, letterIndex) => {
         let letterDiv = document.createElement("div");
         const color = byg[letterIndex];
+        usage[letter][wordIndex] =
+        usage[letter][wordIndex] === "g" || color === "g"
+          ? "g"
+          : usage[letter][wordIndex] === "y"
+          ? "y"
+          : color;
         letterDiv.className = `s l ${color} noHighlight`;
         letterDiv.id = `guess-${submittedGuessIndex}-${wordIndex}-${letterIndex}`;
         rowDiv.appendChild(letterDiv);
@@ -395,4 +402,5 @@ function renderAllGuesses(gameStart) {
       previousGuessByg = resultBygs;
     });
   });
+  updateKeyColors();
 }
