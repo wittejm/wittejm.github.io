@@ -56,7 +56,6 @@ function clickKey(k) {
   applyRules();
   const currentRowIndex = Math.floor(selectedInput / 5);
   const currentWord = getWordAt(currentRowIndex);
-  console.log("currentWord", currentWord);
 
   if (
     selectedInput < inputs.length - 1 &&

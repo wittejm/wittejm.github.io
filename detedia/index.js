@@ -11,7 +11,6 @@ let usage = {};
 let allSubmittedGuesses = [];
 let previousGuess = null;
 let previousGuessByg = null;
-let numSubmitted = 0;
 let enforceDictionary = false;
 let enforceSolutionConstraint = false;
 let enforceHardMode = false;
@@ -43,9 +42,6 @@ function tapSelectInput(tapped) {
 }
 
 function loadGame() {
-  allSubmittedGuesses = getProgressFromStorage() || [];
-  previousGuess = null;
-  previousGuessByg = null;
   let forwardButton = document.getElementById("forwardButton");
   let backButton = document.getElementById("backButton");
 
@@ -60,13 +56,13 @@ function loadGame() {
   backButton.blur();
 
   answers = data[activeDay][2];
+  gameSquares = [];
   numWords = Math.min(6, answers.length);
   inputs = new Array(numWords * 5).fill("");
-  let prompt = computePromptFromWords(answers);
-  // data[activeDay][1] = prompt;
-  // prompt = data[activeDay][1];
-  gameSquares = [];
+  allSubmittedGuesses = getProgressFromStorage() || [];
   gameNodes.map((node) => node.remove());
+  renderAllGuesses(true);
+  let prompt = computePromptFromWords(answers);
   prompt.map((row, wordIndex) => {
     let rowDiv = document.createElement("div");
     rowDiv.id = `r-${wordIndex}`;
@@ -125,10 +121,12 @@ function applyRules() {
   } else clearConstraintHighlights(currentRowIndex);
 
   // hard mode
-  if (previousGuessByg) {
+  if (allSubmittedGuesses.length > 0) {
     new Array(5).fill(0).map((_, letterIndex) => {
       const guessSquare = document.getElementById(
-        `guess-${numSubmitted}-${currentRowIndex}-${letterIndex}`
+        `guess-${
+          allSubmittedGuesses.length - 1
+        }-${currentRowIndex}-${letterIndex}`
       );
       guessSquare.className = removeClassName(
         guessSquare.className,
@@ -145,7 +143,9 @@ function applyRules() {
         if (color === "g") {
           if (thisGuessWord[letterIndex] !== previousGuessWord[letterIndex]) {
             const guessSquare = document.getElementById(
-              `guess-${numSubmitted}-${currentRowIndex}-${letterIndex}`
+              `guess-${
+                allSubmittedGuesses.length - 1
+              }-${currentRowIndex}-${letterIndex}`
             );
             guessSquare.className = addClassName(
               guessSquare.className,
@@ -161,13 +161,17 @@ function applyRules() {
       });
       previousGuessBygWord.map((color, letterIndex) => {
         const guessSquare = document.getElementById(
-          `guess-${numSubmitted}-${currentRowIndex}-${letterIndex}`
+          `guess-${
+            allSubmittedGuesses.length - 1
+          }-${currentRowIndex}-${letterIndex}`
         );
 
         if (color === "y") {
           if (!thisGuessWord.includes(previousGuessWord[letterIndex])) {
             const guessSquare = document.getElementById(
-              `guess-${numSubmitted}-${currentRowIndex}-${letterIndex}`
+              `guess-${
+                allSubmittedGuesses.length - 1
+              }-${currentRowIndex}-${letterIndex}`
             );
             guessSquare.className = addClassName(
               guessSquare.className,
@@ -231,34 +235,12 @@ function bygSingleWord(guess, truth) {
 }
 
 function submit() {
-  numSubmitted = numSubmitted + 1;
   previousGuess = getGuesses();
   allSubmittedGuesses.push(previousGuess);
-  renderAllGuesses();
-  const resultBygs = [];
-  previousGuess.map((guess, wordIndex) => {
-    const byg = bygSingleWord(guess.join(""), answers[wordIndex].toUpperCase());
-    // wipe non-green letters
-    byg.map((c, letterIndex) => {
-      if (c !== "g") {
-        selectedInput = wordIndex * 5 + letterIndex;
-        let input = gameSquares[selectedInput];
-        input.innerHTML = "";
-        inputs[selectedInput] = "";
-      }
-    });
-    resultBygs.push(byg);
-    guess.map((letter, letterIndex) => {
-      const color = byg[letterIndex];
-      usage[letter][wordIndex] =
-        usage[letter][wordIndex] === "g" || color === "g"
-          ? "g"
-          : usage[letter][wordIndex] === "y"
-          ? "y"
-          : color;
-    });
-  });
-  previousGuessByg = resultBygs;
+  saveGuesses();
+
+  renderAllGuesses(false);
+
   applyRules();
   updateKeyColors();
   new Array(numWords).fill(0).forEach((_, wordIndex) => {
@@ -302,7 +284,6 @@ function obeysSuperHardMode(words) {
     .some((previousWord, previousIndex) =>
       words.slice(previousIndex + 1).some((subsequentWord, subsequentIndex) => {
         const byg = bygSingleWord(previousWord, words[words.length - 1]);
-        console.log("previousWord, subsq:", previousWord, subsequentWord, byg);
         return byg.some((c, ind) => {
           const indicesInPreviousWordOfThisLetter = previousWord
             .split("")
@@ -316,25 +297,10 @@ function obeysSuperHardMode(words) {
               if (current === previousWord[ind]) soFar.push(currInd);
               return soFar;
             }, []);
-          console.log(
-            "indicesInPreviousWordOfThisLetter, ind: ",
-            ind,
-            subsequentWord[ind],
-            indicesInPreviousWordOfThisLetter
-          );
           const numYellowOrGreenOfThisLetterInPreviousWord =
             indicesInPreviousWordOfThisLetter.filter(
               (ind) => byg[ind] === "y" || byg[ind] === "g"
             ).length;
-          console.log(
-            "numYellowOrGreenOfThisLetterInPreviousWord",
-            numYellowOrGreenOfThisLetterInPreviousWord
-          );
-          console.log(
-            "subsequentWord.match(new RegExp(previousWord[ind], 'g'')) || [].length",
-            (subsequentWord.match(new RegExp(previousWord[ind], "g")) || [])
-              .length
-          );
           const foundARepeat =
             (c === "y" && previousWord[ind] === subsequentWord[ind]) ||
             (c === "b" &&
@@ -342,45 +308,54 @@ function obeysSuperHardMode(words) {
                 (subsequentWord.match(new RegExp(previousWord[ind], "g")) || [])
                   .length ||
                 previousWord[ind] === subsequentWord[ind]));
-          if (foundARepeat) {
-            console.log(
-              "====\n====\n",
-              "isyorg",
-              numYellowOrGreenOfThisLetterInPreviousWord
-            );
-            console.log(
-              c,
-              "prev, subs",
-              previousWord[ind],
-              subsequentWord[ind]
-            );
-            console.log(
-              "subsequentWord.includes(previousWord[ind])",
-              subsequentWord.includes(previousWord[ind])
-            );
-          }
           return foundARepeat;
         });
       })
     );
-  console.log(
-    foundRepeat
-      ? "this does not obey super hard mode"
-      : "this obeys super hard mode!"
-  );
   return !foundRepeat;
 }
 
 function getProgressFromStorage() {
-  return null;
+  console.log(
+    "window.localStorage.getItem(`submittedGuesses-${activeDay}`)",
+    window.localStorage.getItem(`submittedGuesses-${activeDay}`)
+  );
+  const allSubmittedGuessesString = window.localStorage.getItem(
+    `submittedGuesses-${activeDay}`
+  );
+  const res =
+    allSubmittedGuessesString &&
+    allSubmittedGuessesString
+      .split(":")
+      .map((guessSets) => guessSets.split(",").map((words) => words.split("")));
+  return res;
 }
 
-function renderAllGuesses() {
+function saveGuesses() {
+  const allSubmittedGuessesString = allSubmittedGuesses
+    .map((guessSet) => guessSet.map((word) => word.join("")).join(","))
+    .join(":");
+  window.localStorage.setItem(
+    `submittedGuesses-${activeDay}`,
+    allSubmittedGuessesString
+  );
+}
+
+function resetStorage() {
+  window.localStorage.removeItem(`submittedGuesses-${activeDay}`);
+  allSubmittedGuesses = [];
+  renderAllGuesses(true);
+}
+
+function renderAllGuesses(gameStart) {
+  console.log("allSubmittedGuesses", allSubmittedGuesses);
+  previousGuess = allSubmittedGuesses[allSubmittedGuesses.length - 1];
   const responsesDiv = document.getElementById("responsesDiv");
   [...responsesDiv.children].map((child) => responsesDiv.removeChild(child));
-  allSubmittedGuesses.map((submittedGuess) => {
+  allSubmittedGuesses.map((submittedGuess, submittedGuessIndex) => {
     let response = document.createElement("div");
     response.className = "response";
+    response.id = `response-${submittedGuessIndex}`;
     responsesDiv.prepend(response);
     gameNodes.push(response);
     const resultBygs = [];
@@ -392,24 +367,32 @@ function renderAllGuesses() {
         wordGuess.join(""),
         answers[wordIndex].toUpperCase()
       );
+      console.log("rendering byg", byg);
       // wipe non-green letters
-      byg.map((c, letterIndex) => {
-        if (c !== "g") {
-          selectedInput = wordIndex * 5 + letterIndex;
-          let input = gameSquares[selectedInput];
-          input.innerHTML = "";
-          inputs[selectedInput] = "";
-        }
-      });
+      if (
+        !gameStart &&
+        submittedGuessIndex === allSubmittedGuesses.length - 1
+      ) {
+        byg.map((c, letterIndex) => {
+          if (c !== "g") {
+            selectedInput = wordIndex * 5 + letterIndex;
+            let input = gameSquares[selectedInput];
+            input.innerHTML = "";
+            inputs[selectedInput] = "";
+          }
+        });
+      }
+
       resultBygs.push(byg);
       wordGuess.map((letter, letterIndex) => {
         let letterDiv = document.createElement("div");
         const color = byg[letterIndex];
         letterDiv.className = `s l ${color} noHighlight`;
-        letterDiv.id = `guess-${numSubmitted}-${wordIndex}-${letterIndex}`;
+        letterDiv.id = `guess-${submittedGuessIndex}-${wordIndex}-${letterIndex}`;
         rowDiv.appendChild(letterDiv);
         letterDiv.append(letter);
       });
+      previousGuessByg = resultBygs;
     });
   });
 }
