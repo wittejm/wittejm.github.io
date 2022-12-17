@@ -76,6 +76,13 @@ button {
   width: fit-content;
 }
 #submitDiv {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
+#resetDiv {
   margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
