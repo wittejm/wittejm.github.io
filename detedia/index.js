@@ -3,6 +3,7 @@ let gameSquares;
 let inputs;
 const allSvgs = [];
 let activeDay = 0;
+let wordleNumber = 0;
 let selectedInput = -1;
 let guesses;
 let numWords;
@@ -59,6 +60,7 @@ function loadGame() {
   backButton.blur();
 
   answers = data[activeDay][2];
+  wordleNumber = data[activeDay][0];
   gameSquares = [];
   numWords = Math.min(6, answers.length);
   inputs = new Array(numWords * 5).fill("");
@@ -314,12 +316,8 @@ function obeysSuperHardMode(words) {
 }
 
 function getProgressFromStorage() {
-  console.log(
-    "window.localStorage.getItem(`submittedGuesses-${activeDay}`)",
-    window.localStorage.getItem(`submittedGuesses-${activeDay}`)
-  );
   const allSubmittedGuessesString = window.localStorage.getItem(
-    `submittedGuesses-${activeDay}`
+    `submittedGuesses-${wordleNumber}`
   );
   const res =
     allSubmittedGuessesString &&
@@ -334,13 +332,13 @@ function saveGuesses() {
     .map((guessSet) => guessSet.map((word) => word.join("")).join(","))
     .join(":");
   window.localStorage.setItem(
-    `submittedGuesses-${activeDay}`,
+    `submittedGuesses-${wordleNumber}`,
     allSubmittedGuessesString
   );
 }
 
 function resetStorage() {
-  window.localStorage.removeItem(`submittedGuesses-${activeDay}`);
+  window.localStorage.removeItem(`submittedGuesses-${wordleNumber}`);
   allSubmittedGuesses = [];
   [...line1, ...line2, ...line3].map(
     (l) => (usage[l] = new Array(numWords).fill("w"))
@@ -349,7 +347,6 @@ function resetStorage() {
 }
 
 function renderAllGuesses(gameStart) {
-  console.log("allSubmittedGuesses", allSubmittedGuesses);
   previousGuess = allSubmittedGuesses[allSubmittedGuesses.length - 1];
   const responsesDiv = document.getElementById("responsesDiv");
   [...responsesDiv.children].map((child) => responsesDiv.removeChild(child));
@@ -368,7 +365,6 @@ function renderAllGuesses(gameStart) {
         wordGuess.join(""),
         answers[wordIndex].toUpperCase()
       );
-      console.log("rendering byg", byg);
       // wipe non-green letters
       if (
         !gameStart &&
@@ -389,11 +385,12 @@ function renderAllGuesses(gameStart) {
         let letterDiv = document.createElement("div");
         const color = byg[letterIndex];
         usage[letter][wordIndex] =
-        usage[letter][wordIndex] === "g" || color === "g"
-          ? "g"
-          : usage[letter][wordIndex] === "y"
-          ? "y"
-          : color;
+          usage[letter][wordIndex] === "g" || color === "g"
+            ? "g"
+            : usage[letter][wordIndex] === "y"
+            ? "y"
+            : color;
+        console.log("usage[letter][wordIndex]", usage[letter][wordIndex]);
         letterDiv.className = `s l ${color} noHighlight`;
         letterDiv.id = `guess-${submittedGuessIndex}-${wordIndex}-${letterIndex}`;
         rowDiv.appendChild(letterDiv);
