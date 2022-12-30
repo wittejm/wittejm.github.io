@@ -16,9 +16,6 @@ let enforceDictionary = false;
 let enforceSolutionConstraint = false;
 let enforceHardMode = false;
 
-let isMobile = navigator.userAgent.toLowerCase().match(/mobile/i);
-// if (!isMobile) window.location = ('https://wittejm.github.io/detedium/index.html');
-
 function addClassName(existing, classNameToAdd) {
   if (existing.includes(classNameToAdd)) return existing;
   return `${existing} ${classNameToAdd}`;
