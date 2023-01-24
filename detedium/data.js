@@ -1,5 +1,15 @@
 const data = [
   [
+    583,
+    [],
+    ['sleep', 'elate','elope', 'elude']
+  ],
+  [
+    582,
+    [],
+    ['bosun', 'grimy','meany','mazey','matey']
+  ],
+  [
     581,
     [],
     ['float', 'glide','plumb', 'blurb']
