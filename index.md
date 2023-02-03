@@ -5,17 +5,15 @@ Portland, OR
 
 ## TECHNICAL SKILLS
 ### *Full-Stack Development*
- * Software Engineering, 4 years (Java 2 years, React/Python/Flask 2 years)
+ * Software Engineering, 6 years (Java 2 years, React/Python 2 years, React/Node 2 years) 
  * Python, 7 years (including machine learning research tools)
- * Web API with Flask; JVM + SOAP
+ * Web API with Flask; JVM + SOAP; GraphQL + Apollo
  * Frontend engineering with JS/Typescript, React/Redux
- * Collaborative development with source control and review, Git
- * Test-driven development with PyTest, JUnit
- * Full-stack architecture and deployment with Nginx, Docker, Heroku
- * CI/CD with GitHub Actions, TravisCI
+ * Collaborative development with source control and review, Git Test-driven development with Jest, PyTest, JUnit
+ * Full-stack architecture and deployment with Nginx, Docker CI/CD with GitHub Actions, TravisCI
 
 ### *Data Engineering*
- * Relational databases with SQL, 3 years
+ * Relational databases with SQL, 4 years
  * Data integration with middleware and backend services using Python/Java libraries
  * Data acquisition, exploration, and modeling
  * Python science packages Numpy, Scikit-Learn, Matplotlib
@@ -24,7 +22,22 @@ Portland, OR
 
 ## CURRENT WORK
 ### Code for PDX at Portland, OR (volunteer)
-March 2019-Present
+Feb 2023-Present
+
+**Software Engineer**
+
+**CONTACT:** Hugh Harker, Organizer
+
+## PRIOR WORK EXPERIENCE
+
+
+### 2021-2023: Ameelio, Inc. (remote)
+**Software Engineer**
+ * Full stack: Typescript/React/Node, GraphQL, Postgres, Docker
+    
+**CONTACT:** Lance Ivy, Principal Engineer
+
+### 2019-2021: Code for PDX at Portland, OR (volunteer)
 
 [recordsponge.com](recordsponge.com)
 
@@ -34,15 +47,6 @@ March 2019-Present
  * Collaborative development, organizing volunteers, new contributor on-boarding
 
 **CONTACT:** Michael Zhang, JD (www.qiu-qiulaw.com)
-
-## GRADUATE STUDENT RESEARCH (2014-2019)
- * Developed scene recognition methods combining CNN architectures and structured reasoning
- * Applied statistical models for semantic image interpretation
- * Teaching Assistantships in Theory of Computation, Machine Learning, Operating Systems, and others
-
-**ADVISOR:** Melanie Mitchell, Professor at Portland State University
-
-## ADDITIONAL WORK EXPERIENCE
 
 ### 2021:	PAST LIVES, LLC at Portland, OR
 **Data Engineer**
@@ -92,6 +96,13 @@ March 2019-Present
  * Oracle SQL with Java API
 
 **CONTACT:** Michael Cooney, Senior Project Manager
+
+## GRADUATE STUDENT RESEARCH (2014-2019)
+ * Developed scene recognition methods combining CNN architectures and structured reasoning
+ * Applied statistical models for semantic image interpretation
+ * Teaching Assistantships in Theory of Computation, Machine Learning, Operating Systems, and others
+
+**ADVISOR:** Melanie Mitchell, Professor at Portland State University
 
 ## RESEARCH PUBLICATIONS
  * Quinn, M. H., Conser, E., Witte, J. M., and Mitchell, M. (2018). Semantic image retrieval via active grounding of visual situations. In Proceedings of the 12th International Conference on Semantic Computing. IEEE.
