@@ -1,5 +1,35 @@
 const data = [
   [
+    592,
+    [],
+    ['sicks','scalp','scold']
+  ],
+  [
+    591,
+    [],
+    ['gulps','fares','stirs','cross']
+  ],
+  [
+    590,
+    [],
+    ['boxer','drive','grave','crave']
+  ],
+  [
+    589,
+    [],
+    ['stall','guise','winos','dishy','fishy']
+  ],
+  [
+    588,
+    [],
+    ['worse','guard','churn','flirt']
+  ],
+  [
+    587,
+    [],
+    ['rifts','array','lorry','worry']
+  ],
+  [
     586,
     [],
     ['jazzy', 'gurdy','whiny', 'peppy', 'felty', 'beefy']
