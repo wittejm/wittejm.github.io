@@ -4,16 +4,14 @@ type Props = {
   hasCursor: boolean;
   color: string;
   letter: string;
-  index: number;
-  setCursorIndex: (ind: number) => void;
+  onClick: () => void;
   redHighlight: boolean;
 };
 export default function GameSquare({
   hasCursor,
   color,
   letter,
-  index,
-  setCursorIndex,
+  onClick,
   redHighlight,
 }: Props) {
   return (
@@ -21,7 +19,7 @@ export default function GameSquare({
       className={`square ${color} ${hasCursor ? "cursor" : ""} ${
         redHighlight ? "redHighlight" : ""
       }`}
-      onClick={() => setCursorIndex(index)}
+      onClick={onClick}
     >
       {letter}
     </div>

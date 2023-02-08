@@ -69,12 +69,12 @@ button:disabled {
   flex-direction: row;
 }
 .square {
-  width: 45px;
-  height: 45px;
-  margin: 3px;
+  width: 48px;
+  height: 48px;
+  margin: 0px;
   border-style: solid;
-  border-width: 5px;
-  border-color: rgba(0, 0, 0, 0);
+  border-width: 4px;
+  border-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,12 +93,15 @@ button:disabled {
   background-color: yellow;
 }
 .wrongText {
-  color: "red";
-}
-.redHighlight {
-  border-color: "red";
+  color: red;
 }
 
+.redHighlight {
+  border-color: red;
+}
+.cursor {
+  border-color: skyblue;
+}
 .keyboardRow {
   display: flex;
   flex-direction: row;
@@ -111,4 +114,12 @@ button:disabled {
   border-color: gray;
   border-width: 1px;
   margin: 1px;
+}
+
+.submission {
+  border-bottom-width: 3;
+  border-bottom-color: black;
+  border-bottom-style: solid;
+  padding-bottom: 3px;
+  margin-bottom: 3px;
 }

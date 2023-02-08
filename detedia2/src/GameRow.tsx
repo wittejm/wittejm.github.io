@@ -6,13 +6,17 @@ type Props = {
   byg: string[];
   cursorIndex?: number;
   setCursorIndex: (ind: number) => void;
+  rowIndex: number;
+  redHighlights: boolean[];
 };
 
-export default function Puzzle({
+export default function GameRow({
   letters,
   byg,
   cursorIndex,
   setCursorIndex,
+  rowIndex,
+  redHighlights,
 }: Props) {
   return (
     <div className="row">
@@ -23,9 +27,8 @@ export default function Puzzle({
             hasCursor={cursorIndex === index}
             color={byg[index]}
             letter={letter}
-            index={index}
-            setCursorIndex={setCursorIndex}
-            redHighlight
+            onClick={() => setCursorIndex(5 * rowIndex + index)}
+            redHighlight={redHighlights[index]}
           />
         );
       })}
