@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
-import './App.css';
-import HeaderControls from './HeaderControls';
-import Keyboard from './Keyboard';
-import Puzzle from './Puzzle';
+import React, { useState } from "react";
+import "./App.css";
+import data from "./data";
+import HeaderControls from "./HeaderControls";
+import Keyboard from "./Keyboard";
+import Puzzle from "./Puzzle";
 
 function App() {
+  const [activePuzzleIndex, setActivePuzzleIndex] = useState(0);
+
   return (
     <div className="DetediaPage">
       <HeaderControls
-        puzzle={500}
-        onForward={() => null}
-        onBackward={() => null}
+        activePuzzleIndex={activePuzzleIndex}
+        setActivePuzzleIndex={setActivePuzzleIndex}
       />
-      <Puzzle puzzle={500} />
+      <Puzzle activePuzzleIndex={activePuzzleIndex} />
 
       <Keyboard />
     </div>

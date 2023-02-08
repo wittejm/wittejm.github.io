@@ -1,8 +1,14 @@
 const data = [
-  [596, ['wrong', 'sneak', 'punty', 'linty', 'ninth']],
-  [595, ['cargo', 'batch', 'fancy', 'dance']],
-  [594, ['scour', 'whump', 'guide', 'unity', 'until', 'unlit']],
-  [593, ['under', 'chill', 'smoky', 'gassy', 'pasty', 'tasty']],
+  { puzzleNumber: 596, words: ['wrong', 'sneak', 'punty', 'linty', 'ninth'] },
+  { puzzleNumber: 595, words: ['cargo', 'batch', 'fancy', 'dance'] },
+  {
+    puzzleNumber: 594,
+    words: ['scour', 'whump', 'guide', 'unity', 'until', 'unlit'],
+  },
+  {
+    puzzleNumber: 593,
+    words: ['under', 'chill', 'smoky', 'gassy', 'pasty', 'tasty'],
+  },
 ];
 
 export default data;

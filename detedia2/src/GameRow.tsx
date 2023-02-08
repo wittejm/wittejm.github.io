@@ -1,16 +1,34 @@
-import GameSquare from './GameSquare';
-import React from 'react';
+import GameSquare from "./GameSquare";
+import React from "react";
 
 type Props = {
-  word: string;
+  letters: string[];
+  byg: string[];
+  cursorIndex?: number;
+  setCursorIndex: (ind: number) => void;
 };
 
-export default function Puzzle({ word }: Props) {
+export default function Puzzle({
+  letters,
+  byg,
+  cursorIndex,
+  setCursorIndex,
+}: Props) {
   return (
     <div className="row">
-      {word.split('').map((letter) => (
-        <GameSquare hasCursor={false} color={'green'} letter={letter} />
-      ))}
+      {letters.map((letter, index) => {
+        const color = byg[index];
+        return (
+          <GameSquare
+            hasCursor={cursorIndex === index}
+            color={byg[index]}
+            letter={letter}
+            index={index}
+            setCursorIndex={setCursorIndex}
+            redHighlight
+          />
+        );
+      })}
     </div>
   );
 }

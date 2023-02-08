@@ -1,18 +1,77 @@
 #root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(0, 0, 0, 1);
+  background-color: rgba(255, 255, 255, 1);
+
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 
+body {
+  margin: 0;
+  display: flex;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+.navButton {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  margin: auto 0.3em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #787878;
+  cursor: pointer;
+  height: 40px;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+button:disabled {
+  background-color: #b7b7b7;
+}
+
+.DetediaPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.headerBlock {
+  display: flex;
+  flex-direction: row;
+}
 .row {
   display: flex;
   flex-direction: row;
 }
 .square {
-  width: 55px;
-  height: 55px;
-  margin: 4px;
+  width: 45px;
+  height: 45px;
+  margin: 3px;
   border-style: solid;
   border-width: 5px;
   border-color: rgba(0, 0, 0, 0);
@@ -25,7 +84,7 @@
 }
 
 .gray {
-  background-color: gray;
+  background-color: lightgray;
 }
 .green {
   background-color: green;
@@ -34,5 +93,22 @@
   background-color: yellow;
 }
 .wrongText {
-  color: 'red';
+  color: "red";
+}
+.redHighlight {
+  border-color: "red";
+}
+
+.keyboardRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.keyButton {
+  width: 36px;
+  height: 40px;
+  border-style: solid;
+  border-color: gray;
+  border-width: 1px;
+  margin: 1px;
 }
