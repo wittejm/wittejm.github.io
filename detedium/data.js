@@ -1,763 +1,486 @@
 const data = [
-  [
-    596,
-    [],
-    ['wrong','sneak','punty','linty','ninth']
-  ],
-  [
-    595,
-    [],
-    ['cargo','batch','fancy','dance']
-  ],
-  [
-    594,
-    [],
-    ['scour','whump','guide','unity','until','unlit']
-  ],
-  [
-    593,
-    [],
-    ['under','chill','smoky','gassy','pasty','tasty']
-  ],
-  [
-    592,
-    [],
-    ['sicks','scalp','scold']
-  ],
-  [
-    591,
-    [],
-    ['gulps','fares','stirs','cross']
-  ],
-  [
-    590,
-    [],
-    ['boxer','drive','grave','crave']
-  ],
-  [
-    589,
-    [],
-    ['stall','guise','winos','dishy','fishy']
-  ],
-  [
-    588,
-    [],
-    ['worse','guard','churn','flirt']
-  ],
-  [
-    587,
-    [],
-    ['rifts','array','lorry','worry']
-  ],
-  [
-    586,
-    [],
-    ['jazzy', 'gurdy','whiny', 'peppy', 'felty', 'beefy']
-  ],
-  [
-    585,
-    [],
-    ['minor', 'mails','maize']
-  ],
-  [
-    584,
-    [],
-    ['proud', 'touts','count']
-  ],
-  [
-    583,
-    [],
-    ['sleep', 'elate','elope', 'elude']
-  ],
-  [
-    582,
-    [],
-    ['bosun', 'grimy','meany','mazey','matey']
-  ],
-  [
-    581,
-    [],
-    ['float', 'glide','plumb', 'blurb']
-  ],
-  [
-    580,
-    [],
-    ['repel', 'ulcer','alter']
-  ],
-  [
-    578,
-    [],
-    ['brits', 'rodeo','chard']
-  ],
-  [
-    577,
-    [],
-    ['build', 'apode','adopt']
-  ],
-  [
-    576,
-    [],
-    ['maths', 'groin','drove','frock']
-  ],
-  [
-    575,
-    [],
-    ['flows', 'sneer','spire']
-  ],
-  [
-    574,
-    [],
-    ['hinge', 'droop','vocal','loams', 'koala']
-  ],
-  [
-    573,
-    [],
-    ['kempt', 'lambs','woman','adman','human']
-  ],
-  [
-    571,
-    [],
-    ['anime', 'eager','peats','leapt']
-  ],
-  [
-    570,
-    [],
-    ['scant', 'sneak','sedan']
-  ],
-  [
-    569,
-    [],
-    ['tired', 'piece','pixie']
-  ],
-  [
-    568,
-    [],
-    ['sorry', 'adore','opera']
-  ],
-  [
-    567,
-    [],
-    ['sword', 'ponce','ovine', 'melon', 'lemon']
-  ],
-  [
-    566,
-    [],
-    ['scrat', 'guild','libel','belie']
-  ],
-  [
-    565,
-    [],
-    ['awake', 'keeps', 'sleek']
-  ],
-  [
-    564,
-    [],
-    ['offal','layed','layer']
-  ],
-  [
-    563,
-    [],
-    ['clink','niche','panic','antic']
-  ],
-  [
-    562,
-    [],
-    ['train','first','shirt','skirt']
-  ],
-  [
-    561,
-    [],
-    ['klutz','drive','swine','whine']
-  ],
-  [
-    560,
-    [],
-    ['haste','valor','gaily','wally','manly']
-  ],
-  [
-    559,
-    [],
-    ['knave', 'iotas','polar','molar']
-  ],
-  [
-    556,
-    [],
-    ['tower', 'dough','foods','mondo','condo']
-  ],
-  [
-    555,
-    [],
-    ['poops','frack', 'delve','midge','nudge','budge','judge']
-  ],
-  [
-    554,
-    [],
-    ['groom', 'chart','intra','sutra','tetra','extra']
-  ],
-  [
-    553,
-    [],
-    ['power', 'podge','posse','poise']
-  ],
-  [
-    552,
-    [],
-    ['gouge', 'dorky','coral','forma','sorta','porta','iorta']
-  ],
-  [
-    551,
-    [],
-    ['mason', 'fried','bevel','wheel','excel']
-  ],
+  [599, [], ['scowl', 'shear', 'sated', 'stage']],
+  [598, [], ['elbow', 'glitz', 'plaid', 'flair']],
+  [597, [], ['crate', 'abode', 'apple']],
+  [596, [], ['wrong', 'sneak', 'punty', 'linty', 'ninth']],
+  [595, [], ['cargo', 'batch', 'fancy', 'dance']],
+  [594, [], ['scour', 'whump', 'guide', 'unity', 'until', 'unlit']],
+  [593, [], ['under', 'chill', 'smoky', 'gassy', 'pasty', 'tasty']],
+  [592, [], ['sicks', 'scalp', 'scold']],
+  [591, [], ['gulps', 'fares', 'stirs', 'cross']],
+  [590, [], ['boxer', 'drive', 'grave', 'crave']],
+  [589, [], ['stall', 'guise', 'winos', 'dishy', 'fishy']],
+  [588, [], ['worse', 'guard', 'churn', 'flirt']],
+  [587, [], ['rifts', 'array', 'lorry', 'worry']],
+  [586, [], ['jazzy', 'gurdy', 'whiny', 'peppy', 'felty', 'beefy']],
+  [585, [], ['minor', 'mails', 'maize']],
+  [584, [], ['proud', 'touts', 'count']],
+  [583, [], ['sleep', 'elate', 'elope', 'elude']],
+  [582, [], ['bosun', 'grimy', 'meany', 'mazey', 'matey']],
+  [581, [], ['float', 'glide', 'plumb', 'blurb']],
+  [580, [], ['repel', 'ulcer', 'alter']],
+  [578, [], ['brits', 'rodeo', 'chard']],
+  [577, [], ['build', 'apode', 'adopt']],
+  [576, [], ['maths', 'groin', 'drove', 'frock']],
+  [575, [], ['flows', 'sneer', 'spire']],
+  [574, [], ['hinge', 'droop', 'vocal', 'loams', 'koala']],
+  [573, [], ['kempt', 'lambs', 'woman', 'adman', 'human']],
+  [571, [], ['anime', 'eager', 'peats', 'leapt']],
+  [570, [], ['scant', 'sneak', 'sedan']],
+  [569, [], ['tired', 'piece', 'pixie']],
+  [568, [], ['sorry', 'adore', 'opera']],
+  [567, [], ['sword', 'ponce', 'ovine', 'melon', 'lemon']],
+  [566, [], ['scrat', 'guild', 'libel', 'belie']],
+  [565, [], ['awake', 'keeps', 'sleek']],
+  [564, [], ['offal', 'layed', 'layer']],
+  [563, [], ['clink', 'niche', 'panic', 'antic']],
+  [562, [], ['train', 'first', 'shirt', 'skirt']],
+  [561, [], ['klutz', 'drive', 'swine', 'whine']],
+  [560, [], ['haste', 'valor', 'gaily', 'wally', 'manly']],
+  [559, [], ['knave', 'iotas', 'polar', 'molar']],
+  [556, [], ['tower', 'dough', 'foods', 'mondo', 'condo']],
+  [555, [], ['poops', 'frack', 'delve', 'midge', 'nudge', 'budge', 'judge']],
+  [554, [], ['groom', 'chart', 'intra', 'sutra', 'tetra', 'extra']],
+  [553, [], ['power', 'podge', 'posse', 'poise']],
+  [552, [], ['gouge', 'dorky', 'coral', 'forma', 'sorta', 'porta', 'iorta']],
+  [551, [], ['mason', 'fried', 'bevel', 'wheel', 'excel']],
 
-  [
-    550,
-    [],
-    ['hoist', 'crude','furry','augur','lunar']
-  ],
-  [
-    549,
-    [],
-    ['winch', 'heigh','shirk','third']
-  ],
-  [
-    545,
-    [],
-    ['focus', 'avoid','growl','tromp', 'prone', 'probe']
-  ],
-  [
-    544,
-    [],
-    ['hotel', 'drill','rival']
-  ],
-  [
-    543,
-    [],
-    ['chomp', 'grade','lunas','usual']
-  ],
-  [
-    542,
-    [],
-    ['nerve', 'badge','slice','smote', 'spoke']
-  ],
-  [
-    541,
-    [],
-    ['knell', 'scalp','apply']
-  ],
-  [
-    540,
-    [],
-    ['grand', 'lanes','eaten','naive']
-  ],
-  [
-    539,
-    [],
-    ['piano', 'donor','flown','snobs', 'knock']
-  ],
-  [
-    538,
-    [],
-    ['learn', 'roars','fraud','braid']
-  ],
-  [
-    537,
-    [],
-    ['focus', 'after','infer']
-  ],
-  [
-    536,
-    [],
-    ['train', 'emote','gothy','doubt', 'joust']
-  ],
-  [
-    535,
-    [],
-    ['dross', 'blurt','rebar','caber','amber']
-  ],
-  [
-    534,
-    [],
-    ['blink', 'knots','wonky','woken']
-  ],
-  [
-    533,
-    [],
-    ['snowy', 'float','abode','adore']
-  ],
-  [
-    532,
-    [],
-    ['droop', 'torso',]
-  ],
-  [
-    531,
-    [],
-    ['clogs', 'chart', 'champ', 'chafe']
-  ],
-  [
-    530,
-    [],
-    ['phage', 'error', 'ennui','elect','eject']
-  ],
-  [
-    529,
-    [],
-    ['trash', 'stoop', 'stuck','stung','stuff','studs','study']
-  ],
-  [
-    528,
-    [],
-    ['wreck', 'feint', 'boned', 'nudes', 'undue'],
-  ],
-  [
-    527,
-    [],
-    ['break', 'depth', 'tepid']
-  ],
-  [
-    526,
-    [],
-    ['chaos', 'alpha', 'happy']
-  ],
-  [
-    525,
-    [],
-    ['alloy', 'blade', 'pleat', 'clear','clean']
-  ],
-  [
-    524,
-    [],
-    ['faked', 'blows','unity','pithy','itchy']
-  ],
-  [
-    523,
-    [],
-    ['feast']
-  ],
-  [
-    522,
-    [],
-    ['lunge','chore', 'arise', 'tribe', 'drive']
-  ],
-  [
-    521,
-    [],
-    ['buggy','fixed', 'snipe', 'prize', 'price', 'prime']
-  ],
-  [
-    520,
-    [],
-    ['couch','groan', 'ovals', 'patio', 'axiom']
-  ],
+  [550, [], ['hoist', 'crude', 'furry', 'augur', 'lunar']],
+  [549, [], ['winch', 'heigh', 'shirk', 'third']],
+  [545, [], ['focus', 'avoid', 'growl', 'tromp', 'prone', 'probe']],
+  [544, [], ['hotel', 'drill', 'rival']],
+  [543, [], ['chomp', 'grade', 'lunas', 'usual']],
+  [542, [], ['nerve', 'badge', 'slice', 'smote', 'spoke']],
+  [541, [], ['knell', 'scalp', 'apply']],
+  [540, [], ['grand', 'lanes', 'eaten', 'naive']],
+  [539, [], ['piano', 'donor', 'flown', 'snobs', 'knock']],
+  [538, [], ['learn', 'roars', 'fraud', 'braid']],
+  [537, [], ['focus', 'after', 'infer']],
+  [536, [], ['train', 'emote', 'gothy', 'doubt', 'joust']],
+  [535, [], ['dross', 'blurt', 'rebar', 'caber', 'amber']],
+  [534, [], ['blink', 'knots', 'wonky', 'woken']],
+  [533, [], ['snowy', 'float', 'abode', 'adore']],
+  [532, [], ['droop', 'torso']],
+  [531, [], ['clogs', 'chart', 'champ', 'chafe']],
+  [530, [], ['phage', 'error', 'ennui', 'elect', 'eject']],
+  [529, [], ['trash', 'stoop', 'stuck', 'stung', 'stuff', 'studs', 'study']],
+  [528, [], ['wreck', 'feint', 'boned', 'nudes', 'undue']],
+  [527, [], ['break', 'depth', 'tepid']],
+  [526, [], ['chaos', 'alpha', 'happy']],
+  [525, [], ['alloy', 'blade', 'pleat', 'clear', 'clean']],
+  [524, [], ['faked', 'blows', 'unity', 'pithy', 'itchy']],
+  [523, [], ['feast']],
+  [522, [], ['lunge', 'chore', 'arise', 'tribe', 'drive']],
+  [521, [], ['buggy', 'fixed', 'snipe', 'prize', 'price', 'prime']],
+  [520, [], ['couch', 'groan', 'ovals', 'patio', 'axiom']],
   [
     519,
     [
-      ['b', 'b','b','y','b'],
-      ['b', 'y','b','b','b'],
-      ['b', 'g','g','b','b'],
-      ['g', 'g','g','g','g'],
+      ['b', 'b', 'b', 'y', 'b'],
+      ['b', 'y', 'b', 'b', 'b'],
+      ['b', 'g', 'g', 'b', 'b'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['today','walks', 'crazy','brave']
+    ['today', 'walks', 'crazy', 'brave'],
   ],
   [
     518,
     [
-      ['y', 'b','y','b','b'],
-      ['b', 'y','g','b','b'],
-      ['b', 'b','g','y','y'],
-      ['b', 'b','g','g','y'],
-      ['g', 'b','g','g','g'],
-      ['g', 'g','g','g','g'],
+      ['y', 'b', 'y', 'b', 'b'],
+      ['b', 'y', 'g', 'b', 'b'],
+      ['b', 'b', 'g', 'y', 'y'],
+      ['b', 'b', 'g', 'g', 'y'],
+      ['g', 'b', 'g', 'g', 'g'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['eerie','creed', 'shear','opera', 'alert', 'avert']
+    ['eerie', 'creed', 'shear', 'opera', 'alert', 'avert'],
   ],
   [
     517,
     [
-      ['b', 'b','b','y','b'],
-      ['b', 'g','b','b','b'],
-      ['b', 'g','b','b','b'],
-      ['g', 'g','g','g','g'],
+      ['b', 'b', 'b', 'y', 'b'],
+      ['b', 'g', 'b', 'b', 'b'],
+      ['b', 'g', 'b', 'b', 'b'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['skill','blade', 'clout','glyph']
+    ['skill', 'blade', 'clout', 'glyph'],
   ],
   [
     516,
     [
-      ['b', 'b','g','b','b'],
-      ['b', 'b','g','b','g'],
-      ['g', 'g','g','g','g'],
+      ['b', 'b', 'g', 'b', 'b'],
+      ['b', 'b', 'g', 'b', 'g'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['wield','scene', 'there']
+    ['wield', 'scene', 'there'],
   ],
   [
     515,
     [
-      ['b', 'y','b','b','y'],
-      ['y', 'y','b','b','b'],
-      ['b', 'b','y','g','b'],
-      ['b', 'g','b','g','g'],
-      ['b', 'g','b','g','g'],
-      ['b', 'g','g','g','g'],
+      ['b', 'y', 'b', 'b', 'y'],
+      ['y', 'y', 'b', 'b', 'b'],
+      ['b', 'b', 'y', 'g', 'b'],
+      ['b', 'g', 'b', 'g', 'g'],
+      ['b', 'g', 'b', 'g', 'g'],
+      ['b', 'g', 'g', 'g', 'g'],
     ],
-    ['froze','reels', 'tired', 'waver', 'caper', 'maker', 'baker']
+    ['froze', 'reels', 'tired', 'waver', 'caper', 'maker', 'baker'],
   ],
   [
     514,
     [
-      ['b', 'b','b','b','b'],
-      ['b', 'y','b','y','b'],
-      ['g', 'b','g','g','b'],
-      ['g', 'g','g','g','g'],
+      ['b', 'b', 'b', 'b', 'b'],
+      ['b', 'y', 'b', 'y', 'b'],
+      ['g', 'b', 'g', 'g', 'b'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['bogey','crush', 'stark', 'snarl']
+    ['bogey', 'crush', 'stark', 'snarl'],
   ],
   [
     513,
     [
-      ['g', 'b','b','b','b'],
-      ['g', 'b','b','b','b'],
-      ['g', 'g','g','g','g'],
+      ['g', 'b', 'b', 'b', 'b'],
+      ['g', 'b', 'b', 'b', 'b'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['month','murky', 'maple']
+    ['month', 'murky', 'maple'],
   ],
   [
     512,
     [
-      ['b', 'b','b','g','b'],
-      ['b', 'b','g','g','b'],
-      ['b', 'y','g','g','b'],
-      ['g', 'g','g','g','g'],
+      ['b', 'b', 'b', 'g', 'b'],
+      ['b', 'b', 'g', 'g', 'b'],
+      ['b', 'y', 'g', 'g', 'b'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['brunt','plank', 'deans', 'inane']
+    ['brunt', 'plank', 'deans', 'inane'],
   ],
   [
     511,
     [
-      ['b', 'b','y','b','b'],
-      ['b', 'b','y','y','b'],
-      ['b', 'g','b','y','y'],
-      ['g', 'g','g','g','g'],
+      ['b', 'b', 'y', 'b', 'b'],
+      ['b', 'b', 'y', 'y', 'b'],
+      ['b', 'g', 'b', 'y', 'y'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['chain','break', 'maple', 'valet']
-  ], 
+    ['chain', 'break', 'maple', 'valet'],
+  ],
   [
     510,
     [
-      ['b', 'g','b','g','b'],
-      ['b', 'g','g','g','g'],
-      ['g', 'g','g','g','g'],
+      ['b', 'g', 'b', 'g', 'b'],
+      ['b', 'g', 'g', 'g', 'g'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['vegan','pedal', 'medal']
+    ['vegan', 'pedal', 'medal'],
   ],
   [
     509,
     [
-      ['b', 'b','b','b','b'],
-      ['b', 'b','g','b','y'],
-      ['y', 'b','g','b','b'],
-      ['g', 'g','g','g','g'],
+      ['b', 'b', 'b', 'b', 'b'],
+      ['b', 'b', 'g', 'b', 'y'],
+      ['y', 'b', 'g', 'b', 'b'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['color','shift', 'taiga', 'unite']
+    ['color', 'shift', 'taiga', 'unite'],
   ],
   [
     508,
     [
-      ['b', 'g','b','b','g'],
-      ['b', 'g','y','b','g'],
-      ['y', 'g','b','b','g'],
-      ['g', 'g','g','g','g'],
+      ['b', 'g', 'b', 'b', 'g'],
+      ['b', 'g', 'y', 'b', 'g'],
+      ['y', 'g', 'b', 'b', 'g'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['jazzy','lanky', 'nappy', 'rainy']
+    ['jazzy', 'lanky', 'nappy', 'rainy'],
   ],
   [
     507,
     [
-      ['b', 'b','b','b','b'],
-      ['b', 'b','b','b','y'],
-      ['b', 'b','y','y','y'],
-      ['g', 'b','g','g','g'],
-      ['g', 'g','g','g','g'],
+      ['b', 'b', 'b', 'b', 'b'],
+      ['b', 'b', 'b', 'b', 'y'],
+      ['b', 'b', 'y', 'y', 'y'],
+      ['g', 'b', 'g', 'g', 'g'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['frock','thine', 'gales', 'swell', 'spell']
+    ['frock', 'thine', 'gales', 'swell', 'spell'],
   ],
   [
     506,
     [
-      ['g', 'b','b','b','b'],
-      ['g', 'y','b','y','b'],
-      ['g', 'g','y','y','b'],
-      ['g', 'g','g','g','g'],
+      ['g', 'b', 'b', 'b', 'b'],
+      ['g', 'y', 'b', 'y', 'b'],
+      ['g', 'g', 'y', 'y', 'b'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['botch','biker', 'beige', 'begin']
+    ['botch', 'biker', 'beige', 'begin'],
   ],
   [
     505,
     [
-      ['b', 'b','y','y','b'],
-      ['y', 'b','b','y','y'],
-      ['y', 'y','g','y','b'],
-      ['g', 'b','g','g','g'],
-      ['g', 'g','g','g','g'],
+      ['b', 'b', 'y', 'y', 'b'],
+      ['y', 'b', 'b', 'y', 'y'],
+      ['y', 'y', 'g', 'y', 'b'],
+      ['g', 'b', 'g', 'g', 'g'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['dream','angel', 'leash', 'scale', 'stale']
+    ['dream', 'angel', 'leash', 'scale', 'stale'],
   ],
   [
     504,
     [
-      ['y', 'b','b','b','b'],
-      ['g', 'g','y','b','y'],
-      ['g', 'g','g','g','b'],
-      ['g', 'g','g','g','g'],
+      ['y', 'b', 'b', 'b', 'b'],
+      ['g', 'g', 'y', 'b', 'y'],
+      ['g', 'g', 'g', 'g', 'b'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['again','drape', 'dread', 'dream']
+    ['again', 'drape', 'dread', 'dream'],
   ],
   [
     503,
     [
-      ['b', 'b','g','b','b'],
-      ['b', 'g','g','b','y'],
-      ['g', 'g','g','g','g'],
+      ['b', 'b', 'g', 'b', 'b'],
+      ['b', 'g', 'g', 'b', 'y'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['frown','chomp', 'photo']
+    ['frown', 'chomp', 'photo'],
   ],
   [
     502,
     [
-      ['b', 'b','b','b','b'],
-      ['b', 'b','g','b','y'],
-      ['b', 'g','g','b','b'],
-      ['b', 'g','g','b','g'],
-      ['g', 'g','g','g','g'],
+      ['b', 'b', 'b', 'b', 'b'],
+      ['b', 'b', 'g', 'b', 'y'],
+      ['b', 'g', 'g', 'b', 'b'],
+      ['b', 'g', 'g', 'b', 'g'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['knife','growl', 'sloth', 'blood','aloud']
+    ['knife', 'growl', 'sloth', 'blood', 'aloud'],
   ],
   [
     501,
     [
-      ['b', 'y','b','b','y'],
-      ['y', 'b','b','y','g'],
-      ['g', 'g','g','g','g'],
+      ['b', 'y', 'b', 'b', 'y'],
+      ['y', 'b', 'b', 'y', 'g'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['spoon','plant', 'inept']
+    ['spoon', 'plant', 'inept'],
   ],
   [
     500,
     [
-      ['b', 'y','y','b','b'],
-      ['y', 'g','b','b','b'],
-      ['g', 'g','g','b','b'],
-      ['g', 'g','g','g','b'],
-      ['g', 'g','g','g','b'],
-      ['g', 'g','g','g','g'],
+      ['b', 'y', 'y', 'b', 'b'],
+      ['y', 'g', 'b', 'b', 'b'],
+      ['g', 'g', 'g', 'b', 'b'],
+      ['g', 'g', 'g', 'g', 'b'],
+      ['g', 'g', 'g', 'g', 'b'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['onion','night', 'pinch','pined', 'pines', 'piney']
+    ['onion', 'night', 'pinch', 'pined', 'pines', 'piney'],
   ],
   [
     499,
     [
-      ['b', 'y','y','b','b'],
-      ['y', 'b','b','b','g'],
-      ['b', 'g','b','b','g'],
-      ['g', 'g','g','g','g'],
+      ['b', 'y', 'y', 'b', 'b'],
+      ['y', 'b', 'b', 'b', 'g'],
+      ['b', 'g', 'b', 'b', 'g'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['hyped','porky', 'spicy','aptly']
+    ['hyped', 'porky', 'spicy', 'aptly'],
   ],
   [
     498,
     [
-      ['b', 'b','b','b','b'],
-      ['y', 'g','b','b','b'],
-      ['g', 'g','g','g','g'],
+      ['b', 'b', 'b', 'b', 'b'],
+      ['y', 'g', 'b', 'b', 'b'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['every','laugh', 'waltz']
+    ['every', 'laugh', 'waltz'],
   ],
   [
     497,
     [
-      ['b', 'g','b','b','b'],
-      ['b', 'g','b','b','y'],
-      ['b', 'g','b','g','b'],
-      ['b', 'g','y','g','b'],
-      ['g', 'g','g','g','g'],
+      ['b', 'g', 'b', 'b', 'b'],
+      ['b', 'g', 'b', 'b', 'y'],
+      ['b', 'g', 'b', 'g', 'b'],
+      ['b', 'g', 'y', 'g', 'b'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['fight','diode', 'riven', 'piles', 'libel']
+    ['fight', 'diode', 'riven', 'piles', 'libel'],
   ],
   [
     496,
     [
-      ['b', 'b','y','y','b'],
-      ['g', 'y','b','y','b'],
-      ['g', 'y','b','g','y'],
-      ['g', 'g','g','g','g'],
+      ['b', 'b', 'y', 'y', 'b'],
+      ['g', 'y', 'b', 'y', 'b'],
+      ['g', 'y', 'b', 'g', 'y'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['crash','sauna', 'sedan', 'sneak']
+    ['crash', 'sauna', 'sedan', 'sneak'],
   ],
   [
     495,
     [
-      ['b', 'b','b','g','b'],
-      ['b', 'b','y','g','b'],
-      ['b', 'g','b','g','b'],
-      ['g', 'g','g','g','g'],
+      ['b', 'b', 'b', 'g', 'b'],
+      ['b', 'b', 'y', 'g', 'b'],
+      ['b', 'g', 'b', 'g', 'b'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['storm','quark', 'faire', 'carry']
+    ['storm', 'quark', 'faire', 'carry'],
   ],
   [
     494,
     [
-      ['b', 'b','b','b','y'],
-      ['g', 'y','y','b','b'],
-      ['g', 'g','g','b','b'],
-      ['g', 'g','g','b','b'],
-      ['g', 'g','g','b','g'],
-      ['g', 'g','g','g','g'],
+      ['b', 'b', 'b', 'b', 'y'],
+      ['g', 'y', 'y', 'b', 'b'],
+      ['g', 'g', 'g', 'b', 'b'],
+      ['g', 'g', 'g', 'b', 'b'],
+      ['g', 'g', 'g', 'b', 'g'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['grief','folds', 'flown', 'flock', 'float', 'flout']
+    ['grief', 'folds', 'flown', 'flock', 'float', 'flout'],
   ],
   [
     493,
     [
-      ['b', 'b','y','b','b'],
-      ['b', 'g','b','b','b'],
-      ['b', 'g','b','b','b'],
-      ['b', 'g','g','g','g'],
-      ['g', 'g','g','g','g'],
+      ['b', 'b', 'y', 'b', 'b'],
+      ['b', 'g', 'b', 'b', 'b'],
+      ['b', 'g', 'b', 'b', 'b'],
+      ['b', 'g', 'g', 'g', 'g'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['cloth','roads', 'women', 'boggy', 'foggy']
+    ['cloth', 'roads', 'women', 'boggy', 'foggy'],
   ],
   [
     492,
     [
-      ['b', 'b','b','b','b'],
-      ['b', 'y','b','g','g'],
-      ['y', 'b','g','g','g'],
-      ['g', 'g','g','g','g'],
+      ['b', 'b', 'b', 'b', 'b'],
+      ['b', 'y', 'b', 'g', 'g'],
+      ['y', 'b', 'g', 'g', 'g'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['porch','built', 'adult', 'fault']
+    ['porch', 'built', 'adult', 'fault'],
   ],
   [
     491,
     [
-      ['b', 'b','b','b','b'],
-      ['b', 'g','b','b','b'],
-      ['b', 'g','b','b','b'],
-      ['b', 'g','g','b','b'],
-      ['g', 'g','g','g','g'],
+      ['b', 'b', 'b', 'b', 'b'],
+      ['b', 'g', 'b', 'b', 'b'],
+      ['b', 'g', 'b', 'b', 'b'],
+      ['b', 'g', 'g', 'b', 'b'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['spank', 'butte', 'guild', 'humor', 'mummy']
+    ['spank', 'butte', 'guild', 'humor', 'mummy'],
   ],
   [
     490,
     [
-      ['y', 'b','b','g','b'],
-      ['b', 'b','b','g','g'],
-      ['g', 'g','g','g','g'],
+      ['y', 'b', 'b', 'g', 'b'],
+      ['b', 'b', 'b', 'g', 'g'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['later', 'dowel', 'spiel']
+    ['later', 'dowel', 'spiel'],
   ],
   [
     489,
     [
-      ['b', 'b','b','b','b'],
-      ['b', 'b','g','b','b'],
-      ['b', 'g','g','b','g'],
-      ['g', 'g','g','g','g'],
+      ['b', 'b', 'b', 'b', 'b'],
+      ['b', 'b', 'g', 'b', 'b'],
+      ['b', 'g', 'g', 'b', 'g'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['fluff', 'adopt', 'crone', 'grove']
+    ['fluff', 'adopt', 'crone', 'grove'],
   ],
   [
     488,
     [
-      ['b', 'b','b','y','b'],
-      ['y', 'b','y','b','y'],
-      ['b', 'y','g','y','y'],
-      ['g', 'g','g','g','g'],
+      ['b', 'b', 'b', 'y', 'b'],
+      ['y', 'b', 'y', 'b', 'y'],
+      ['b', 'y', 'g', 'y', 'y'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['haunt', 'noise', 'pined', 'denim']
+    ['haunt', 'noise', 'pined', 'denim'],
   ],
   [
     487,
     [
-      ['b', 'b','b','b','b'],
-      ['b', 'b','b','b','b'],
-      ['b', 'b','y','b','b'],
-      ['y', 'y','b','b','b'],
-      ['b', 'y','g','b','b'],
-      ['g', 'g','g','g','g'],
+      ['b', 'b', 'b', 'b', 'b'],
+      ['b', 'b', 'b', 'b', 'b'],
+      ['b', 'b', 'y', 'b', 'b'],
+      ['y', 'y', 'b', 'b', 'b'],
+      ['b', 'y', 'g', 'b', 'b'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['allay', 'tooth', 'verve', 'rigid', 'primp', 'quirk']
+    ['allay', 'tooth', 'verve', 'rigid', 'primp', 'quirk'],
   ],
   [
     486,
     [
-      ['b', 'b','b','b','b'],
-      ['b', 'b','y','b','b'],
-      ['y', 'y','b','y','b'],
-      ['b', 'y','b','y','y'],
-      ['g', 'g','g','g','g'],
+      ['b', 'b', 'b', 'b', 'b'],
+      ['b', 'b', 'y', 'b', 'b'],
+      ['y', 'y', 'b', 'y', 'b'],
+      ['b', 'y', 'b', 'y', 'y'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['foggy', 'quell', 'strep', 'dents', 'exist']
+    ['foggy', 'quell', 'strep', 'dents', 'exist'],
   ],
   [
     485,
     [
-      ['b', 'b','y','y','b'],
-      ['b', 'y','y','y','y'],
-      ['g', 'b','g','g','g'],
-      ['g', 'g','g','g','g'],
+      ['b', 'b', 'y', 'y', 'b'],
+      ['b', 'y', 'y', 'y', 'y'],
+      ['g', 'b', 'g', 'g', 'g'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['doing', 'fines', 'skein', 'stein']
+    ['doing', 'fines', 'skein', 'stein'],
   ],
   [
     484,
     [
-      ['y', 'b','b','b','b'],
-      ['b', 'b','b','g','y'],
-      ['g', 'g','g','g','g'],
+      ['y', 'b', 'b', 'b', 'b'],
+      ['b', 'b', 'b', 'g', 'y'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['ditzy', 'words', 'spade']
+    ['ditzy', 'words', 'spade'],
   ],
   [
     483,
     [
-      ['b', 'b','b','b','b'],
-      ['b', 'b','b','b','b'],
-      ['g', 'b','b','b','b'],
-      ['g', 'g','g','g','g'],
+      ['b', 'b', 'b', 'b', 'b'],
+      ['b', 'b', 'b', 'b', 'b'],
+      ['g', 'b', 'b', 'b', 'b'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['gorge', 'sunny', 'cliff', 'catch']
+    ['gorge', 'sunny', 'cliff', 'catch'],
   ],
   [
     482,
     [
-      ['b', 'y','b','b','b'],
-      ['y', 'b','b','y','b'],
-      ['b', 'y','g','b','b'],
-      ['y', 'b','g','b','b'],
-      ['g', 'g','g','g','g'],
+      ['b', 'y', 'b', 'b', 'b'],
+      ['y', 'b', 'b', 'y', 'b'],
+      ['b', 'y', 'g', 'b', 'b'],
+      ['y', 'b', 'g', 'b', 'b'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['mound', 'ovary', 'grope', 'riots', 'floor']
+    ['mound', 'ovary', 'grope', 'riots', 'floor'],
   ],
   [
     480,
     [
-      ['y', 'b','b','b','b'],
-      ['b', 'b','b','y','b'],
-      ['b', 'y','b','g','g'],
-      ['g', 'g','g','g','g'],
+      ['y', 'b', 'b', 'b', 'b'],
+      ['b', 'b', 'b', 'y', 'b'],
+      ['b', 'y', 'b', 'g', 'g'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['clued', 'aback', 'mimic', 'ionic']
+    ['clued', 'aback', 'mimic', 'ionic'],
   ],
   [
     479,
     [
-      ['b', 'y','b','b','b'],
-      ['b', 'g','g','b','b'],
-      ['y', 'g','g','b','b'],
-      ['g', 'g','g','g','g'],
+      ['b', 'y', 'b', 'b', 'b'],
+      ['b', 'g', 'g', 'b', 'b'],
+      ['y', 'g', 'g', 'b', 'b'],
+      ['g', 'g', 'g', 'g', 'g'],
     ],
-    ['clots', 'ralph', 'dally', 'valid']
+    ['clots', 'ralph', 'dally', 'valid'],
   ],
 ];
