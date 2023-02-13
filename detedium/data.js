@@ -1,4 +1,8 @@
 const data = [
+  [603, [], ['tummy', 'round', 'laugh', 'usage']],
+  [602, [], ['baggy', 'grail', 'giant']],
+  [601, [], ['tired', 'deeps', 'death', 'delve', 'defog', 'debug']],
+  [600, [], ['tango', 'place', 'deads', 'ready', 'beady', 'heady']],
   [599, [], ['scowl', 'shear', 'sated', 'stage']],
   [598, [], ['elbow', 'glitz', 'plaid', 'flair']],
   [597, [], ['crate', 'abode', 'apple']],
