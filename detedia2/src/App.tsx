@@ -8,10 +8,19 @@ import Submissions from "./Submissions";
 
 function submitGuess(
   guess: string[],
+  setGuess: (a: string[]) => void,
   submissions: string[][],
   setSubmissions: any,
+  activePuzzleIndex: number,
 ) {
   setSubmissions([guess, ...submissions]);
+  const correctLetters = guess.map((letter, index) => {
+    const wordIndex = Math.floor(index / 5);
+    const sourceLetter = data[activePuzzleIndex].words[wordIndex][index % 5];
+    if (sourceLetter !== letter.toLowerCase()) return " ";
+    return letter;
+  });
+  setGuess(correctLetters);
 }
 
 function App() {
@@ -44,7 +53,15 @@ function App() {
         setCursorIndex={setCursorIndex}
       />
       <button
-        onClick={() => submitGuess(guess.slice(), submissions, setSubmissions)}
+        onClick={() =>
+          submitGuess(
+            guess.slice(),
+            setGuess,
+            submissions,
+            setSubmissions,
+            activePuzzleIndex,
+          )
+        }
       >
         SUBMIT
       </button>

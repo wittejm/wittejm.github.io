@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import data from "./data";
 import GameRow from "./GameRow";
+import valid from "./valid";
 
 type Props = {
   activePuzzleIndex: number;
@@ -24,9 +25,34 @@ export function handleKeyInput(
       key.toUpperCase(),
       ...guess.slice(cursorIndex + 1, data[activePuzzleIndex].words.length * 5),
     ]);
-    if (cursorIndex !== guess.length - 1) {
+    const rowStartIndex = cursorIndex - (cursorIndex % 5);
+    const rowEndIndex = rowStartIndex + 5;
+    const activeRowWord = [
+      ...guess.slice(rowStartIndex, cursorIndex),
+      key.toUpperCase(),
+      ...guess.slice(cursorIndex + 1, rowEndIndex),
+    ]
+      .join("")
+      .toLowerCase();
+    if (
+      cursorIndex !== guess.length - 1 &&
+      !(cursorIndex % 5 === 4 && !valid.includes(activeRowWord))
+    ) {
       setCursorIndex(cursorIndex + 1);
     }
+  }
+  console.log("key", key);
+  if (key === "Backspace") {
+    const onEmptySquare = guess[cursorIndex] === " ";
+    if (onEmptySquare && cursorIndex > 0) {
+      setCursorIndex(cursorIndex - 1);
+    }
+    const toDelete = onEmptySquare ? cursorIndex - 1 : cursorIndex;
+    setGuess([
+      ...guess.slice(0, toDelete),
+      " ",
+      ...guess.slice(toDelete + 1, data[activePuzzleIndex].words.length * 5),
+    ]);
   }
   if (key === "ArrowRight") {
     if (cursorIndex % 5 !== 4) setCursorIndex(cursorIndex + 1);
@@ -40,8 +66,6 @@ export default function Puzzle({
   cursorIndex,
   setCursorIndex,
 }: Props) {
-  console.log("Puzzle rerender");
-
   const handleKeydownEvent = useCallback(
     (event: KeyboardEvent) =>
       handleKeyInput(
@@ -94,35 +118,38 @@ export default function Puzzle({
 
 export function computeByg(guess: string, target: string) {
   let result = new Array(5).fill("gray");
-  let remainingLetters = guess.split("");
-  console.log("remainingLetters", remainingLetters);
-  console.log("result", result);
-  remainingLetters.forEach((letter, index) => {
-    if (letter === target[index]) {
-      console.log("index", index);
+  let remainingLettersInTarget = target.slice().split("");
+  guess.split("").forEach((letter, index) => {
+    if (letter === remainingLettersInTarget[index]) {
       result = [...result.slice(0, index), "green", ...result.slice(index + 1)];
-      remainingLetters[index] = "_";
+      remainingLettersInTarget[index] = "_";
     }
   });
-  remainingLetters.forEach((letter, index) => {
-    if (result[index] !== "green") {
-      if (target.includes(letter)) {
-        result = [
-          ...result.slice(0, index),
-          "yellow",
-          ...result.slice(index + 1),
-        ];
-        remainingLetters[index] = "_";
-      } else {
-        result = [
-          ...result.slice(0, index),
-          "gray",
-          ...result.slice(index + 1),
-        ];
+  let findingYellows = true;
+  let letter;
+  while (findingYellows) {
+    for (let index = 0; index < 5; index++) {
+      letter = guess[index];
+      if (!["green", "yellow"].includes(result[index])) {
+        if (target.includes(letter)) {
+          result = [
+            ...result.slice(0, index),
+            "yellow",
+            ...result.slice(index + 1),
+          ];
+          remainingLettersInTarget[index] = "_";
+          break;
+        } else {
+          result = [
+            ...result.slice(0, index),
+            "gray",
+            ...result.slice(index + 1),
+          ];
+        }
       }
     }
-  });
-  console.log("result", result);
+    findingYellows = false;
+  }
   return result;
 }
 

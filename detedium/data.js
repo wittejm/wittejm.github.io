@@ -1,4 +1,10 @@
 const data = [
+  [609, [], ['tacos', 'shone', 'moose', 'gloss', 'dross', 'kiosk']],
+  [608, [], ['fully', 'latch', 'altar', 'avail']],
+  [607, [], ['algae', 'brave', 'taste', 'cache']],
+  [606, [], ['salty', 'dared', 'manic', 'magic']],
+  [605, [], ['fiber', 'plant', 'lacks', 'sally', 'salsa']],
+  [604, [], ['brink', 'thong', 'mound', 'pound', 'sound']],
   [603, [], ['tummy', 'round', 'laugh', 'usage']],
   [602, [], ['baggy', 'grail', 'giant']],
   [601, [], ['tired', 'deeps', 'death', 'delve', 'defog', 'debug']],

@@ -59,6 +59,21 @@ export default function Keyboard({
             setCursorIndex={setCursorIndex}
           />
         ))}
+        <div
+          className="delButton"
+          onClick={() =>
+            handleKeyInput(
+              "Backspace",
+              activePuzzleIndex,
+              guess,
+              setGuess,
+              cursorIndex,
+              setCursorIndex,
+            )
+          }
+        >
+          DEL
+        </div>
       </div>
     </div>
   );

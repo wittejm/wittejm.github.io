@@ -1,6 +1,7 @@
 import React from "react";
 import data from "./data";
 import { computeByg } from "./Puzzle";
+import valid from "./valid";
 
 type Props = {
   submissions: string[][];
@@ -55,7 +56,11 @@ function SubmissionRow({
     data[activePuzzleIndex].words[wordIndex],
   );
   return (
-    <div className="row">
+    <div
+      className={`row ${
+        valid.includes(guess.join("").toLowerCase()) ? "" : "wrongText"
+      }`}
+    >
       {guess.map((letter, index) => {
         return (
           <SubmissionSquare
