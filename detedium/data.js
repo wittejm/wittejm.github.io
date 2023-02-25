@@ -1,4 +1,9 @@
 const data = [
+  [614, [], ['boots', 'wrath', 'petty', 'nifty', 'fifty']],
+  [613, [], ['shard', 'array', 'arbor']],
+  [612, [], ['about', 'malus', 'vague']],
+  [611, [], ['tarry', 'error', 'refer', 'rider', 'river', 'riser', 'riper']],
+  [610, [], ['whole', 'bunny', 'puffy', 'sucky', 'dummy', 'ruddy']],
   [609, [], ['tacos', 'shone', 'moose', 'gloss', 'dross', 'kiosk']],
   [608, [], ['fully', 'latch', 'altar', 'avail']],
   [607, [], ['algae', 'brave', 'taste', 'cache']],
@@ -54,7 +59,6 @@ const data = [
   [553, [], ['power', 'podge', 'posse', 'poise']],
   [552, [], ['gouge', 'dorky', 'coral', 'forma', 'sorta', 'porta', 'iorta']],
   [551, [], ['mason', 'fried', 'bevel', 'wheel', 'excel']],
-
   [550, [], ['hoist', 'crude', 'furry', 'augur', 'lunar']],
   [549, [], ['winch', 'heigh', 'shirk', 'third']],
   [545, [], ['focus', 'avoid', 'growl', 'tromp', 'prone', 'probe']],
