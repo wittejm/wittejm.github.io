@@ -1,0 +1,62 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+
+  margin-top: 10px;
+}
+.card {
+  padding: 2em;
+}
+
+.fieldInput {
+  width: 300px;
+  font-size: 18px;
+}
+.checkbox {
+  padding: 4px;
+}
+
+.invalidInput {
+  border-style: sold;
+  border-width: 2px;
+  border-color: red;
+}
+.fieldLabel {
+  width: 300px;
+  text-align: right;
+}
+.fieldLabelText {
+  margin-right: 10px;
+  margin-left: auto;
+  font-size: 18px;
+}
+.requiredAsterisk {
+  color: darkred;
+  font-weight: 500;
+  font-size: 20px;
+}
+.pleaseComplete {
+  color: darkred;
+  font-weight: 500;
+}
+.myIcon {
+  transform: scale(1);
+}
+.iconSpan {
+  margin-right: 4px;
+}
+.tooltipText {
+  font-size: 18px;
+}
+
+.link {
+  color: blue;
+  font-weight: 600;
+}
