@@ -1,4 +1,12 @@
 const data = [
+  [628, [], ['maven', 'slice', 'probe', 'there', 'where']],
+  [627, [], ['bough', 'angle', 'regal']],
+  [626, [], ['bread', 'score', 'horse']],
+  [625, [], ['right', 'pines', 'pinny', 'pinky']],
+  [624, [], ['cafes', 'block', 'occur', 'tonic', 'topic', 'toxic']],
+  [623, [], ['plant', 'trine', 'trend']],
+  [622, [], ['crook', 'blame', 'pains', 'assay', 'squad', 'squat']],
+  [621, [], ['stoic', 'broke', 'abode', 'above']],
   [618, [], ['delay', 'emote', 'biome', 'moose']],
   [617, [], ['going', 'rowed', 'bouts', 'cooky', 'polka']],
   [616, [], ['robot', 'corgi', 'pored', 'worse']],
