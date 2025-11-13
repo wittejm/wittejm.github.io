@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>PFA Tax Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f5f7fb;
+            --card: #ffffff;
+            --accent: #ffcd02;
+            --accent-orange: #ff5714;
+            --accent-yellow: #ffcd02;
+            --muted: #6b7280;
+            --radius: 12px;
+            --max-width: 980px;
+            --gap: 18px;
+            --shadow: 0 4px 16px rgba(27, 231, 255, 0.08);
+            --sans: "Quicksand", "Outfit", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--sans);
+            background: linear-gradient(180deg, var(--bg), #eef2f7 60%);
+            color: #0f1724;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.45;
+            padding: 32px;
+            display: flex;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 22px;
+            margin: 0 0 24px 0;
+            font-weight: 700;
+            color: #111111;
+            letter-spacing: -0.02em;
+        }
+
+        .calculator {
+            max-width: 600px;
+        }
+
+        .inputs-row {
+            display: flex;
+            gap: var(--gap);
+            margin-bottom: 28px;
+            padding: 24px;
+            background: var(--card);
+            box-shadow: var(--shadow);
+        }
+
+        .income-container,
+        .tax-container {
+            flex: 1;
+        }
+
+        .income-container p,
+        .tax-container p {
+            margin: 0 0 8px 0;
+            font-weight: 600;
+            font-size: 13px;
+            color: #111111;
+            /* text-transform: uppercase; */
+            letter-spacing: 0.05em;
+        }
+
+        .calculations {
+            padding: 24px;
+            background: var(--card);
+            box-shadow: var(--shadow);
+        }
+
+        .ti-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding: 6px 0;
+        }
+
+        .status-selector {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .status-selector label {
+            font-weight: 600;
+            font-size: 13px;
+            color: #111111;
+            margin-right: 8px;
+            /* text-transform: uppercase; */
+            letter-spacing: 0.05em;
+        }
+
+        .status-selector select {
+            padding: 8px 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            background: white;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .status-selector select:hover {
+            border-color: var(--accent);
+        }
+
+        .status-selector select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(27, 231, 255, 0.15);
+        }
+
+        .deductions-row {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .deductions-row > div:first-child {
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .deduction {
+            width: 120px;
+            font-size: 20px;
+            padding: 10px 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .income,
+        .tax {
+            width: 120px;
+            font-size: 20px;
+            padding: 10px 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(255, 205, 2, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .bracket-range {
+            flex: 1;
+        }
+
+        .taxed-value {
+            width: 120px;
+            text-align: right;
+        }
+
+        .rate {
+            width: 60px;
+            text-align: center;
+        }
+
+        .amount {
+            width: 100px;
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <header>
+            <div>
+                <h1>PFA Tax Calculator</h1>
+            </div>
+        </header>
+
+        <div class="calculator">
+            <div class="inputs-row">
+                <div class="income-container">
+                    <p>Income:</p>
+                    <input class="income" type="text" id="income" name="income" value="40000" />
+
+                </div>
+                <div class="tax-container">
+                    <p>Tax:</p>
+
+                    <input class="tax" type="text" id="tax" name="tax" />
+                </div>
+            </div>
+            <div class="calculations">
+                <div class="status-selector">
+                    <label for="filing-status">Filing status:</label>
+                    <select id="filing-status" name="filing-status">
+                        <option value="single">Single</option>
+                        <option value="joint">Joint</option>
+                        <option value="head">Head of Household</option>
+                    </select>
+                </div>
+                <div class="deductions-row">
+                    <div>
+                        Deductions (<label for="standard">Standard</label> <input type="checkbox" id="standard" name="standard" checked />):
+                    </div>
+                    <div>
+                        <input class="deduction" type="text" id="deduction" name="deduction" />
+                    </div>
+                    <!-- when the box is checked, the input field is set to the right value. it's 2,835.00. for single, double that for joint and HoHH-->
+                </div>
+                <div class="ti-row">
+                    <span class="bracket-range">Taxable income:</span>
+                    <span class="taxed-value" id="taxable-income-amount"></span>
+                    <span class="rate"></span>
+                    <span class="amount"></span>
+                </div>
+                <div class="ti-row">
+                    <span class="bracket-range" id="bracket-1-range"></span>
+                    <span class="taxed-value" id="bracket-1-taxed"></span>
+                    <span class="rate" id="bracket-1-rate"></span>
+                    <span class="amount" id="bracket-1-amount"></span>
+                </div>
+                <div class="ti-row">
+                    <span class="bracket-range" id="bracket-2-range"></span>
+                    <span class="taxed-value" id="bracket-2-taxed"></span>
+                    <span class="rate" id="bracket-2-rate"></span>
+                    <span class="amount" id="bracket-2-amount"></span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        const filingStatus = document.getElementById('filing-status');
+        const standardCheckbox = document.getElementById('standard');
+        const deductionInput = document.getElementById('deduction');
+        const incomeInput = document.getElementById('income');
+        const taxInput = document.getElementById('tax');
+        const taxableIncomeAmount = document.getElementById('taxable-income-amount');
+        const bracket1Range = document.getElementById('bracket-1-range');
+        const bracket1Taxed = document.getElementById('bracket-1-taxed');
+        const bracket1Rate = document.getElementById('bracket-1-rate');
+        const bracket1Amount = document.getElementById('bracket-1-amount');
+        const bracket2Range = document.getElementById('bracket-2-range');
+        const bracket2Taxed = document.getElementById('bracket-2-taxed');
+        const bracket2Rate = document.getElementById('bracket-2-rate');
+        const bracket2Amount = document.getElementById('bracket-2-amount');
+
+        // Helper functions for number formatting
+        function parseNumberValue(value) {
+            return parseFloat(String(value).replace(/,/g, '')) || 0;
+        }
+
+        function formatNumberInput(input) {
+            const cursorPosition = input.selectionStart;
+            const oldValue = input.value;
+            const numericValue = oldValue.replace(/[^0-9.]/g, '');
+
+            if (numericValue === '') {
+                input.value = '';
+                return;
+            }
+
+            const parts = numericValue.split('.');
+            parts[0] = parseInt(parts[0]).toLocaleString('en-US');
+            const formattedValue = parts.join('.');
+
+            input.value = formattedValue;
+
+            // Adjust cursor position for added commas
+            const addedCommas = formattedValue.length - oldValue.length;
+            input.setSelectionRange(cursorPosition + addedCommas, cursorPosition + addedCommas);
+        }
+
+        // Handle standard deduction checkbox
+        standardCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                const status = filingStatus.value;
+                if (status === 'single') {
+                    deductionInput.value = '2,835.00';
+                } else {
+                    deductionInput.value = '5,670.00';
+                }
+            }
+            calculateTI();
+        });
+
+        // Update deduction when filing status changes
+        filingStatus.addEventListener('change', function() {
+            if (standardCheckbox.checked) {
+                const status = filingStatus.value;
+                if (status === 'single') {
+                    deductionInput.value = '2,835.00';
+                } else {
+                    deductionInput.value = '5,670.00';
+                }
+            }
+            calculateTI();
+        });
+
+        // Format inputs as user types
+        incomeInput.addEventListener('input', function() {
+            formatNumberInput(incomeInput);
+            calculateTI();
+        });
+
+        deductionInput.addEventListener('input', function() {
+            formatNumberInput(deductionInput);
+            standardCheckbox.checked = false;
+            calculateTI();
+        });
+
+        // Calculate income from tax (reverse calculation)
+        taxInput.addEventListener('input', function() {
+            formatNumberInput(taxInput);
+            const targetTax = parseNumberValue(taxInput.value);
+            const deduction = parseNumberValue(deductionInput.value);
+            const status = filingStatus.value;
+
+            // If tax is 0, set income to default
+            if (targetTax === 0) {
+                incomeInput.value = '39,791';
+                calculateTI(false);
+                return;
+            }
+
+            // Define brackets based on filing status
+            const bracket1Lower = status === 'single' ? 125000 : 250000;
+            const bracket1Upper = status === 'single' ? 200000 : 400000;
+            const bracket1MaxTax = (bracket1Upper - bracket1Lower) * 0.015;
+
+            let taxableIncome;
+            if (targetTax <= bracket1MaxTax) {
+                // Tax is entirely in bracket 1
+                taxableIncome = bracket1Lower + (targetTax / 0.015);
+            } else {
+                // Tax spans into bracket 2
+                const bracket2Tax = targetTax - bracket1MaxTax;
+                const bracket2TaxableAmount = bracket2Tax / 0.03;
+                taxableIncome = bracket1Upper + bracket2TaxableAmount;
+            }
+
+            const income = taxableIncome + deduction;
+            incomeInput.value = income.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            calculateTI(false);
+        });
+
+        function calculateTI(updateTax = true) {
+            const income = parseNumberValue(incomeInput.value);
+            const deduction = parseNumberValue(deductionInput.value);
+            const taxableIncome = Math.max(income - deduction, 0);
+            const status = filingStatus.value;
+
+            // Display taxable income
+            taxableIncomeAmount.textContent = `$${taxableIncome.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+
+            // Define brackets based on filing status
+            const bracket1Lower = status === 'single' ? 125000 : 250000;
+            const bracket1Upper = status === 'single' ? 200000 : 400000;
+
+            // Calculate bracket 1 (between bracket1Lower and bracket1Upper)
+            const bracket1TaxableAmount = Math.max(0, Math.min(taxableIncome, bracket1Upper) - bracket1Lower);
+            const bracket1Tax = bracket1TaxableAmount * 0.015;
+            bracket1Range.textContent = `TI btwn $${bracket1Lower.toLocaleString('en-US')} and $${bracket1Upper.toLocaleString('en-US')}:`;
+            bracket1Taxed.textContent = `$${bracket1TaxableAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            bracket1Rate.textContent = '× 1.5%';
+            bracket1Amount.textContent = `$${bracket1Tax.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+
+            // Calculate bracket 2 (above bracket1Upper)
+            const bracket2TaxableAmount = Math.max(0, taxableIncome - bracket1Upper);
+            const bracket2Tax = bracket2TaxableAmount * 0.03;
+            bracket2Range.textContent = `TI above $${bracket1Upper.toLocaleString('en-US')}:`;
+            bracket2Taxed.textContent = `$${bracket2TaxableAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            bracket2Rate.textContent = '× 3%';
+            bracket2Amount.textContent = `$${bracket2Tax.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+
+            // Update total tax
+            if (updateTax) {
+                const totalTax = bracket1Tax + bracket2Tax;
+                taxInput.value = totalTax.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            }
+        }
+
+        // Initialize on page load
+        if (standardCheckbox.checked) {
+            deductionInput.value = '2,835.00';
+        }
+        formatNumberInput(incomeInput);
+        calculateTI();
+    </script>
+</body>
+
+</html>
