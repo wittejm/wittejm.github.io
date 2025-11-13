@@ -154,7 +154,7 @@
 
         .income,
         .tax {
-            width: 120px;
+            width: 150px;
             font-size: 20px;
             padding: 10px 14px;
             border: 2px solid #e5e7eb;
@@ -322,19 +322,28 @@
 
         // Format inputs as user types
         incomeInput.addEventListener('input', function() {
-            formatNumberInput(incomeInput);
+            const value = parseNumberValue(incomeInput.value);
+            if (value !== 0) {
+                formatNumberInput(incomeInput);
+            }
             calculateTI();
         });
 
         deductionInput.addEventListener('input', function() {
-            formatNumberInput(deductionInput);
+            const value = parseNumberValue(deductionInput.value);
+            if (value !== 0) {
+                formatNumberInput(deductionInput);
+            }
             standardCheckbox.checked = false;
             calculateTI();
         });
 
         // Calculate income from tax (reverse calculation)
         taxInput.addEventListener('input', function() {
-            formatNumberInput(taxInput);
+            const value = parseNumberValue(taxInput.value);
+            if (value !== 0) {
+                formatNumberInput(taxInput);
+            }
             const targetTax = parseNumberValue(taxInput.value);
             const deduction = parseNumberValue(deductionInput.value);
             const status = filingStatus.value;
