@@ -188,52 +188,6 @@
             width: 100px;
             text-align: right;
         }
-
-        .state-tax-container {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            margin-top: 0;
-            transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
-        }
-
-        .state-tax-container.visible {
-            max-height: 200px;
-            opacity: 1;
-            margin-top: 20px;
-        }
-
-        .state-tax-container p {
-            margin: 0 0 8px 0;
-            font-weight: 600;
-            font-size: 13px;
-            color: #111111;
-            letter-spacing: 0.05em;
-        }
-
-        .show-state-tax {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #e5e7eb;
-        }
-
-        .state-breakdown {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            margin-top: 0;
-            padding-top: 0;
-            border-top: none;
-            transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.3s ease, padding-top 0.3s ease;
-        }
-
-        .state-breakdown.visible {
-            max-height: 500px;
-            opacity: 1;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #e5e7eb;
-        }
     </style>
 </head>
 
@@ -254,12 +208,8 @@
                 </div>
                 <div class="tax-container">
                     <p>Tax:</p>
-                    <input class="tax" type="text" id="tax" name="tax" />
 
-                    <div class="state-tax-container" id="state-tax-container">
-                        <p>State Tax:</p>
-                        <input class="tax" type="text" id="state-tax" name="state-tax" />
-                    </div>
+                    <input class="tax" type="text" id="tax" name="tax" />
                 </div>
             </div>
             <div class="calculations">
@@ -299,44 +249,6 @@
                     <span class="amount" id="bracket-2-amount"></span>
                 </div>
 
-                <div class="show-state-tax">
-                    <label for="show-state">Show Oregon State Tax</label>
-                    <input type="checkbox" id="show-state" name="show-state" />
-                </div>
-
-                <div class="state-breakdown" id="state-breakdown">
-                    <div class="ti-row">
-                        <span class="bracket-range">Oregon Taxable income:</span>
-                        <span class="taxed-value" id="state-taxable-income-amount"></span>
-                        <span class="rate"></span>
-                        <span class="amount"></span>
-                    </div>
-                    <div class="ti-row">
-                        <span class="bracket-range" id="state-bracket-1-range"></span>
-                        <span class="taxed-value" id="state-bracket-1-taxed"></span>
-                        <span class="rate" id="state-bracket-1-rate"></span>
-                        <span class="amount" id="state-bracket-1-amount"></span>
-                    </div>
-                    <div class="ti-row">
-                        <span class="bracket-range" id="state-bracket-2-range"></span>
-                        <span class="taxed-value" id="state-bracket-2-taxed"></span>
-                        <span class="rate" id="state-bracket-2-rate"></span>
-                        <span class="amount" id="state-bracket-2-amount"></span>
-                    </div>
-                    <div class="ti-row">
-                        <span class="bracket-range" id="state-bracket-3-range"></span>
-                        <span class="taxed-value" id="state-bracket-3-taxed"></span>
-                        <span class="rate" id="state-bracket-3-rate"></span>
-                        <span class="amount" id="state-bracket-3-amount"></span>
-                    </div>
-                    <div class="ti-row">
-                        <span class="bracket-range" id="state-bracket-4-range"></span>
-                        <span class="taxed-value" id="state-bracket-4-taxed"></span>
-                        <span class="rate" id="state-bracket-4-rate"></span>
-                        <span class="amount" id="state-bracket-4-amount"></span>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
@@ -346,10 +258,6 @@
         const deductionInput = document.getElementById('deduction');
         const incomeInput = document.getElementById('income');
         const taxInput = document.getElementById('tax');
-        const showStateCheckbox = document.getElementById('show-state');
-        const stateTaxContainer = document.getElementById('state-tax-container');
-        const stateBreakdown = document.getElementById('state-breakdown');
-        const stateTaxInput = document.getElementById('state-tax');
         const taxableIncomeAmount = document.getElementById('taxable-income-amount');
         const bracket1Range = document.getElementById('bracket-1-range');
         const bracket1Taxed = document.getElementById('bracket-1-taxed');
@@ -386,46 +294,6 @@
             input.setSelectionRange(cursorPosition + addedCommas, cursorPosition + addedCommas);
         }
 
-        // Handle show state tax checkbox
-        showStateCheckbox.addEventListener('change', function() {
-            if (this.checked) {
-                stateTaxContainer.classList.add('visible');
-                stateBreakdown.classList.add('visible');
-                updateStateBracketRanges();
-                calculateTI(); // Initialize state tax values
-            } else {
-                stateTaxContainer.classList.remove('visible');
-                stateBreakdown.classList.remove('visible');
-            }
-        });
-
-        // Update state bracket ranges based on filing status
-        function updateStateBracketRanges() {
-            const status = filingStatus.value;
-
-            if (status === 'single' || status === 'head') {
-                document.getElementById('state-bracket-1-range').textContent = 'TI btwn $0 and $4,400:';
-                document.getElementById('state-bracket-2-range').textContent = 'TI btwn $4,400 and $11,050:';
-                document.getElementById('state-bracket-3-range').textContent = 'TI btwn $11,050 and $125,000:';
-                document.getElementById('state-bracket-4-range').textContent = 'TI above $125,000:';
-
-                document.getElementById('state-bracket-1-rate').textContent = '× 4.75%';
-                document.getElementById('state-bracket-2-rate').textContent = '× 6.75%';
-                document.getElementById('state-bracket-3-rate').textContent = '× 8.75%';
-                document.getElementById('state-bracket-4-rate').textContent = '× 9.90%';
-            } else { // joint
-                document.getElementById('state-bracket-1-range').textContent = 'TI btwn $0 and $8,800:';
-                document.getElementById('state-bracket-2-range').textContent = 'TI btwn $8,800 and $22,100:';
-                document.getElementById('state-bracket-3-range').textContent = 'TI btwn $22,100 and $250,000:';
-                document.getElementById('state-bracket-4-range').textContent = 'TI above $250,000:';
-
-                document.getElementById('state-bracket-1-rate').textContent = '× 4.75%';
-                document.getElementById('state-bracket-2-rate').textContent = '× 6.75%';
-                document.getElementById('state-bracket-3-rate').textContent = '× 8.75%';
-                document.getElementById('state-bracket-4-rate').textContent = '× 9.90%';
-            }
-        }
-
         // Handle standard deduction checkbox
         standardCheckbox.addEventListener('change', function() {
             if (this.checked) {
@@ -449,9 +317,6 @@
                     deductionInput.value = '5,670.00';
                 }
             }
-            if (showStateCheckbox.checked) {
-                updateStateBracketRanges();
-            }
             calculateTI();
         });
 
@@ -473,7 +338,7 @@
             calculateTI();
         });
 
-        // Calculate income from PFA tax (reverse calculation)
+        // Calculate income from tax (reverse calculation)
         taxInput.addEventListener('input', function() {
             const value = parseNumberValue(taxInput.value);
             if (value !== 0) {
@@ -486,118 +351,32 @@
             // If tax is 0, set income to default
             if (targetTax === 0) {
                 incomeInput.value = '40,000';
-                calculateTI(false, true);
+                calculateTI(false);
                 return;
             }
 
-            const income = calculateIncomeFromPFATax(targetTax, deduction, status);
-            incomeInput.value = income.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-            calculateTI(false, true);
-        });
-
-        // Calculate income from State tax (reverse calculation)
-        stateTaxInput.addEventListener('input', function() {
-            const value = parseNumberValue(stateTaxInput.value);
-            if (value !== 0) {
-                formatNumberInput(stateTaxInput);
-            }
-            const targetTax = parseNumberValue(stateTaxInput.value);
-            const deduction = parseNumberValue(deductionInput.value);
-            const status = filingStatus.value;
-
-            // If tax is 0, set income to default
-            if (targetTax === 0) {
-                incomeInput.value = '40,000';
-                calculateTI(true, false);
-                return;
-            }
-
-            const income = calculateIncomeFromStateTax(targetTax, deduction, status);
-            incomeInput.value = income.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-            calculateTI(true, false);
-        });
-
-        // Calculate Oregon State tax
-        function calculateStateTax(taxableIncome, status) {
-            let brackets;
-            if (status === 'single' || status === 'head') {
-                brackets = [
-                    { lower: 0, upper: 4400, rate: 0.0475 },
-                    { lower: 4400, upper: 11050, rate: 0.0675 },
-                    { lower: 11050, upper: 125000, rate: 0.0875 },
-                    { lower: 125000, upper: Infinity, rate: 0.0990 }
-                ];
-            } else { // joint
-                brackets = [
-                    { lower: 0, upper: 8800, rate: 0.0475 },
-                    { lower: 8800, upper: 22100, rate: 0.0675 },
-                    { lower: 22100, upper: 250000, rate: 0.0875 },
-                    { lower: 250000, upper: Infinity, rate: 0.0990 }
-                ];
-            }
-
-            let totalTax = 0;
-            const breakdown = [];
-
-            for (const bracket of brackets) {
-                const taxableInBracket = Math.max(0, Math.min(taxableIncome, bracket.upper) - bracket.lower);
-                const taxForBracket = taxableInBracket * bracket.rate;
-                totalTax += taxForBracket;
-
-                breakdown.push({
-                    taxableAmount: taxableInBracket,
-                    tax: taxForBracket
-                });
-            }
-
-            return { totalTax, breakdown };
-        }
-
-        // Calculate income from PFA tax (reverse calculation)
-        function calculateIncomeFromPFATax(targetTax, deduction, status) {
+            // Define brackets based on filing status
             const bracket1Lower = status === 'single' ? 125000 : 250000;
             const bracket1Upper = status === 'single' ? 200000 : 400000;
             const bracket1MaxTax = (bracket1Upper - bracket1Lower) * 0.015;
 
             let taxableIncome;
             if (targetTax <= bracket1MaxTax) {
+                // Tax is entirely in bracket 1
                 taxableIncome = bracket1Lower + (targetTax / 0.015);
             } else {
+                // Tax spans into bracket 2
                 const bracket2Tax = targetTax - bracket1MaxTax;
                 const bracket2TaxableAmount = bracket2Tax / 0.03;
                 taxableIncome = bracket1Upper + bracket2TaxableAmount;
             }
 
-            return taxableIncome + deduction;
-        }
+            const income = taxableIncome + deduction;
+            incomeInput.value = income.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            calculateTI(false);
+        });
 
-        // Calculate income from State tax (reverse calculation using binary search)
-        function calculateIncomeFromStateTax(targetTax, deduction, status) {
-            let low = 0;
-            let high = 10000000;
-            let iterations = 0;
-
-            while (iterations < 100 && high - low > 1) {
-                const mid = (low + high) / 2;
-                const taxableIncome = Math.max(0, mid - deduction);
-                const result = calculateStateTax(taxableIncome, status);
-
-                if (Math.abs(result.totalTax - targetTax) < 1) {
-                    return mid;
-                }
-
-                if (result.totalTax < targetTax) {
-                    low = mid;
-                } else {
-                    high = mid;
-                }
-                iterations++;
-            }
-
-            return (low + high) / 2;
-        }
-
-        function calculateTI(updateTax = true, updateStateTax = true) {
+        function calculateTI(updateTax = true) {
             const income = parseNumberValue(incomeInput.value);
             const deduction = parseNumberValue(deductionInput.value);
             const taxableIncome = Math.max(income - deduction, 0);
@@ -626,32 +405,10 @@
             bracket2Rate.textContent = '× 3%';
             bracket2Amount.textContent = `$${bracket2Tax.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
 
-            // Update PFA tax
+            // Update total tax
             if (updateTax) {
                 const totalTax = bracket1Tax + bracket2Tax;
                 taxInput.value = totalTax.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-            }
-
-            // Calculate and update state tax if visible
-            if (showStateCheckbox.checked) {
-                const stateResult = calculateStateTax(taxableIncome, status);
-
-                // Display state taxable income
-                document.getElementById('state-taxable-income-amount').textContent =
-                    `$${taxableIncome.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-
-                // Update breakdown for each bracket
-                for (let i = 0; i < 4; i++) {
-                    document.getElementById(`state-bracket-${i + 1}-taxed`).textContent =
-                        `$${stateResult.breakdown[i].taxableAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-                    document.getElementById(`state-bracket-${i + 1}-amount`).textContent =
-                        `$${stateResult.breakdown[i].tax.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-                }
-
-                // Update state tax input
-                if (updateStateTax) {
-                    stateTaxInput.value = stateResult.totalTax.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-                }
             }
         }
 
@@ -659,14 +416,6 @@
         if (standardCheckbox.checked) {
             deductionInput.value = '2,835.00';
         }
-
-        // Initialize state tax visibility and values if checkbox is checked
-        if (showStateCheckbox.checked) {
-            stateTaxContainer.classList.add('visible');
-            stateBreakdown.classList.add('visible');
-            updateStateBracketRanges();
-        }
-
         formatNumberInput(incomeInput);
         calculateTI();
     </script>
