@@ -190,12 +190,17 @@
         }
 
         .state-tax-container {
-            display: none;
-            margin-top: 20px;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            margin-top: 0;
+            transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
         }
 
         .state-tax-container.visible {
-            display: block;
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 20px;
         }
 
         .state-tax-container p {
@@ -213,14 +218,21 @@
         }
 
         .state-breakdown {
-            display: none;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #e5e7eb;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+            transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.3s ease, padding-top 0.3s ease;
         }
 
         .state-breakdown.visible {
-            display: block;
+            max-height: 500px;
+            opacity: 1;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
         }
     </style>
 </head>
