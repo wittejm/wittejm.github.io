@@ -364,8 +364,10 @@
                 const status = filingStatus.value;
                 if (status === 'single') {
                     deductionInput.value = '2,835.00';
-                } else {
+                } else if (status === 'joint') {
                     deductionInput.value = '5,670.00';
+                } else {
+                    deductionInput.value = '4,560.00';
                 }
             } else {
                 deductionInput.value = '0';
@@ -379,8 +381,10 @@
                 const status = filingStatus.value;
                 if (status === 'single') {
                     deductionInput.value = '2,835.00';
-                } else {
+                } else if (status === 'joint') {
                     deductionInput.value = '5,670.00';
+                } else {
+                    deductionInput.value = '4,560.00';
                 }
             }
             calculateTI();
