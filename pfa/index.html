@@ -69,6 +69,14 @@
         .income-container,
         .tax-container {
             flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tax-input-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .income-container p,
@@ -188,6 +196,62 @@
             width: 100px;
             text-align: right;
         }
+
+        .tax-percentage {
+            width: 100px;
+            text-align: right;
+            font-size: 14px;
+            color: #6b7280;
+            font-weight: 600;
+        }
+
+        /* Mobile styles */
+        @media (max-width: 640px) {
+            body {
+                padding: 16px;
+            }
+
+            .wrap {
+                width: 100%;
+            }
+
+            h1 {
+                font-size: 18px;
+                margin: 0 0 16px 0;
+            }
+
+            .inputs-row {
+                flex-direction: column;
+                gap: 16px;
+                padding: 16px;
+            }
+
+            .income-container,
+            .tax-container {
+                width: 100%;
+            }
+
+            .calculations {
+                padding: 16px;
+            }
+
+            .ti-row {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .bracket-range {
+                flex-basis: 100%;
+                margin-bottom: 4px;
+            }
+
+            .taxed-value,
+            .rate,
+            .amount {
+                flex: 1;
+                min-width: 80px;
+            }
+        }
     </style>
 </head>
 
@@ -207,9 +271,11 @@
 
                 </div>
                 <div class="tax-container">
-                    <p>Tax:</p>
-
-                    <input class="tax" type="text" id="tax" name="tax" />
+                    <p>County PFA Tax:</p>
+                    <div class="tax-input-row">
+                        <input class="tax" type="text" id="tax" name="tax" />
+                        <div class="tax-percentage" id="tax-percentage"></div>
+                    </div>
                 </div>
             </div>
             <div class="calculations">
@@ -258,6 +324,7 @@
         const deductionInput = document.getElementById('deduction');
         const incomeInput = document.getElementById('income');
         const taxInput = document.getElementById('tax');
+        const taxPercentage = document.getElementById('tax-percentage');
         const taxableIncomeAmount = document.getElementById('taxable-income-amount');
         const bracket1Range = document.getElementById('bracket-1-range');
         const bracket1Taxed = document.getElementById('bracket-1-taxed');
@@ -303,6 +370,8 @@
                 } else {
                     deductionInput.value = '5,670.00';
                 }
+            } else {
+                deductionInput.value = '0';
             }
             calculateTI();
         });
@@ -409,6 +478,15 @@
             if (updateTax) {
                 const totalTax = bracket1Tax + bracket2Tax;
                 taxInput.value = totalTax.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            }
+
+            // Update effective tax percentage
+            const currentTax = parseNumberValue(taxInput.value);
+            if (income > 0) {
+                const effectivePercentage = (currentTax / income) * 100;
+                taxPercentage.textContent = "= " + effectivePercentage.toFixed(2) + '%';
+            } else {
+                taxPercentage.textContent = "= 0%";
             }
         }
 
