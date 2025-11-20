@@ -492,10 +492,21 @@
         }
 
         // Initialize on page load
-        if (standardCheckbox.checked) {
-            deductionInput.value = '2,835.00';
+        // Check for income query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const incomeParam = urlParams.get('income');
+
+        if (incomeParam) {
+            incomeInput.value = incomeParam;
+            formatNumberInput(incomeInput);
+            deductionInput.value = '0';
+            standardCheckbox.checked = false;
+        } else {
+            if (standardCheckbox.checked) {
+                deductionInput.value = '2,835.00';
+            }
+            formatNumberInput(incomeInput);
         }
-        formatNumberInput(incomeInput);
         calculateTI();
     </script>
 </body>
