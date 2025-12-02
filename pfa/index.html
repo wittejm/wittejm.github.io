@@ -35,35 +35,58 @@
         body {
             margin: 0;
             font-family: var(--sans);
-            background: linear-gradient(180deg, var(--bg), #eef2f7 60%);
-            color: #0f1724;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             line-height: 1.45;
-            padding: 32px;
             display: flex;
             justify-content: center;
         }
 
+        .wrap {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .header-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 32px;
+            align-items: start;
+        }
+
         h1 {
-            font-size: 22px;
-            margin: 0 0 24px 0;
-            font-weight: 700;
+            font-size: 32px;
+            margin: 0;
             color: #111111;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.03em;
+            font-weight: 600;
+        }
+
+        .header-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #4a4a4a;
+            font-weight: 600;
         }
 
         .calculator {
-            max-width: 600px;
+            border: 2px solid #1a1a1a;
+            border-radius: 8px;
+            background: linear-gradient(145deg, #4a4a4a, #3d3d3d);
+            box-shadow:
+                0 2px 1px rgba(255, 255, 255, 0.05) inset,
+                0 -2px 1px rgba(0, 0, 0, 0.5) inset,
+                0 8px 24px rgba(0, 0, 0, 0.6);
+            padding: 12px;
         }
 
         .inputs-row {
             display: flex;
             gap: var(--gap);
-            margin-bottom: 28px;
+            margin-bottom: 12px;
             padding: 24px;
-            background: var(--card);
-            box-shadow: var(--shadow);
+            background: #2d2d2d;
         }
 
         .income-container,
@@ -84,15 +107,14 @@
             margin: 0 0 8px 0;
             font-weight: 600;
             font-size: 13px;
-            color: #111111;
-            /* text-transform: uppercase; */
+            color: #e8e8e8;
             letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
 
         .calculations {
             padding: 24px;
-            background: var(--card);
-            box-shadow: var(--shadow);
+            background: #2d2d2d;
         }
 
         .ti-row {
@@ -100,32 +122,37 @@
             gap: 12px;
             align-items: center;
             padding: 6px 0;
+            color: #e8e8e8;
         }
 
         .status-selector {
             margin-bottom: 20px;
             padding-bottom: 20px;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 1px solid #454545;
         }
 
         .status-selector label {
             font-weight: 600;
             font-size: 13px;
-            color: #111111;
+            color: #e8e8e8;
             margin-right: 8px;
-            /* text-transform: uppercase; */
+            text-transform: uppercase;
             letter-spacing: 0.05em;
         }
 
         .status-selector select {
             padding: 8px 12px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
+            border: 2px solid #0a0a0a;
+            border-radius: 4px;
             font-size: 15px;
             font-weight: 600;
-            background: white;
+            background: #d4d2c0;
+            color: #1a1a1a;
             transition: all 0.2s ease;
             cursor: pointer;
+            box-shadow:
+                0 2px 4px rgba(0, 0, 0, 0.3) inset,
+                0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .status-selector select:hover {
@@ -141,23 +168,30 @@
         .deductions-row {
             margin-bottom: 20px;
             padding-bottom: 20px;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 1px solid #454545;
         }
 
-        .deductions-row > div:first-child {
+        .deductions-row>div:first-child {
             margin-bottom: 8px;
             font-weight: 500;
             font-size: 14px;
+            color: #e8e8e8;
         }
 
         .deduction {
             width: 150px;
             font-size: 20px;
             padding: 10px 14px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
+            border: 2px solid #0a0a0a;
+            border-radius: 4px;
             font-weight: 600;
             transition: all 0.2s ease;
+            background: #d4d2c0;
+            color: #1a1a1a;
+            font-family: 'Courier New', monospace;
+            box-shadow:
+                0 2px 4px rgba(0, 0, 0, 0.3) inset,
+                0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .income,
@@ -165,10 +199,16 @@
             width: 150px;
             font-size: 20px;
             padding: 10px 14px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
+            border: 2px solid #0a0a0a;
+            border-radius: 4px;
             font-weight: 600;
             transition: all 0.2s ease;
+            background: #d4d2c0;
+            color: #1a1a1a;
+            font-family: 'Courier New', monospace;
+            box-shadow:
+                0 2px 4px rgba(0, 0, 0, 0.3) inset,
+                0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         input[type="text"]:focus {
@@ -200,6 +240,54 @@
         .tax-percentage {
             width: 100px;
             text-align: right;
+            color: #e8e8e8;
+        }
+
+        .share-buttons {
+            margin-top: 20px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .share-label {
+            color: #4a4a4a;
+            font-size: 14px;
+            font-weight: 600;
+            margin-right: 4px;
+        }
+
+        .share-button {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .share-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        #share-bluesky {
+            background: #1185fe;
+            color: white;
+        }
+
+        #share-twitter {
+            background: #000000;
+            color: white;
+        }
+
+        #share-facebook {
+            background: #1877f2;
+            color: white;
         }
 
         /* Mobile styles */
@@ -212,9 +300,18 @@
                 width: 100%;
             }
 
+            .header-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                margin-bottom: 24px;
+            }
+
             h1 {
-                font-size: 18px;
-                margin: 0 0 16px 0;
+                font-size: 24px;
+            }
+
+            .header-description {
+                font-size: 14px;
             }
 
             .inputs-row {
@@ -254,12 +351,14 @@
 
 <body>
     <div class="wrap">
-        <header>
+        <div class="header-grid">
             <div>
                 <h1>PFA Tax Calculator</h1>
             </div>
-        </header>
-
+            <div class="header-description">
+                Who really pays the Preschool for All Tax? Input sample figures and see for yourself.
+            </div>
+        </div>
         <div class="calculator">
             <div class="inputs-row">
                 <div class="income-container">
@@ -286,7 +385,8 @@
                 </div>
                 <div class="deductions-row">
                     <div>
-                        Deductions (<label for="standard">Standard</label> <input type="checkbox" id="standard" name="standard" checked />):
+                        Deductions (<label for="standard">Standard</label> <input type="checkbox" id="standard"
+                            name="standard" checked />):
                     </div>
                     <div>
                         <input class="deduction" type="text" id="deduction" name="deduction" />
@@ -313,6 +413,25 @@
                 </div>
 
             </div>
+        </div>
+
+        <div class="share-buttons">
+            <span class="share-label">Share:</span>
+            <a href="#" class="share-button" id="share-bluesky" aria-label="Share on Bluesky">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 0 1-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.206-.659-.298-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z"/>
+                </svg>
+            </a>
+            <a href="#" class="share-button" id="share-twitter" aria-label="Share on Twitter">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+            <a href="#" class="share-button" id="share-facebook" aria-label="Share on Facebook">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+            </a>
         </div>
     </div>
     <script>
@@ -359,7 +478,7 @@
         }
 
         // Handle standard deduction checkbox
-        standardCheckbox.addEventListener('change', function() {
+        standardCheckbox.addEventListener('change', function () {
             if (this.checked) {
                 const status = filingStatus.value;
                 if (status === 'single') {
@@ -376,7 +495,7 @@
         });
 
         // Update deduction when filing status changes
-        filingStatus.addEventListener('change', function() {
+        filingStatus.addEventListener('change', function () {
             if (standardCheckbox.checked) {
                 const status = filingStatus.value;
                 if (status === 'single') {
@@ -391,7 +510,7 @@
         });
 
         // Format inputs as user types
-        incomeInput.addEventListener('input', function() {
+        incomeInput.addEventListener('input', function () {
             const value = parseNumberValue(incomeInput.value);
             if (value !== 0) {
                 formatNumberInput(incomeInput);
@@ -399,7 +518,7 @@
             calculateTI();
         });
 
-        deductionInput.addEventListener('input', function() {
+        deductionInput.addEventListener('input', function () {
             const value = parseNumberValue(deductionInput.value);
             if (value !== 0) {
                 formatNumberInput(deductionInput);
@@ -409,7 +528,7 @@
         });
 
         // Calculate income from tax (reverse calculation)
-        taxInput.addEventListener('input', function() {
+        taxInput.addEventListener('input', function () {
             const value = parseNumberValue(taxInput.value);
             if (value !== 0) {
                 formatNumberInput(taxInput);
@@ -442,7 +561,7 @@
             }
 
             const income = taxableIncome + deduction;
-            incomeInput.value = income.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            incomeInput.value = income.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             calculateTI(false);
         });
 
@@ -453,7 +572,7 @@
             const status = filingStatus.value;
 
             // Display taxable income
-            taxableIncomeAmount.textContent = `$${taxableIncome.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            taxableIncomeAmount.textContent = `$${taxableIncome.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
             // Define brackets based on filing status
             const bracket1Lower = status === 'single' ? 125000 : 250000;
@@ -462,23 +581,23 @@
             // Calculate bracket 1 (between bracket1Lower and bracket1Upper)
             const bracket1TaxableAmount = Math.max(0, Math.min(taxableIncome, bracket1Upper) - bracket1Lower);
             const bracket1Tax = bracket1TaxableAmount * 0.015;
-            bracket1Range.textContent = `TI btwn $${bracket1Lower.toLocaleString('en-US')} and $${bracket1Upper.toLocaleString('en-US')}:`;
-            bracket1Taxed.textContent = `$${bracket1TaxableAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            bracket1Range.textContent = `TI $${bracket1Lower.toLocaleString('en-US')}-$${bracket1Upper.toLocaleString('en-US')}:`;
+            bracket1Taxed.textContent = `$${bracket1TaxableAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
             bracket1Rate.textContent = '× 1.5%';
-            bracket1Amount.textContent = `$${bracket1Tax.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            bracket1Amount.textContent = `$${bracket1Tax.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
             // Calculate bracket 2 (above bracket1Upper)
             const bracket2TaxableAmount = Math.max(0, taxableIncome - bracket1Upper);
             const bracket2Tax = bracket2TaxableAmount * 0.03;
             bracket2Range.textContent = `TI above $${bracket1Upper.toLocaleString('en-US')}:`;
-            bracket2Taxed.textContent = `$${bracket2TaxableAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            bracket2Taxed.textContent = `$${bracket2TaxableAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
             bracket2Rate.textContent = '× 3%';
-            bracket2Amount.textContent = `$${bracket2Tax.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            bracket2Amount.textContent = `$${bracket2Tax.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
             // Update total tax
             if (updateTax) {
                 const totalTax = bracket1Tax + bracket2Tax;
-                taxInput.value = totalTax.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                taxInput.value = totalTax.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             }
 
             // Update effective tax percentage
@@ -508,6 +627,37 @@
             formatNumberInput(incomeInput);
         }
         calculateTI();
+        incomeInput.focus();
+
+        // Share button functionality
+        const shareBluesky = document.getElementById('share-bluesky');
+        const shareTwitter = document.getElementById('share-twitter');
+        const shareFacebook = document.getElementById('share-facebook');
+
+        function getShareUrl() {
+            const income = parseNumberValue(incomeInput.value);
+            return `https://friendsofpfa.org/pfa-tax-calculator/?income=${income}`;
+        }
+
+        shareBluesky.addEventListener('click', function(e) {
+            e.preventDefault();
+            const url = getShareUrl();
+            const text = 'Check out this Preschool For All Tax Calculator';
+            window.open(`https://bsky.app/intent/compose?text=${encodeURIComponent(text + ' ' + url)}`, '_blank');
+        });[DynamoDB-section]
+
+        shareTwitter.addEventListener('click', function(e) {
+            e.preventDefault();
+            const url = getShareUrl();
+            const text = 'Check out this Preschool For All Tax Calculator';
+            window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`, '_blank');
+        });
+
+        shareFacebook.addEventListener('click', function(e) {
+            e.preventDefault();
+            const url = getShareUrl();
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+        });
     </script>
 </body>
 
