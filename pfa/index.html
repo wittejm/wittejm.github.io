@@ -290,6 +290,106 @@
             color: white;
         }
 
+        .demo-box {
+            background: #fff9e6;
+            border: 2px solid #ffcd02;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 24px;
+            position: relative;
+        }
+
+        .demo-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #4a4a4a;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .demo-close:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .demo-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #4a4a4a;
+            margin: 0 0 12px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .demo-row {
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .demo-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .demo-row:hover {
+            border-color: #ffcd02;
+            background: #fffef8;
+            transform: translateX(4px);
+        }
+
+        .demo-row-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .demo-income {
+            font-weight: 600;
+            color: #1a1a1a;
+            font-size: 15px;
+        }
+
+        .demo-status {
+            font-weight: 400;
+            color: #6b6b6b;
+        }
+
+        .demo-descriptor {
+            font-weight: 400;
+            color: #6b6b6b;
+            font-size: 15px;
+        }
+
+        .demo-descriptor sup a {
+            color: #6b6b6b;
+            text-decoration: none;
+            font-size: 10px;
+        }
+
+        .demo-descriptor sup a:hover {
+            text-decoration: underline;
+        }
+
+        .demo-tax {
+            color: #4a4a4a;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
         /* Mobile styles */
         @media (max-width: 640px) {
             body {
@@ -356,14 +456,14 @@
                 <h1>PFA Tax Calculator</h1>
             </div>
             <div class="header-description">
-                Who really pays the Preschool for All Tax? Input sample figures and see for yourself.
+                Who's really paying the Preschool for All Tax? See for yourself.
             </div>
         </div>
         <div class="calculator">
             <div class="inputs-row">
                 <div class="income-container">
                     <p>Income:</p>
-                    <input class="income" type="text" id="income" name="income" value="40000" />
+                    <input class="income" type="text" id="income" name="income" value="50000" />
 
                 </div>
                 <div class="tax-container">
@@ -394,7 +494,7 @@
                     <!-- when the box is checked, the input field is set to the right value. it's 2,835.00. for single, double that for joint and HoHH-->
                 </div>
                 <div class="ti-row">
-                    <span class="bracket-range">Taxable income:</span>
+                    <span class="bracket-range">Taxable income (TI):</span>
                     <span class="taxed-value" id="taxable-income-amount"></span>
                     <span class="rate"></span>
                     <span class="amount"></span>
@@ -412,6 +512,38 @@
                     <span class="amount" id="bracket-2-amount"></span>
                 </div>
 
+            </div>
+        </div>
+        <div class="demo-box" id="demo-box">
+            <button class="demo-close" id="demo-close" aria-label="Close demo">&times;</button>
+            <div class="demo-title">Try these examples:</div>
+            <div class="demo-row" data-income="32600" data-status="single" data-deductions="standard">
+                <div class="demo-row-top">
+                    <span class="demo-income">$32,600 <span class="demo-status">(Single)</span></span>
+                    <span class="demo-tax">Tax: $0</span>
+                </div>
+                <div class="demo-descriptor">Full-time minimum wage worker in Portland<sup><a href="https://www.oregon.gov/boli/workers/Pages/minimum-wage.aspx" target="_blank">[1]</a></sup></div>
+            </div>
+            <div class="demo-row" data-income="86247" data-status="joint" data-deductions="standard">
+                <div class="demo-row-top">
+                    <span class="demo-income">$86,247 <span class="demo-status">(Joint)</span></span>
+                    <span class="demo-tax">Tax: $0</span>
+                </div>
+                <div class="demo-descriptor">Median household income in Multnomah County (2023)<sup><a href="https://censusreporter.org/profiles/05000US41051-multnomah-county-or/" target="_blank">[2]</a></sup></div>
+            </div>
+            <div class="demo-row" data-income="127901.67" data-status="single" data-deductions="standard">
+                <div class="demo-row-top">
+                    <span class="demo-income">$127,901.67 <span class="demo-status">(Single)</span></span>
+                    <span class="demo-tax">Tax: $1.00</span>
+                </div>
+                <div class="demo-descriptor">Estimated income of the top 10% of earners in Multnomah County <sup><a href="https://censusreporter.org/profiles/05000US41051-multnomah-county-or/?utm_source=chatgpt.com" target="_blank">[3]</a></sup></div>
+            </div>
+            <div class="demo-row" data-income="306960" data-status="joint" data-deductions="standard">
+                <div class="demo-row-top">
+                    <span class="demo-income">$306,960 <span class="demo-status">(Joint)</span></span>
+                    <span class="demo-tax">Tax: $769.35</span>
+                </div>
+                <div class="demo-descriptor">Salary of Andrew Hoan, President of Portland Business Alliance<sup><a href="https://projects.propublica.org/nonprofits/organizations/320016048" target="_blank">[4]</a></sup></div>
             </div>
         </div>
 
@@ -539,7 +671,7 @@
 
             // If tax is 0, set income to default
             if (targetTax === 0) {
-                incomeInput.value = '40,000';
+                incomeInput.value = '50,000';
                 calculateTI(false);
                 return;
             }
@@ -611,23 +743,111 @@
         }
 
         // Initialize on page load
-        // Check for income query parameter
+        // Check for query parameters
         const urlParams = new URLSearchParams(window.location.search);
         const incomeParam = urlParams.get('income');
+        const statusParam = urlParams.get('status');
+        const deductionsParam = urlParams.get('deductions');
 
+        // Set filing status from query param
+        if (statusParam) {
+            const validStatuses = ['single', 'joint', 'head'];
+            if (validStatuses.includes(statusParam.toLowerCase())) {
+                filingStatus.value = statusParam.toLowerCase();
+            }
+        }
+
+        // Set income from query param
         if (incomeParam) {
             incomeInput.value = incomeParam;
             formatNumberInput(incomeInput);
+        } else {
+            formatNumberInput(incomeInput);
+        }
+
+        // Set deductions from query param
+        if (deductionsParam) {
+            if (deductionsParam.toLowerCase() === 'standard') {
+                standardCheckbox.checked = true;
+                const status = filingStatus.value;
+                if (status === 'single') {
+                    deductionInput.value = '2,835.00';
+                } else if (status === 'joint') {
+                    deductionInput.value = '5,670.00';
+                } else {
+                    deductionInput.value = '4,560.00';
+                }
+            } else {
+                // Try to parse as numeric value
+                const deductionValue = parseNumberValue(deductionsParam);
+                deductionInput.value = deductionValue.toString();
+                formatNumberInput(deductionInput);
+                standardCheckbox.checked = false;
+            }
+        } else if (incomeParam) {
+            // If income param is set but no deductions param, set to 0
             deductionInput.value = '0';
             standardCheckbox.checked = false;
         } else {
+            // Default behavior - use standard deduction
             if (standardCheckbox.checked) {
                 deductionInput.value = '2,835.00';
             }
-            formatNumberInput(incomeInput);
         }
+
         calculateTI();
         incomeInput.focus();
+
+        // Demo box functionality
+        const demoBox = document.getElementById('demo-box');
+        const demoClose = document.getElementById('demo-close');
+        const demoRows = document.querySelectorAll('.demo-row');
+
+        demoClose.addEventListener('click', function() {
+            demoBox.style.display = 'none';
+        });
+
+        demoRows.forEach(row => {
+            row.addEventListener('click', function() {
+                const income = this.getAttribute('data-income');
+                const status = this.getAttribute('data-status');
+                const deductions = this.getAttribute('data-deductions');
+
+                // Set income
+                incomeInput.value = income;
+                formatNumberInput(incomeInput);
+
+                // Set filing status
+                if (status) {
+                    filingStatus.value = status;
+                }
+
+                // Set deductions
+                if (deductions === 'standard') {
+                    standardCheckbox.checked = true;
+                    if (status === 'single') {
+                        deductionInput.value = '2,835.00';
+                    } else if (status === 'joint') {
+                        deductionInput.value = '5,670.00';
+                    } else {
+                        deductionInput.value = '4,560.00';
+                    }
+                } else {
+                    standardCheckbox.checked = false;
+                    deductionInput.value = deductions;
+                    formatNumberInput(deductionInput);
+                }
+
+                calculateTI();
+                incomeInput.focus({ preventScroll: true });
+
+                // Smooth scroll to top
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
 
         // Share button functionality
         const shareBluesky = document.getElementById('share-bluesky');
@@ -636,7 +856,9 @@
 
         function getShareUrl() {
             const income = parseNumberValue(incomeInput.value);
-            return `https://friendsofpfa.org/pfa-tax-calculator/?income=${income}`;
+            const status = filingStatus.value;
+            const deductions = standardCheckbox.checked ? 'standard' : parseNumberValue(deductionInput.value);
+            return `https://friendsofpfa.org/pfa-tax-calculator/?income=${income}&status=${status}&deductions=${deductions}`;
         }
 
         shareBluesky.addEventListener('click', function(e) {
