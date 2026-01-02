@@ -243,6 +243,11 @@
             color: #e8e8e8;
         }
 
+        .rate-strikethrough {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
         .share-buttons {
             margin-top: 20px;
             display: flex;
@@ -511,6 +516,12 @@
                     <span class="rate" id="bracket-2-rate"></span>
                     <span class="amount" id="bracket-2-amount"></span>
                 </div>
+                <div class="ti-row" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #454545;">
+                    <label for="tax-2027" style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" id="tax-2027" name="tax-2027" />
+                        <span>Recompute with 2027 tax (+0.8%)</span>
+                    </label>
+                </div>
 
             </div>
         </div>
@@ -582,6 +593,34 @@
         const bracket2Taxed = document.getElementById('bracket-2-taxed');
         const bracket2Rate = document.getElementById('bracket-2-rate');
         const bracket2Amount = document.getElementById('bracket-2-amount');
+        const tax2027Checkbox = document.getElementById('tax-2027');
+
+        // Get current tax rates based on 2027 checkbox
+        function getCurrentRates() {
+            if (tax2027Checkbox.checked) {
+                return {
+                    bracket1: 0.023,  // 1.5% + 0.8% = 2.3%
+                    bracket2: 0.038   // 3% + 0.8% = 3.8%
+                };
+            } else {
+                return {
+                    bracket1: 0.015,  // 1.5%
+                    bracket2: 0.03    // 3%
+                };
+            }
+        }
+
+        // Update rate display
+        function updateRateDisplay() {
+            const rates = getCurrentRates();
+            if (tax2027Checkbox.checked) {
+                bracket1Rate.textContent = '× 2.3%';
+                bracket2Rate.textContent = '× 3.8%';
+            } else {
+                bracket1Rate.textContent = '× 1.5%';
+                bracket2Rate.textContent = '× 3%';
+            }
+        }
 
         // Helper functions for number formatting
         function parseNumberValue(value) {
@@ -676,19 +715,22 @@
                 return;
             }
 
+            // Get current rates
+            const rates = getCurrentRates();
+
             // Define brackets based on filing status
             const bracket1Lower = status === 'single' ? 125000 : 250000;
             const bracket1Upper = status === 'single' ? 200000 : 400000;
-            const bracket1MaxTax = (bracket1Upper - bracket1Lower) * 0.015;
+            const bracket1MaxTax = (bracket1Upper - bracket1Lower) * rates.bracket1;
 
             let taxableIncome;
             if (targetTax <= bracket1MaxTax) {
                 // Tax is entirely in bracket 1
-                taxableIncome = bracket1Lower + (targetTax / 0.015);
+                taxableIncome = bracket1Lower + (targetTax / rates.bracket1);
             } else {
                 // Tax spans into bracket 2
                 const bracket2Tax = targetTax - bracket1MaxTax;
-                const bracket2TaxableAmount = bracket2Tax / 0.03;
+                const bracket2TaxableAmount = bracket2Tax / rates.bracket2;
                 taxableIncome = bracket1Upper + bracket2TaxableAmount;
             }
 
@@ -703,6 +745,9 @@
             const taxableIncome = Math.max(income - deduction, 0);
             const status = filingStatus.value;
 
+            // Get current rates
+            const rates = getCurrentRates();
+
             // Display taxable income
             taxableIncomeAmount.textContent = `$${taxableIncome.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
@@ -712,19 +757,20 @@
 
             // Calculate bracket 1 (between bracket1Lower and bracket1Upper)
             const bracket1TaxableAmount = Math.max(0, Math.min(taxableIncome, bracket1Upper) - bracket1Lower);
-            const bracket1Tax = bracket1TaxableAmount * 0.015;
+            const bracket1Tax = bracket1TaxableAmount * rates.bracket1;
             bracket1Range.textContent = `TI $${bracket1Lower.toLocaleString('en-US')}-$${bracket1Upper.toLocaleString('en-US')}:`;
             bracket1Taxed.textContent = `$${bracket1TaxableAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-            bracket1Rate.textContent = '× 1.5%';
             bracket1Amount.textContent = `$${bracket1Tax.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
             // Calculate bracket 2 (above bracket1Upper)
             const bracket2TaxableAmount = Math.max(0, taxableIncome - bracket1Upper);
-            const bracket2Tax = bracket2TaxableAmount * 0.03;
+            const bracket2Tax = bracket2TaxableAmount * rates.bracket2;
             bracket2Range.textContent = `TI above $${bracket1Upper.toLocaleString('en-US')}:`;
             bracket2Taxed.textContent = `$${bracket2TaxableAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-            bracket2Rate.textContent = '× 3%';
             bracket2Amount.textContent = `$${bracket2Tax.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+            // Update rate display
+            updateRateDisplay();
 
             // Update total tax
             if (updateTax) {
@@ -741,6 +787,12 @@
                 taxPercentage.textContent = "= 0%";
             }
         }
+
+        // Handle 2027 tax checkbox
+        tax2027Checkbox.addEventListener('change', function () {
+            calculateTI();
+            updateDemoTaxes();
+        });
 
         // Initialize on page load
         // Check for query parameters
@@ -798,6 +850,54 @@
         calculateTI();
         incomeInput.focus();
 
+        // Calculate tax for demo examples
+        function calculateDemoTax(income, status, deductionsType) {
+            // Get deduction amount
+            let deduction;
+            if (deductionsType === 'standard') {
+                if (status === 'single') {
+                    deduction = 2835.00;
+                } else if (status === 'joint') {
+                    deduction = 5670.00;
+                } else {
+                    deduction = 4560.00;
+                }
+            } else {
+                deduction = parseFloat(deductionsType) || 0;
+            }
+
+            const taxableIncome = Math.max(income - deduction, 0);
+            const rates = getCurrentRates();
+
+            // Define brackets based on filing status
+            const bracket1Lower = status === 'single' ? 125000 : 250000;
+            const bracket1Upper = status === 'single' ? 200000 : 400000;
+
+            // Calculate bracket 1
+            const bracket1TaxableAmount = Math.max(0, Math.min(taxableIncome, bracket1Upper) - bracket1Lower);
+            const bracket1Tax = bracket1TaxableAmount * rates.bracket1;
+
+            // Calculate bracket 2
+            const bracket2TaxableAmount = Math.max(0, taxableIncome - bracket1Upper);
+            const bracket2Tax = bracket2TaxableAmount * rates.bracket2;
+
+            return bracket1Tax + bracket2Tax;
+        }
+
+        // Update demo tax amounts
+        function updateDemoTaxes() {
+            const demoRows = document.querySelectorAll('.demo-row');
+            demoRows.forEach(row => {
+                const income = parseFloat(row.getAttribute('data-income'));
+                const status = row.getAttribute('data-status');
+                const deductions = row.getAttribute('data-deductions');
+
+                const tax = calculateDemoTax(income, status, deductions);
+                const taxSpan = row.querySelector('.demo-tax');
+                taxSpan.textContent = `Tax: $${tax.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            });
+        }
+
         // Demo box functionality
         const demoBox = document.getElementById('demo-box');
         const demoClose = document.getElementById('demo-close');
@@ -848,6 +948,9 @@
                 });
             });
         });
+
+        // Initialize demo taxes
+        updateDemoTaxes();
 
         // Share button functionality
         const shareBluesky = document.getElementById('share-bluesky');
