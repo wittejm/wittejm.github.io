@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Book TBD: Join Us And Vote!</title>
+    <meta name="description" content="Book TBD: Join Us And Vote! — our next book club selection has not been chosen yet. Join the club to cast your vote." />
+
+    <!-- Open Graph (book) -->
+    <meta property="og:type" content="book" />
+    <meta property="og:title" content="Book TBD: Join Us And Vote!" />
+    <meta property="og:description" content="Our next book club selection has not been chosen yet. Join the club to cast your vote." />
+    <meta property="og:url" content="https://wittejm.github.io/book-tbd/" />
+    <meta property="og:image" content="https://wittejm.github.io/book-tbd/cover.svg" />
+    <meta property="book:author" content="To Be Determined" />
+    <meta property="book:isbn" content="000-0-00-000000-0" />
+    <meta property="book:release_date" content="2026-01-01" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Book TBD: Join Us And Vote!" />
+    <meta name="twitter:description" content="Our next book club selection has not been chosen yet. Join the club to cast your vote." />
+    <meta name="twitter:image" content="https://wittejm.github.io/book-tbd/cover.svg" />
+
+    <!-- schema.org Book -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Book",
+        "name": "Book TBD: Join Us And Vote!",
+        "headline": "Book TBD: Join Us And Vote!",
+        "author": {
+            "@type": "Person",
+            "name": "To Be Determined"
+        },
+        "url": "https://wittejm.github.io/book-tbd/",
+        "image": "https://wittejm.github.io/book-tbd/cover.svg",
+        "description": "Our next book club selection has not been chosen yet. Join the club to cast your vote.",
+        "isbn": "000-0-00-000000-0",
+        "bookFormat": "https://schema.org/Paperback",
+        "inLanguage": "en"
+    }
+    </script>
+
+    <style>
+        :root {
+            --bg: #f5f1e8;
+            --card: #ffffff;
+            --ink: #2b2b2b;
+            --muted: #6b6b6b;
+            --accent: #c0392b;
+        }
+        * { box-sizing: border-box; }
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: Georgia, "Times New Roman", serif;
+            min-height: 100vh;
+        }
+        main {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+        .card {
+            background: var(--card);
+            border-radius: 14px;
+            padding: 40px;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        .cover {
+            width: 220px;
+            height: 320px;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, #2c3e50, #c0392b);
+            border-radius: 6px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            padding: 24px;
+            font-family: Georgia, serif;
+        }
+        .cover .label {
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.8;
+            margin-bottom: 16px;
+        }
+        .cover .title {
+            font-size: 22px;
+            line-height: 1.25;
+            font-weight: bold;
+        }
+        .cover .author {
+            margin-top: auto;
+            font-size: 13px;
+            font-style: italic;
+            opacity: 0.85;
+        }
+        h1 {
+            font-size: 28px;
+            margin: 0 0 8px;
+        }
+        .byline {
+            color: var(--muted);
+            font-style: italic;
+            margin-bottom: 24px;
+        }
+        p.body {
+            font-size: 17px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .meta {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #eee;
+            font-size: 14px;
+            color: var(--muted);
+            text-align: left;
+        }
+        .meta dt {
+            font-weight: bold;
+            display: inline;
+        }
+        .meta dd {
+            display: inline;
+            margin: 0 0 0 6px;
+        }
+        .meta div { margin-bottom: 6px; }
+    </style>
+</head>
+<body>
+    <main>
+        <article class="card" itemscope itemtype="https://schema.org/Book">
+            <div class="cover" aria-hidden="true">
+                <div class="label">Book Club Pick</div>
+                <div class="title">Book TBD<br/>Join Us And Vote!</div>
+                <div class="author">To Be Determined</div>
+            </div>
+            <h1 itemprop="name">Book TBD: Join Us And Vote!</h1>
+            <div class="byline">by <span itemprop="author">To Be Determined</span></div>
+            <p class="body" itemprop="description">
+                Our next book club selection has not been chosen yet.
+                Join the club and cast your vote to help pick what we read next.
+            </p>
+            <dl class="meta">
+                <div><dt>Title:</dt> <dd itemprop="name">Book TBD: Join Us And Vote!</dd></div>
+                <div><dt>Author:</dt> <dd itemprop="author">To Be Determined</dd></div>
+                <div><dt>ISBN:</dt> <dd itemprop="isbn">000-0-00-000000-0</dd></div>
+                <div><dt>Format:</dt> <dd itemprop="bookFormat">Paperback</dd></div>
+                <div><dt>Language:</dt> <dd itemprop="inLanguage">English</dd></div>
+            </dl>
+        </article>
+    </main>
+</body>
+</html>
